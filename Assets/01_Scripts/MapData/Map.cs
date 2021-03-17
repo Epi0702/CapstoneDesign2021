@@ -4,18 +4,18 @@ using UnityEngine;
 
 namespace MapData
 {
-    enum MapSize
+    public enum MapSize
     {
         TwobyTwo = 2,
         ThreebyThree = 3,
         FourbyFour = 4,
     };
-    enum AreaSize
+    public enum AreaSize
     {
         SixbySix = 6,
         NinebyNine = 9,
     };
-    class Map
+    public class Map
     {
         List<Room> rooms = new List<Room>();
         List<Aisle> passages = new List<Aisle>();
@@ -291,18 +291,31 @@ namespace MapData
                 }
             }
         }
+        public int GetRoomCount()
+        {
+            return rooms.Count;
+        }
+        public int GetAisleCount()
+        {
+            return passages.Count;
+        }
+        public int GetPassageCount(int _index)
+        {
+            return passages[_index].GetPassageCount();
+        }
         void PrintRoomRel()
         {
             for(int i = 0; i<(int)settedMapSize * (int)settedMapSize; i++)
             {
-                if(rooms[i].roomRel.left !=null)
-                    Debug.Log("room:" + i + ", left" + rooms[i].roomRel.left.GetRoomAreaNum());
-                if(rooms[i].roomRel.right !=null)
-                    Debug.Log("room:" + i + ", right" + rooms[i].roomRel.right.GetRoomAreaNum());
-                if(rooms[i].roomRel.top !=null)
-                    Debug.Log("room:" + i + ", top" + rooms[i].roomRel.top.GetRoomAreaNum());
-                if(rooms[i].roomRel.bottom !=null)
-                    Debug.Log("room:" + i + ", bottom" + rooms[i].roomRel.bottom.GetRoomAreaNum());
+                //if(rooms[i].roomRel.left !=null)
+                //    Debug.Log("room:" + i + ", left" + rooms[i].roomRel.left.GetRoomAreaNum());
+                //if(rooms[i].roomRel.right !=null)
+                //    Debug.Log("room:" + i + ", right" + rooms[i].roomRel.right.GetRoomAreaNum());
+                //if(rooms[i].roomRel.top !=null)
+                //    Debug.Log("room:" + i + ", top" + rooms[i].roomRel.top.GetRoomAreaNum());
+                //if(rooms[i].roomRel.bottom !=null)
+                //    Debug.Log("room:" + i + ", bottom" + rooms[i].roomRel.bottom.GetRoomAreaNum());
+               // rooms[i].SetPosition(100);
             }
         }
     }

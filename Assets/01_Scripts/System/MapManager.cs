@@ -6,11 +6,10 @@ using MapData;
 
 public class MapManager : MonoBehaviour
 {
-    CoupleInt rand;
-    Map gameWorld;
-    int num;
+    public Map gameWorld;
+
     [SerializeField]
-    PrefabCacheData[] Rooms;
+    Room[] rooms;
     [SerializeField]
     PrefabCacheData[] Passage;
 
@@ -22,7 +21,15 @@ public class MapManager : MonoBehaviour
         gameWorld.InitMap(MapSize.ThreebyThree, AreaSize.NinebyNine);
         Debug.Log("Map Initialize Complete!!");
 
+        rooms = new Room[gameWorld.GetRoomCount()];
+
+        for(int i = 0; i<gameWorld.GetRoomCount(); i++)
+        {
+            //rooms[i] = Resources.Load<Room>("Prefabs/Room");
+        }
+
     }
+
     //void Update()
     //{
     //    if (Input.GetKeyDown(KeyCode.R))
@@ -30,13 +37,7 @@ public class MapManager : MonoBehaviour
 
     //    }
     //}
-    public void Prepare()
-    {
-        for(int i = 0; i< Rooms.Length; i++)
-        {
 
-        }
-    }
 }
 
 

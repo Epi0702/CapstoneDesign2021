@@ -21,7 +21,7 @@ namespace MapData
         public Aisle topAisle;
         public Aisle bottomAisle;
     }
-    class Room
+    class Room 
     {
         Location locationInfo = new Location();
         RoomEventType roomevent;
@@ -42,7 +42,7 @@ namespace MapData
         }
         public void PrintRoomInfo()
         {
-            Debug.Log("Room Num : " + locationInfo.areanum + ", " + locationInfo.locationIndex.x+ ", " + locationInfo.locationIndex.y);
+            Debug.Log("Room Num : " + locationInfo.areanum + ", " + locationInfo.locationIndex.x + ", " + locationInfo.locationIndex.y);
         }
         public void InitRoomRel()
         {
@@ -64,5 +64,6 @@ namespace MapData
         {
             return locationInfo.areanum;
         }
+
     }
 }
