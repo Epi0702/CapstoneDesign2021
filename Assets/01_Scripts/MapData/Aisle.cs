@@ -119,6 +119,11 @@ namespace MapData
                 CreatePassage(_endroom.GetRoomLoca().x, i);
             }
         }
+
+        public int GetPassageCount()
+        {
+            return passage.Count;
+        }
     }
 }
 
