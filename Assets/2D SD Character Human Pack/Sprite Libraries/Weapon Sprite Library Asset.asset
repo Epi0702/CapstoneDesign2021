@@ -16,9 +16,6 @@ MonoBehaviour:
   - m_Name: Item
     m_Hash: -1087796704
     m_CategoryList:
-    - m_Name: None
-      m_Hash: -542986255
-      m_Sprite: {fileID: 21300000, guid: 234300cad7b0742dab90a77dacbe4dfa, type: 3}
     - m_Name: Arrow
       m_Hash: 435601722
       m_Sprite: {fileID: 21300000, guid: 1c2969e92198a44c898ff5e3a14d4c31, type: 3}
@@ -58,3 +55,15 @@ MonoBehaviour:
     - m_Name: Sword
       m_Hash: 1529145355
       m_Sprite: {fileID: 21300000, guid: af35b6c39fc944fd5b0c55d9075360cd, type: 3}
+    - m_Name: Hammer
+      m_Hash: -648442112
+      m_Sprite: {fileID: 21300000, guid: cb2fa48106c49443fa9e7dfed2793fc7, type: 3}
+    - m_Name: Trident
+      m_Hash: -831508033
+      m_Sprite: {fileID: 21300000, guid: 9f7c4071851994895b997e45af0ac0d7, type: 3}
+    - m_Name: Cub
+      m_Hash: 2087282508
+      m_Sprite: {fileID: 21300000, guid: 4f666c89024644aeca3971001134d76d, type: 3}
+    - m_Name: Empty
+      m_Hash: -1459219776
+      m_Sprite: {fileID: 21300000, guid: 234300cad7b0742dab90a77dacbe4dfa, type: 3}
