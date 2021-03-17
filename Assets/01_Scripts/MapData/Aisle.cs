@@ -49,11 +49,12 @@ namespace MapData
             {
                 Debug.LogError("PassageInfo Error!!" + startRoom.GetRoomAreaNum());
             }
+
+            //for (int i = 0; i < passage.Count; i++)
+            //{
+            //    Debug.Log("(" + passage[i].GetLoca() + ")");
+            //}
             Debug.Log("End!!!");
-            for (int i = 0; i < passage.Count; i++)
-            {
-                Debug.Log("(" + passage[i].GetLoca() + ")");
-            }
         }
         int SetAreaSize(AreaSize _areasize)
         {
