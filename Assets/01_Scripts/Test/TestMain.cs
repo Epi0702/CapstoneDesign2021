@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MapAlgo;
 
 public class TestMain : MonoBehaviour
 {
     private static TestMain instance;
+    //public MapData GameWorld;
 
     public static TestMain Instance        //singleT
     {

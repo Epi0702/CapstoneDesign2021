@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MapData
+namespace MapAlgo
 {
     public enum MapSize
     {
@@ -15,10 +15,10 @@ namespace MapData
         SixbySix = 6,
         NinebyNine = 9,
     };
-    public class Map
+    public class MapData
     {
-        List<Room> rooms = new List<Room>();
-        List<Aisle> passages = new List<Aisle>();
+        List<RoomData> rooms = new List<RoomData>();
+        List<AisleData> passages = new List<AisleData>();
         MapSize settedMapSize;
         AreaSize settedAreaSize;
         int startRoomIndex;
@@ -51,7 +51,7 @@ namespace MapData
         }
         void CreateRoom(int _areaNum, AreaSize _areasize, CoupleInt _arealocation)
         {
-            Room room = new Room();
+            RoomData room = new RoomData();
             CoupleInt rand;
             rand.x = Random.Range(1, (int)_areasize - 1);
             rand.y = Random.Range(1, (int)_areasize - 1);
@@ -106,9 +106,9 @@ namespace MapData
                 }
             }
         }
-        void GenerateAisle(Room _startRoom, Room _endRoom)
+        void GenerateAisle(RoomData _startRoom, RoomData _endRoom)
         {
-            Aisle temp = new Aisle();
+            AisleData temp = new AisleData();
 
             temp.SetInfo(_startRoom, _endRoom, settedAreaSize, settedMapSize);
             temp.GeneratePassage();
@@ -303,19 +303,24 @@ namespace MapData
         {
             return passages[_index].GetPassageCount();
         }
+        public RoomData GetRoomDatas(int _index)
+        {
+            return rooms[_index];
+        }
+
         void PrintRoomRel()
         {
             for(int i = 0; i<(int)settedMapSize * (int)settedMapSize; i++)
             {
-                //if(rooms[i].roomRel.left !=null)
-                //    Debug.Log("room:" + i + ", left" + rooms[i].roomRel.left.GetRoomAreaNum());
-                //if(rooms[i].roomRel.right !=null)
-                //    Debug.Log("room:" + i + ", right" + rooms[i].roomRel.right.GetRoomAreaNum());
-                //if(rooms[i].roomRel.top !=null)
-                //    Debug.Log("room:" + i + ", top" + rooms[i].roomRel.top.GetRoomAreaNum());
-                //if(rooms[i].roomRel.bottom !=null)
-                //    Debug.Log("room:" + i + ", bottom" + rooms[i].roomRel.bottom.GetRoomAreaNum());
-               // rooms[i].SetPosition(100);
+                if (rooms[i].roomRel.left != null)
+                    Debug.Log("room:" + i + ", left" + rooms[i].roomRel.left.GetRoomAreaNum());
+                if (rooms[i].roomRel.right != null)
+                    Debug.Log("room:" + i + ", right" + rooms[i].roomRel.right.GetRoomAreaNum());
+                if (rooms[i].roomRel.top != null)
+                    Debug.Log("room:" + i + ", top" + rooms[i].roomRel.top.GetRoomAreaNum());
+                if (rooms[i].roomRel.bottom != null)
+                    Debug.Log("room:" + i + ", bottom" + rooms[i].roomRel.bottom.GetRoomAreaNum());
+                
             }
         }
     }

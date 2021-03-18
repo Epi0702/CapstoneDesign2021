@@ -1,27 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MapData;
+using MapAlgo;
 
 
 public class MapManager : MonoBehaviour
 {
-    public Map gameWorld;
+    public MapData gameWorld;
 
     [SerializeField]
-    Room[] rooms;
+    RoomData[] rooms;
     [SerializeField]
     PrefabCacheData[] Passage;
-
-    [SerializeField]
+    private void Awake()
+    {
+        gameWorld = new MapData();
+        gameWorld.InitMap(MapSize.ThreebyThree, AreaSize.NinebyNine);
+    }
     // Start is called before the first frame update
     void Start()
     {
-        gameWorld = new Map();
-        gameWorld.InitMap(MapSize.ThreebyThree, AreaSize.NinebyNine);
         Debug.Log("Map Initialize Complete!!");
 
-        rooms = new Room[gameWorld.GetRoomCount()];
+        rooms = new RoomData[gameWorld.GetRoomCount()];
 
         for(int i = 0; i<gameWorld.GetRoomCount(); i++)
         {

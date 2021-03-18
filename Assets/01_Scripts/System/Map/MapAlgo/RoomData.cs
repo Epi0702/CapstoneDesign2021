@@ -2,28 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MapData
+namespace MapAlgo
 {
-    enum RoomEventType
+    public enum RoomEventType
     {
         None,
         Battle,
     }
-    struct RoomRelation
+    public struct RoomRelation
     {
-        public Room left;
-        public Room right;
-        public Room top;
-        public Room bottom;
+        public RoomData left;
+        public RoomData right;
+        public RoomData top;
+        public RoomData bottom;
 
-        public Aisle leftAisle;
-        public Aisle rightAisle;
-        public Aisle topAisle;
-        public Aisle bottomAisle;
+        public AisleData leftAisle;
+        public AisleData rightAisle;
+        public AisleData topAisle;
+        public AisleData bottomAisle;
     }
-    class Room 
+    public class RoomData
     {
-        Location locationInfo = new Location();
+        LocationData locationInfo = new LocationData();
         RoomEventType roomevent;
 
         public RoomRelation roomRel;

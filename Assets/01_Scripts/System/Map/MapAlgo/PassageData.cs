@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MapData
+namespace MapAlgo
 {
     enum PassageEventType
     {
 
     }
-    class Passage
+    class PassageData
     {
-        Location locationInfo;// = new Location();
+        LocationData locationInfo;// = new Location();
         PassageEventType passageevent;
         
-        public Passage()
+        public PassageData()
         {
-            locationInfo = new Location();
+            locationInfo = new LocationData();
         }
         public void SetPassageLoca(int _x, int _y)
         {

@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MapData
+namespace MapAlgo
 {
     //upper class than passage
-    class Aisle
+    public class AisleData
     {
-        Room startRoom;
-        Room endRoom;
+        RoomData startRoom;
+        RoomData endRoom;
         int areasize;
         int mapsize;
-        List<Passage> passage = new List<Passage>();
+        List<PassageData> passage = new List<PassageData>();
 
-        public void SetInfo(Room _startroom, Room _endroom, AreaSize _areasize, MapSize _mapsize)
+        public void SetInfo(RoomData _startroom, RoomData _endroom, AreaSize _areasize, MapSize _mapsize)
         {
             areasize = SetAreaSize(_areasize);
             mapsize = SetMapSize(_mapsize);
@@ -22,7 +22,7 @@ namespace MapData
         }
         void CreatePassage(int _x, int _y)
         {
-            Passage temppassage = new Passage();
+            PassageData temppassage = new PassageData();
             temppassage.SetPassageLoca(_x, _y);
             passage.Add(temppassage);
         }
@@ -64,7 +64,7 @@ namespace MapData
         {
             return (int)_mapsize;
         }
-        void ConnectHorizontal(Room _startroom, Room _endroom)
+        void ConnectHorizontal(RoomData _startroom, RoomData _endroom)
         {
             for (int i = _startroom.GetRoomLoca().x + 1;
                  i <= (_startroom.GetRoomAreaNum() % mapsize) * (areasize + 1) + (areasize - 1); i++)
@@ -91,7 +91,7 @@ namespace MapData
                 CreatePassage(i, _endroom.GetRoomLoca().y);
             }
         }
-        void ConnectVertial(Room _startroom, Room _endroom)
+        void ConnectVertial(RoomData _startroom, RoomData _endroom)
         {
             for (int i = _startroom.GetRoomLoca().y + 1;
                 i <= (_startroom.GetRoomAreaNum() / mapsize) * (areasize + 1) + (areasize - 1); i++)
