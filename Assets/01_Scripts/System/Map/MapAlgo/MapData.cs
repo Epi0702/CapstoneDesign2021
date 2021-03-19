@@ -4,20 +4,9 @@ using UnityEngine;
 
 namespace MapAlgo
 {
-    public enum MapSize
-    {
-        TwobyTwo = 2,
-        ThreebyThree = 3,
-        FourbyFour = 4,
-    };
-    public enum AreaSize
-    {
-        SixbySix = 6,
-        NinebyNine = 9,
-    };
     public class MapData
     {
-        List<RoomData> rooms = new List<RoomData>();
+        public List<RoomData> rooms = new List<RoomData>();
         List<AisleData> passages = new List<AisleData>();
         MapSize settedMapSize;
         AreaSize settedAreaSize;
@@ -33,10 +22,10 @@ namespace MapAlgo
 
             SetStartEndRoomIndex();
             SecondConnectRooms();
-            Debug.Log(startRoomIndex + "^^" + endRoomIndex);
+            //Debug.Log(startRoomIndex + "^^" + endRoomIndex);
             ConnectRooms(_mapsize);
             Debug.Log("Map Initialize Complete!!");
-            PrintRoomRel();
+            //PrintRoomRel();
         }
         void GenerateRooms(MapSize _mapSize, AreaSize _areaSize)
         {
@@ -261,22 +250,22 @@ namespace MapAlgo
                     }
                     else if (i == (int)settedMapSize - 2)
                     {
-                        Debug.Log("case03");
+                        //Debug.Log("case03");
                         int temp = 0;
                         if(startRoomIndex / (int)settedMapSize == (i+1))
                         {
-                            Debug.Log(startRoomIndex);
+                            //Debug.Log(startRoomIndex);
 
                             temp = startRoomIndex % (int)settedMapSize;
                         }  
                         else if(endRoomIndex / (int)settedMapSize == (i+1))
                         {
-                            Debug.Log(endRoomIndex);
+                            //Debug.Log(endRoomIndex);
                             temp = endRoomIndex % (int)settedMapSize;
                         }
-                        Debug.Log(temp);
+                        //Debug.Log(temp);
                         rand = GetRandomNumWithout(0, (int)settedMapSize, temp);
-                        Debug.Log(rand);
+                        //Debug.Log(rand);
                         tempindex = i * (int)settedMapSize + rand;
                         rooms[tempindex].roomRel.bottom = rooms[tempindex + (int)settedMapSize];
                         rooms[tempindex + (int)settedMapSize].roomRel.top = rooms[tempindex];
@@ -303,12 +292,15 @@ namespace MapAlgo
         {
             return passages[_index].GetPassageCount();
         }
-        public RoomData GetRoomDatas(int _index)
+        public CoupleInt GetRoomLocaData(int _index)
         {
-            return rooms[_index];
+            return rooms[_index].GetRoomLoca();
         }
-
-        void PrintRoomRel()
+        public RoomRelation GetRoomRel(int _index)
+        {
+            return rooms[_index].GetRoomRel();
+        }
+        public void PrintRoomRel()
         {
             for(int i = 0; i<(int)settedMapSize * (int)settedMapSize; i++)
             {

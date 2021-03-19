@@ -5,12 +5,13 @@ using MapAlgo;
 
 public class Room : MonoBehaviour
 {
-    RoomData roomInfo;
+    //RoomData roomInfo;
     RectTransform rectTrans;
+    public RoomData roominfo;
     // Start is called before the first frame update
     void Start()
     {
-        roomInfo = GetComponent<RoomData>();
+        //TestMain.Instance.MapManager
     }
 
     // Update is called once per frame
@@ -18,8 +19,9 @@ public class Room : MonoBehaviour
     {
         
     }
-    public void SetRoomInfo(RoomData _roomData)
+    public void SetRoom(RoomData _roomData)
     {
-        roomInfo = _roomData;
+        roominfo = _roomData;
     }
+
 }

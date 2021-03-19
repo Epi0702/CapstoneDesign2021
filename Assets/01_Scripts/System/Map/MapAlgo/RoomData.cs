@@ -4,23 +4,7 @@ using UnityEngine;
 
 namespace MapAlgo
 {
-    public enum RoomEventType
-    {
-        None,
-        Battle,
-    }
-    public struct RoomRelation
-    {
-        public RoomData left;
-        public RoomData right;
-        public RoomData top;
-        public RoomData bottom;
 
-        public AisleData leftAisle;
-        public AisleData rightAisle;
-        public AisleData topAisle;
-        public AisleData bottomAisle;
-    }
     public class RoomData
     {
         LocationData locationInfo = new LocationData();
@@ -39,6 +23,13 @@ namespace MapAlgo
             locationInfo.locationIndex.x = _areaLocation.x + _rand.x;
             locationInfo.locationIndex.y = _areaLocation.y + _rand.y;
             locationInfo.loCT = LocationCategory.CT_Room;
+        }
+
+        //mapmanager 에서 맵뷰 room 에 초기 정보 전달
+        public void SetRoomLocation(CoupleInt _areaLoaction, RoomRelation _roomRel)
+        {
+            locationInfo.locationIndex = _areaLoaction;
+            roomRel = _roomRel;
         }
         public void PrintRoomInfo()
         {
@@ -63,6 +54,10 @@ namespace MapAlgo
         public int GetRoomAreaNum()
         {
             return locationInfo.areanum;
+        }
+        public RoomRelation GetRoomRel()
+        {
+            return roomRel;
         }
 
     }

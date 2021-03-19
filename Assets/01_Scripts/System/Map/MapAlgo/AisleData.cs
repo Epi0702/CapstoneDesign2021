@@ -28,7 +28,6 @@ namespace MapAlgo
         }
         public void GeneratePassage()
         {
-            Debug.Log("Start!!!");
             if (startRoom.roomRel.left == endRoom)
             {
                 ConnectHorizontal(endRoom, startRoom);
@@ -54,7 +53,6 @@ namespace MapAlgo
             //{
             //    Debug.Log("(" + passage[i].GetLoca() + ")");
             //}
-            Debug.Log("End!!!");
         }
         int SetAreaSize(AreaSize _areasize)
         {
