@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PrefabTest03 : MonoBehaviour
 {
-    [SerializeField]
-    GameObject Prefab;
-
     Transform temp;
     // Start is called before the first frame update
     void Start()
