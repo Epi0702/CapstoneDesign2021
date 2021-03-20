@@ -4,13 +4,10 @@ using UnityEngine;
 
 namespace MapAlgo
 {
-    enum PassageEventType
-    {
 
-    }
-    class PassageData
+    public class PassageData
     {
-        LocationData locationInfo;// = new Location();
+        LocationData locationInfo = new LocationData();
         PassageEventType passageevent;
         
         public PassageData()
@@ -26,6 +23,10 @@ namespace MapAlgo
         public string GetLoca()
         {
             return (locationInfo.locationIndex.x + ", " + locationInfo.locationIndex.y);
+        }
+        public CoupleInt GetRoomLoca()
+        {
+            return locationInfo.locationIndex;
         }
     }
 }

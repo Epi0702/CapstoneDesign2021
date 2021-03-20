@@ -32,6 +32,10 @@ namespace MapAlgo
         SixbySix = 6,
         NinebyNine = 9,
     };
+    public enum PassageEventType
+    {
+
+    }
     public  class MapDataStruct
     {
     }

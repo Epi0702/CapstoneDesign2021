@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrefabTest03 : MonoBehaviour
+public class Test03 : MonoBehaviour
 {
-
-    Transform temp;
+    RectTransform rectTrans;
     // Start is called before the first frame update
     void Start()
     {
-        temp = this.transform;
-        Instantiate(Resources.Load<GameObject>("Prefabs/Test/Cube"), temp);
+        rectTrans = this.GetComponent<RectTransform>();
+        rectTrans.anchoredPosition = new Vector2(100, 100);
     }
 
     // Update is called once per frame

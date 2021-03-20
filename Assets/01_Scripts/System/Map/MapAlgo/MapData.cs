@@ -7,9 +7,9 @@ namespace MapAlgo
     public class MapData
     {
         public List<RoomData> rooms = new List<RoomData>();
-        List<AisleData> passages = new List<AisleData>();
-        MapSize settedMapSize;
-        AreaSize settedAreaSize;
+        public List<AisleData> passages = new List<AisleData>();
+        public MapSize settedMapSize;
+        public AreaSize settedAreaSize;
         int startRoomIndex;
         int endRoomIndex;
         int mapPatternVH;

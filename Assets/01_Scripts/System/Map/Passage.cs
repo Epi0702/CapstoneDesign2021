@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MapAlgo;
 
-public class PrefabTest03 : MonoBehaviour
+public class Passage : MonoBehaviour
 {
-
-    Transform temp;
+    RectTransform rectTrans;
+    public PassageData passageinfo;
     // Start is called before the first frame update
     void Start()
     {
-        temp = this.transform;
-        Instantiate(Resources.Load<GameObject>("Prefabs/Test/Cube"), temp);
+        rectTrans = this.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
 }
