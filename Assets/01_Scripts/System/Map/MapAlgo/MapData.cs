@@ -2,25 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MapData
+namespace MapAlgo
 {
-    public enum MapSize
+    public class MapData
     {
-        TwobyTwo = 2,
-        ThreebyThree = 3,
-        FourbyFour = 4,
-    };
-    public enum AreaSize
-    {
-        SixbySix = 6,
-        NinebyNine = 9,
-    };
-    public class Map
-    {
-        List<Room> rooms = new List<Room>();
-        List<Aisle> passages = new List<Aisle>();
-        MapSize settedMapSize;
-        AreaSize settedAreaSize;
+        public List<RoomData> rooms = new List<RoomData>();
+        public List<AisleData> passages = new List<AisleData>();
+        public MapSize settedMapSize;
+        public AreaSize settedAreaSize;
         int startRoomIndex;
         int endRoomIndex;
         int mapPatternVH;
@@ -33,10 +22,10 @@ namespace MapData
 
             SetStartEndRoomIndex();
             SecondConnectRooms();
-            Debug.Log(startRoomIndex + "^^" + endRoomIndex);
+            //Debug.Log(startRoomIndex + "^^" + endRoomIndex);
             ConnectRooms(_mapsize);
             Debug.Log("Map Initialize Complete!!");
-            PrintRoomRel();
+            //PrintRoomRel();
         }
         void GenerateRooms(MapSize _mapSize, AreaSize _areaSize)
         {
@@ -51,7 +40,7 @@ namespace MapData
         }
         void CreateRoom(int _areaNum, AreaSize _areasize, CoupleInt _arealocation)
         {
-            Room room = new Room();
+            RoomData room = new RoomData();
             CoupleInt rand;
             rand.x = Random.Range(1, (int)_areasize - 1);
             rand.y = Random.Range(1, (int)_areasize - 1);
@@ -106,9 +95,9 @@ namespace MapData
                 }
             }
         }
-        void GenerateAisle(Room _startRoom, Room _endRoom)
+        void GenerateAisle(RoomData _startRoom, RoomData _endRoom)
         {
-            Aisle temp = new Aisle();
+            AisleData temp = new AisleData();
 
             temp.SetInfo(_startRoom, _endRoom, settedAreaSize, settedMapSize);
             temp.GeneratePassage();
@@ -261,22 +250,22 @@ namespace MapData
                     }
                     else if (i == (int)settedMapSize - 2)
                     {
-                        Debug.Log("case03");
+                        //Debug.Log("case03");
                         int temp = 0;
                         if(startRoomIndex / (int)settedMapSize == (i+1))
                         {
-                            Debug.Log(startRoomIndex);
+                            //Debug.Log(startRoomIndex);
 
                             temp = startRoomIndex % (int)settedMapSize;
                         }  
                         else if(endRoomIndex / (int)settedMapSize == (i+1))
                         {
-                            Debug.Log(endRoomIndex);
+                            //Debug.Log(endRoomIndex);
                             temp = endRoomIndex % (int)settedMapSize;
                         }
-                        Debug.Log(temp);
+                        //Debug.Log(temp);
                         rand = GetRandomNumWithout(0, (int)settedMapSize, temp);
-                        Debug.Log(rand);
+                        //Debug.Log(rand);
                         tempindex = i * (int)settedMapSize + rand;
                         rooms[tempindex].roomRel.bottom = rooms[tempindex + (int)settedMapSize];
                         rooms[tempindex + (int)settedMapSize].roomRel.top = rooms[tempindex];
@@ -303,19 +292,27 @@ namespace MapData
         {
             return passages[_index].GetPassageCount();
         }
-        void PrintRoomRel()
+        public CoupleInt GetRoomLocaData(int _index)
+        {
+            return rooms[_index].GetRoomLoca();
+        }
+        public RoomRelation GetRoomRel(int _index)
+        {
+            return rooms[_index].GetRoomRel();
+        }
+        public void PrintRoomRel()
         {
             for(int i = 0; i<(int)settedMapSize * (int)settedMapSize; i++)
             {
-                //if(rooms[i].roomRel.left !=null)
-                //    Debug.Log("room:" + i + ", left" + rooms[i].roomRel.left.GetRoomAreaNum());
-                //if(rooms[i].roomRel.right !=null)
-                //    Debug.Log("room:" + i + ", right" + rooms[i].roomRel.right.GetRoomAreaNum());
-                //if(rooms[i].roomRel.top !=null)
-                //    Debug.Log("room:" + i + ", top" + rooms[i].roomRel.top.GetRoomAreaNum());
-                //if(rooms[i].roomRel.bottom !=null)
-                //    Debug.Log("room:" + i + ", bottom" + rooms[i].roomRel.bottom.GetRoomAreaNum());
-               // rooms[i].SetPosition(100);
+                if (rooms[i].roomRel.left != null)
+                    Debug.Log("room:" + i + ", left" + rooms[i].roomRel.left.GetRoomAreaNum());
+                if (rooms[i].roomRel.right != null)
+                    Debug.Log("room:" + i + ", right" + rooms[i].roomRel.right.GetRoomAreaNum());
+                if (rooms[i].roomRel.top != null)
+                    Debug.Log("room:" + i + ", top" + rooms[i].roomRel.top.GetRoomAreaNum());
+                if (rooms[i].roomRel.bottom != null)
+                    Debug.Log("room:" + i + ", bottom" + rooms[i].roomRel.bottom.GetRoomAreaNum());
+                
             }
         }
     }

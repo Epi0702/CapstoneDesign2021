@@ -2,28 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MapData
+namespace MapAlgo
 {
-    enum RoomEventType
-    {
-        None,
-        Battle,
-    }
-    struct RoomRelation
-    {
-        public Room left;
-        public Room right;
-        public Room top;
-        public Room bottom;
 
-        public Aisle leftAisle;
-        public Aisle rightAisle;
-        public Aisle topAisle;
-        public Aisle bottomAisle;
-    }
-    class Room 
+    public class RoomData
     {
-        Location locationInfo = new Location();
+        LocationData locationInfo = new LocationData();
         RoomEventType roomevent;
 
         public RoomRelation roomRel;
@@ -39,6 +23,13 @@ namespace MapData
             locationInfo.locationIndex.x = _areaLocation.x + _rand.x;
             locationInfo.locationIndex.y = _areaLocation.y + _rand.y;
             locationInfo.loCT = LocationCategory.CT_Room;
+        }
+
+        //mapmanager 에서 맵뷰 room 에 초기 정보 전달
+        public void SetRoomLocation(CoupleInt _areaLoaction, RoomRelation _roomRel)
+        {
+            locationInfo.locationIndex = _areaLoaction;
+            roomRel = _roomRel;
         }
         public void PrintRoomInfo()
         {
@@ -63,6 +54,10 @@ namespace MapData
         public int GetRoomAreaNum()
         {
             return locationInfo.areanum;
+        }
+        public RoomRelation GetRoomRel()
+        {
+            return roomRel;
         }
 
     }

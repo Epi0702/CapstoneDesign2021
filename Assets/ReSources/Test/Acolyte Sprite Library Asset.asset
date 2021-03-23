@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
-  m_Name: Archer Sprite Library Asset
+  m_Name: Acolyte Sprite Library Asset
   m_EditorClassIdentifier: 
   m_Labels:
   - m_Name: Body
     m_Hash: 2073732236
     m_CategoryList:
-    - m_Name: 
-      m_Hash: 0
-      m_Sprite: {fileID: 0}
+    - m_Name: Body
+      m_Hash: 2073732236
+      m_Sprite: {fileID: 21300000, guid: f8e0e6cb96e154e70afe74683a2b5078, type: 3}
   - m_Name: Head
     m_Hash: 130111906
     m_CategoryList:
@@ -30,34 +30,34 @@ MonoBehaviour:
     m_CategoryList:
     - m_Name: Straight
       m_Hash: -1242686235
-      m_Sprite: {fileID: 21300000, guid: 6c1fcbfbaa3c54d4fb6c5af42c81dc1b, type: 3}
+      m_Sprite: {fileID: 21300000, guid: 905b01190ac5e40368b4f1e6ef59d2f2, type: 3}
     - m_Name: Bend
       m_Hash: -270228215
-      m_Sprite: {fileID: 21300000, guid: acb789e51341042b08772fbfcdc49454, type: 3}
+      m_Sprite: {fileID: 21300000, guid: 82bf9e0076bcd45c08cde71a64398599, type: 3}
   - m_Name: Front arm
     m_Hash: 562816095
     m_CategoryList:
     - m_Name: Straight
       m_Hash: -1242686235
-      m_Sprite: {fileID: 21300000, guid: fcfb68ef3732a48eb823bc999b06ee3e, type: 3}
+      m_Sprite: {fileID: 21300000, guid: dd440904df59c450196d47be96d6b06e, type: 3}
     - m_Name: Bend
       m_Hash: -270228215
-      m_Sprite: {fileID: 21300000, guid: e1586f79a6d3d47afaf956f09c716bc4, type: 3}
+      m_Sprite: {fileID: 21300000, guid: 73af6afe2ff6e4dbc9d38dacce18a8a9, type: 3}
   - m_Name: Legs
     m_Hash: 1563094196
     m_CategoryList:
     - m_Name: Leg1
       m_Hash: -973550584
-      m_Sprite: {fileID: 21300000, guid: 50711fe07ab9849879a8a7b98e88c19f, type: 3}
+      m_Sprite: {fileID: 21300000, guid: 163980053e6fc44c88470553841d388c, type: 3}
     - m_Name: Leg2
       m_Hash: 1559338418
-      m_Sprite: {fileID: 21300000, guid: aa566005a507040d183b95ed36e1f9ed, type: 3}
+      m_Sprite: {fileID: 21300000, guid: f3b06a9605f8b4335a498eb14c151fa8, type: 3}
     - m_Name: Leg3
       m_Hash: 737586468
-      m_Sprite: {fileID: 21300000, guid: 6c1a74bbcfbbb4ea0b7a6ea1d2a1bf28, type: 3}
+      m_Sprite: {fileID: 21300000, guid: c5e0abc18d8c141d9a5b06387354e632, type: 3}
     - m_Name: Leg4
       m_Hash: -1248708473
-      m_Sprite: {fileID: 21300000, guid: c7941f60456ce4c69944664280d200e2, type: 3}
+      m_Sprite: {fileID: 21300000, guid: ceda6e6f39a32450da5d5b65355eb340, type: 3}
   - m_Name: Hat
     m_Hash: -1438192983
     m_CategoryList:
