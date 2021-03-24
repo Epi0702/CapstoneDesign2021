@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.U2D.Animation;
 
-public class Player : MonoBehaviour
+public class Playerlook : MonoBehaviour
 {
     SpriteLibrary spriteLibrary;
     // Start is called before the first frame update
@@ -17,7 +17,12 @@ public class Player : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            spriteLibrary.spriteLibraryAsset = Resources.Load<SpriteLibraryAsset>("Test/Acolyte Sprite Library Asset");
+            //spriteLibrary.spriteLibraryAsset = Resources.Load<SpriteLibraryAsset>("Test/Acolyte Sprite Library Asset");
+            //GetSpriteLibraryAsset(Resources.Load<SpriteLibraryAsset>("Test/Acolyte Sprite Library Asset"));
         }
+    }
+    public void GetSpriteLibraryAsset(SpriteLibraryAsset _spriteLibraryAsset)
+    {
+        spriteLibrary.spriteLibraryAsset = _spriteLibraryAsset;
     }
 }

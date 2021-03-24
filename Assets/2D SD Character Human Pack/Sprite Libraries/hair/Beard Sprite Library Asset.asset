@@ -31,6 +31,6 @@ MonoBehaviour:
     - m_Name: Beard5
       m_Hash: 558740513
       m_Sprite: {fileID: 21300000, guid: addeca70f0a9b450b9846b63dc8890ce, type: 3}
-    - m_Name: None
-      m_Hash: -542986255
+    - m_Name: Beard0
+      m_Hash: 1361526958
       m_Sprite: {fileID: 21300000, guid: 234300cad7b0742dab90a77dacbe4dfa, type: 3}
