@@ -7,18 +7,26 @@ public class CustomizingPanel : MonoBehaviour
     [SerializeField]
     SpriteLibraryAsset[] facespriteLibraryAsset;
     [SerializeField]
-    SpriteResolver face;
+    SpriteResolver face;   
+    [SerializeField]
+    SpriteResolver face_preview;
 
     [SerializeField]
-    SpriteResolver hair;
+    SpriteResolver hair;   
+    [SerializeField]
+    SpriteResolver hair_preview;
     [SerializeField]
     int HairCount;
 
     [SerializeField]
     SpriteResolver beard;
     [SerializeField]
+    SpriteResolver beard_preview;
+    [SerializeField]
     int beardCount;
 
+    int haircolor;
+    int beardcolor;
 
     int faceIndex;
     int hairIndex;
@@ -29,6 +37,8 @@ public class CustomizingPanel : MonoBehaviour
         faceIndex = 0;
         hairIndex = 0;
         beardindex = 0;
+        haircolor = 0;
+        beardcolor = 0;
     }
 
     // Update is called once per frame
@@ -40,6 +50,7 @@ public class CustomizingPanel : MonoBehaviour
     public void UpdateFace()
     {
         face.spriteLibrary.spriteLibraryAsset = facespriteLibraryAsset[faceIndex];
+        face_preview.spriteLibrary.spriteLibraryAsset = facespriteLibraryAsset[faceIndex];
     }
     public void OnClickUpFaceIndex()
     {
@@ -69,6 +80,7 @@ public class CustomizingPanel : MonoBehaviour
     public void UpdateHair()
     {
         hair.SetCategoryAndLabel("Hair", "Hair" + hairIndex);
+        hair_preview.SetCategoryAndLabel("Hair", "Hair" + hairIndex);
         Debug.Log(hairIndex);
 
     }
@@ -100,6 +112,7 @@ public class CustomizingPanel : MonoBehaviour
     public void UpdateBeard()
     {
         beard.SetCategoryAndLabel("Beard", "Beard" + beardindex);
+        beard_preview.SetCategoryAndLabel("Beard", "Beard" + beardindex);
         Debug.Log(beardindex);
     }
     public void OnClickUpBeardIndex()
@@ -127,4 +140,12 @@ public class CustomizingPanel : MonoBehaviour
         UpdateBeard();
     }
 
+    public void OnClickHairColor(int num)
+    {
+        haircolor = num;
+    } 
+    public void OnClickBeardColor(int num)
+    {
+        beardcolor = num;
+    }
 }
