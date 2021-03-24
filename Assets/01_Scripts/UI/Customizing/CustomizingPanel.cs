@@ -51,6 +51,7 @@ public class CustomizingPanel : MonoBehaviour
     {
         face.spriteLibrary.spriteLibraryAsset = facespriteLibraryAsset[faceIndex];
         face_preview.spriteLibrary.spriteLibraryAsset = facespriteLibraryAsset[faceIndex];
+        Debug.Log(faceIndex);
     }
     public void OnClickUpFaceIndex()
     {
