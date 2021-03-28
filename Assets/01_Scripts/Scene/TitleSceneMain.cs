@@ -7,15 +7,6 @@ using UnityEngine.SceneManagement;
 public class TitleSceneMain : BaseSceneMain
 {
     [SerializeField]
-    Login login;
-    public Login Login
-    {
-        get
-        {
-            return login;
-        }
-    }
-    [SerializeField]
     LoadScene loadScene;
     public LoadScene LoadScene
     {
