@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TitleSceneMain : BaseSceneMain
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject LoginPanel;
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeLoginScene()
     {
-        
+        LoginPanel.SetActive(true);
     }
 }
