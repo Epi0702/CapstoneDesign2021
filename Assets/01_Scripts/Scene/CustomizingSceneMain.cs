@@ -13,6 +13,15 @@ public class CustomizingSceneMain : BaseSceneMain
             return playerLook;
         }
     }
+    [SerializeField]
+    LoadScene loadScene;
+    public LoadScene LoadScene
+    {
+        get
+        {
+            return loadScene;
+        }
+    }
 
     [SerializeField]
     ClassSelectPanel classSelectPanel;
@@ -34,5 +43,10 @@ public class CustomizingSceneMain : BaseSceneMain
     protected override void UpdateScene()
     {
 
+    }
+    public void MoveToMainLobbyScene()
+    {
+        loadScene.gameObject.SetActive(true);
+        loadScene.SceneLoader(2);
     }
 }
