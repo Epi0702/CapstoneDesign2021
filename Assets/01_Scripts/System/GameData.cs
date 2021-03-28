@@ -5,6 +5,6 @@ using UnityEngine;
 [SerializeField]
 public class GameData
 {
-    public string User_id = "";
-    public string PW = "";
+    public string User_id = "test";
+    public string PW = "1234";
 }

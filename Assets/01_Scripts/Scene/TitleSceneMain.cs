@@ -6,10 +6,46 @@ using UnityEngine.SceneManagement;
 
 public class TitleSceneMain : BaseSceneMain
 {
-    public GameObject LoginPanel;
-
-    public void ChangeLoginScene()
+    [SerializeField]
+    Login login;
+    public Login Login
     {
-        LoginPanel.SetActive(true);
+        get
+        {
+            return login;
+        }
+    }
+    [SerializeField]
+    LoadScene loadScene;
+    public LoadScene LoadScene
+    {
+        get
+        {
+            return loadScene;
+        }
+    }
+
+    private string userID;
+    private string userPW;
+
+    protected override void OnStart()
+    {
+        userID = DataController.Instance.gameData.User_id;
+        userPW = DataController.Instance.gameData.PW;
+    }
+
+    public bool CheckUserID(string _userID)
+    {
+        return userID.Equals(_userID);
+    }   
+    public bool CheckUserPW(string _userPW)
+    {
+        return userPW.Equals(_userPW);
+    }
+
+    public void MoveToCustomizingScene()
+    {
+        loadScene.gameObject.SetActive(true);
+        loadScene.SceneLoader(1);
     }
 }

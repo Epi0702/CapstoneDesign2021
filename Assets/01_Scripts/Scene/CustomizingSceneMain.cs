@@ -6,11 +6,11 @@ public class CustomizingSceneMain : BaseSceneMain
 {
     [SerializeField]
     Playerlook playerLook;
-    public Playerlook playerlook
+    public Playerlook Playerlook
     {
         get
         {
-            return playerlook;
+            return playerLook;
         }
     }
 

@@ -14,14 +14,21 @@ public class Login : MonoBehaviour
     public GameObject SignUpPanel;
     public GameObject StartButton;
 
-    private string AdminID = "test";
-    private string AdminPW = "1234";
+    //private string AdminID = "test";
+    //private string AdminPW = "1234";
+
+    private bool idCheck;
+    private bool pwCheck;
 
     public void ClickLoginButton()
     {
-        if (IDText.text.Equals(AdminID) && PWText.text.Equals(AdminPW))
+        idCheck = SystemManager.Instance.GetCurrentSceneMain<TitleSceneMain>().CheckUserID(IDText.text);
+        pwCheck = SystemManager.Instance.GetCurrentSceneMain<TitleSceneMain>().CheckUserPW(PWText.text);
+        //if (IDText.text.Equals(AdminID) && PWText.text.Equals(AdminPW))
+        if (idCheck && pwCheck)
         {
-            SceneManager.LoadScene("CustomizingScene");
+            //SceneManager.LoadScene("CustomizingScene");
+            SystemManager.Instance.GetCurrentSceneMain<TitleSceneMain>().MoveToCustomizingScene();
         }
         else
         {

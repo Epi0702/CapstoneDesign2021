@@ -7,7 +7,7 @@ public class LoadScene : MonoBehaviour
 {
     public Slider loadingSlider;
 
-    public void LoadLevel(int _SceneIndex)
+    public void SceneLoader(int _SceneIndex)
     {
         StartCoroutine(LoadAsynchronously(_SceneIndex));
     }
