@@ -37,7 +37,7 @@ public class MapViewer : MonoBehaviour
     {
         for(int i = 0; i< gameWorldInMap.rooms.Count; i++)
         {
-            room[i] = Instantiate(Resources.Load<Room>("Prefabs/Room")) as Room;
+            room[i] = Instantiate(Resources.Load<Room>("Prefabs/Map/Room")) as Room;
             room[i].transform.SetParent(this.transform, false);
             room[i].roominfo = gameWorldInMap.rooms[i];
             Debug.Log(room[i].roominfo.GetRoomLoca().x + ", " + room[i].roominfo.GetRoomLoca().y);
