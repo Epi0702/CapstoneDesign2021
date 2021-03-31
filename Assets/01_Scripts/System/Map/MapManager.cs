@@ -10,7 +10,7 @@ public class MapManager : MonoBehaviour
     void Awake()
     {
         gameWorld = new MapData();
-        gameWorld.InitMap(MapSize.ThreebyThree, AreaSize.NinebyNine);
+        gameWorld.InitMap(MapSize.FourbyFour, AreaSize.NinebyNine);
     }
     void Start()
     {

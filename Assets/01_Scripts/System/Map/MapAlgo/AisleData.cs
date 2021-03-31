@@ -11,7 +11,7 @@ namespace MapAlgo
         RoomData endRoom;
         int areasize;
         int mapsize;
-        List<PassageData> passage = new List<PassageData>();
+        public List<PassageData> passage = new List<PassageData>();
 
         public void SetInfo(RoomData _startroom, RoomData _endroom, AreaSize _areasize, MapSize _mapsize)
         {
