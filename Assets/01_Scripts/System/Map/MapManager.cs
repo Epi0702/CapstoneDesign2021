@@ -12,6 +12,7 @@ public class MapManager : MonoBehaviour
     AreaSize areaSize;
     public MapData gameWorld;
     public int currentRoomIndex;
+    public int prevRoomIndex;
     public int currentAisleIndex;
     public int currentPassageIndex;
 
@@ -22,6 +23,7 @@ public class MapManager : MonoBehaviour
         currentRoomIndex = 0;
         currentAisleIndex = 0;
         currentPassageIndex = 0;
+        prevRoomIndex = 0;
     }
     void Start()
     {
@@ -36,13 +38,22 @@ public class MapManager : MonoBehaviour
         gameWorld = new MapData();
         //gameWorld.InitMap(MapSize.FourbyFour, AreaSize.NinebyNine);
         gameWorld.InitMap(mapSize, areaSize);
-        InitWorld();
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.OnStart();
+
+        InitWorld();
+        CurrentRoomRelSet();
     }
     void InitWorld()
     {
         currentRoomIndex = gameWorld.startRoomIndex;
         endRoomIndex = gameWorld.endRoomIndex;
+    }
+
+    public void CurrentRoomRelSet()
+    {
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetCurrentRoom();
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.PrevRoomSet();
+        
     }
 
 }

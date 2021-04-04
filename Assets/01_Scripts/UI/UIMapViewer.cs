@@ -16,6 +16,8 @@ public class UIMapViewer : MonoBehaviour
 
     int passageIndex;
 
+    int currentRoomIndexInMap;
+    int prevRoomIndexInMap;
     public void OnStart()
     {
         //temp = this.transform;
@@ -62,5 +64,47 @@ public class UIMapViewer : MonoBehaviour
             }
         }
 
+    }
+    public void PrevRoomSet()
+    {
+        prevRoomIndexInMap = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.prevRoomIndex;
+        room[prevRoomIndexInMap].CurrentRoomIconInActive();
+        if (room[prevRoomIndexInMap].roominfo.roomRel.left != null)
+        {
+            room[room[prevRoomIndexInMap].roominfo.roomRel.left.GetRoomAreaNum()].ButtonInActive();
+        }
+        if (room[prevRoomIndexInMap].roominfo.roomRel.right != null)
+        {
+            room[room[prevRoomIndexInMap].roominfo.roomRel.right.GetRoomAreaNum()].ButtonInActive();
+        }
+        if (room[prevRoomIndexInMap].roominfo.roomRel.top != null)
+        {
+            room[room[prevRoomIndexInMap].roominfo.roomRel.top.GetRoomAreaNum()].ButtonInActive();
+        }
+        if (room[prevRoomIndexInMap].roominfo.roomRel.bottom != null)
+        {
+            room[room[prevRoomIndexInMap].roominfo.roomRel.bottom.GetRoomAreaNum()].ButtonInActive();
+        }
+    }
+    public void SetCurrentRoom()
+    {
+        currentRoomIndexInMap = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.currentRoomIndex;
+        room[currentRoomIndexInMap].CurrentRoomIconActive();
+        if (room[currentRoomIndexInMap].roominfo.roomRel.left != null)
+        {
+            room[room[currentRoomIndexInMap].roominfo.roomRel.left.GetRoomAreaNum()].ButtonActive();
+        }        
+        if (room[currentRoomIndexInMap].roominfo.roomRel.right != null)
+        {
+            room[room[currentRoomIndexInMap].roominfo.roomRel.right.GetRoomAreaNum()].ButtonActive();
+        }        
+        if (room[currentRoomIndexInMap].roominfo.roomRel.top != null)
+        {
+            room[room[currentRoomIndexInMap].roominfo.roomRel.top.GetRoomAreaNum()].ButtonActive();
+        }        
+        if (room[currentRoomIndexInMap].roominfo.roomRel.bottom != null)
+        {
+            room[room[currentRoomIndexInMap].roominfo.roomRel.bottom.GetRoomAreaNum()].ButtonActive();
+        }
     }
 }

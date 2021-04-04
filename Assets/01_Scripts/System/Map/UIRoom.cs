@@ -6,11 +6,16 @@ public class UIRoom : MonoBehaviour
 {
     public RoomData roominfo;
     RectTransform rect;
-
+    [SerializeField]
+    GameObject Button;
+    [SerializeField]
+    GameObject CurrentRoomIcon;
     // Start is called before the first frame update
     void Awake()
     {
         rect = this.GetComponent<RectTransform>();
+        ButtonInActive();
+        CurrentRoomIconInActive();
     }
 
     // Update is called once per frame
@@ -29,8 +34,30 @@ public class UIRoom : MonoBehaviour
 
         rect.anchoredPosition = new Vector2((roominfo.GetRoomLoca().x - realLoca) * _scale, (roominfo.GetRoomLoca().y - realLoca) * _scale);
     }
+
     public void OnClick()
     {
         Debug.Log("Clicked!!");
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.prevRoomIndex = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.currentRoomIndex;
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.currentRoomIndex = roominfo.GetRoomAreaNum();
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.CurrentRoomRelSet();
+    }
+
+    public void ButtonInActive()
+    {
+        Button.SetActive(false);
+    }
+    public void ButtonActive()
+    {
+        Button.SetActive(true);
+    }
+
+    public void CurrentRoomIconInActive()
+    {
+        CurrentRoomIcon.SetActive(false);
+    } 
+    public void CurrentRoomIconActive()
+    {
+        CurrentRoomIcon.SetActive(true);
     }
 }
