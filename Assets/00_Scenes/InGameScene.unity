@@ -1273,7 +1273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1773502354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1773,6 +1773,7 @@ MonoBehaviour:
   mapSize: 4
   areaSize: 9
   currentRoomIndex: 0
+  prevRoomIndex: 0
   currentAisleIndex: 0
   currentPassageIndex: 0
   endRoomIndex: 0
