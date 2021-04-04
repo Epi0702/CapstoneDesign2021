@@ -21,7 +21,7 @@ public class MapViewer : MonoBehaviour
     {
         //temp = this.transform;
         passageIndex = 0;
-        gameWorldInMap = TestMain.Instance.MapManager.gameWorld;
+        gameWorldInMap = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.gameWorld;
         room = new Room[gameWorldInMap.rooms.Count];
         aisle = new AisleData[gameWorldInMap.passages.Count];
         //aisle = new Aisle[gameWorldInMap.passages.Count];

@@ -30,5 +30,9 @@ public class Room : MonoBehaviour
         //rectTrans.anchoredPosition = new Vector2((roominfo.GetRoomLoca().x - realLoca) * _scale, (roominfo.GetRoomLoca().y - realLoca) * _scale);
         transform.position = new Vector2((roominfo.GetRoomLoca().x - realLoca), (roominfo.GetRoomLoca().y - realLoca));
     }
+    public void OnClick()
+    {
+        Debug.Log("");
+    }
 
 }

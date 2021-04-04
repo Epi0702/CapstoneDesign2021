@@ -10,7 +10,7 @@ namespace MapAlgo
         public List<AisleData> passages = new List<AisleData>();
         public MapSize settedMapSize;
         public AreaSize settedAreaSize;
-        int startRoomIndex;
+        public int startRoomIndex;
         int endRoomIndex;
         int mapPatternVH;
         public void InitMap(MapSize _mapsize, AreaSize _areasize)
