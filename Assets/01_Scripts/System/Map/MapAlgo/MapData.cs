@@ -11,7 +11,7 @@ namespace MapAlgo
         public MapSize settedMapSize;
         public AreaSize settedAreaSize;
         public int startRoomIndex;
-        int endRoomIndex;
+        public int endRoomIndex;
         int mapPatternVH;
         public void InitMap(MapSize _mapsize, AreaSize _areasize)
         {

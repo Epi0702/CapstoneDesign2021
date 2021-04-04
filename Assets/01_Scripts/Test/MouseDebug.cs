@@ -18,24 +18,23 @@ public class MouseDebug : MonoBehaviour
     }
     void touchClick()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    RaycastHit hit;
-
-        //    Ray touchray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        //    Physics.Raycast(touchray, out hit);
-        //    if (hit.collider != null)
-        //    {
-        //        Debug.Log(hit.collider.gameObject.name);
-        //    }
-
-        //}
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            mouseposition = Input.mousePosition;
-            Debug.Log(mouseposition.x + ", " + mouseposition.y);
-        }
+            RaycastHit hit;
 
+            Ray touchray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            Physics.Raycast(touchray, out hit);
+            if (hit.collider != null)
+            {
+                Debug.Log(hit.collider.gameObject.name);
+            }
+
+        }
+        //if(Input.GetMouseButtonDown(0))
+        //{
+        //    mouseposition = Input.mousePosition;
+        //    Debug.Log(mouseposition.x + ", " + mouseposition.y);
+        //}
     }
 }
