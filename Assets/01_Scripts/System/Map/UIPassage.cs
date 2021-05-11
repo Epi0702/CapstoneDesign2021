@@ -26,8 +26,8 @@ public class UIPassage : MonoBehaviour
         int realLoca = 0;
         realLoca = ((int)_mapsize * (int)_areasize + (int)_mapsize - 2) / 2;
 
-        Debug.Log(passageinfo.GetRoomLoca().x + ", " + passageinfo.GetRoomLoca().y);
-        Debug.Log(realLoca);
+        //Debug.Log(passageinfo.GetRoomLoca().x + ", " + passageinfo.GetRoomLoca().y);
+        //Debug.Log(realLoca);
         rect.anchoredPosition = new Vector2((passageinfo.GetRoomLoca().x - realLoca) * _scale, (passageinfo.GetRoomLoca().y - realLoca) * _scale);
     }
 }

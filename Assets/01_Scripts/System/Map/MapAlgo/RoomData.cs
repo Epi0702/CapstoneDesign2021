@@ -8,7 +8,7 @@ namespace MapAlgo
     public class RoomData
     {
         LocationData locationInfo = new LocationData();
-        RoomEventType roomevent;
+        public RoomEventType roomevent = RoomEventType.None;
 
         public RoomRelation roomRel;
 
@@ -33,7 +33,7 @@ namespace MapAlgo
         }
         public void PrintRoomInfo()
         {
-            Debug.Log("Room Num : " + locationInfo.areanum + ", " + locationInfo.locationIndex.x + ", " + locationInfo.locationIndex.y);
+            //Debug.Log("Room Num : " + locationInfo.areanum + ", " + locationInfo.locationIndex.x + ", " + locationInfo.locationIndex.y);
         }
         public void InitRoomRel()
         {
@@ -58,6 +58,25 @@ namespace MapAlgo
         public RoomRelation GetRoomRel()
         {
             return roomRel;
+        }
+        public AisleData GetAisle(RoomData _targetRoom)
+        {
+            if(roomRel.left == _targetRoom)
+            {
+                return roomRel.leftAisle;
+            }            
+            else if(roomRel.right == _targetRoom)
+            {
+                return roomRel.rightAisle;
+            }            
+            else if(roomRel.top == _targetRoom)
+            {
+                return roomRel.topAisle;
+            }            
+            else
+            {
+                return roomRel.bottomAisle;
+            }
         }
 
     }

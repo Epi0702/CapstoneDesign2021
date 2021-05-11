@@ -37,10 +37,11 @@ public class UIRoom : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("Clicked!!");
+        //Debug.Log("Clicked!!");
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.prevRoomIndex = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.currentRoomIndex;
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.currentRoomIndex = roominfo.GetRoomAreaNum();
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.CurrentRoomRelSet();
+        //SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.CurrentRoomRelSet();
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.EnterAisle();
     }
 
     public void ButtonInActive()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MapAlgo;
 
 public enum PlayerState
 {
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     Character[] PlayerCharacter;
 
-    PlayerState playerState;
+    public PlayerState playerState;
 
     //Room currentRoom;
     //Aisle currentAisle;
@@ -44,5 +45,29 @@ public class Player : MonoBehaviour
     void UpdateCurrentLocation()
     {
 
+    }
+    public void EnterRoom(RoomData _room)
+    {
+        if (_room.roomevent == RoomEventType.None)
+        {
+            playerState = PlayerState.NoneInRoom;
+        }
+        else if (_room.roomevent == RoomEventType.Battle)
+        {
+            playerState = PlayerState.BattleInRoom;
+        }
+        Debug.Log(playerState);
+    }
+    public void EnterPassgae(PassageData _passage)
+    {
+        if (_passage.passageevent == PassageEventType.None)
+        {
+            playerState = PlayerState.NoneInPassage;
+        }
+        else if (_passage.passageevent == PassageEventType.Battle)
+        {
+            playerState = PlayerState.BattleInPassage;
+        }
+        Debug.Log(playerState);
     }
 }

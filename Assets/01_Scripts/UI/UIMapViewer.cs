@@ -35,7 +35,7 @@ public class UIMapViewer : MonoBehaviour
         }
         passage = new UIPassage[passageIndex];
 
-        Debug.Log(gameWorldInMap.rooms.Count);
+        //Debug.Log(gameWorldInMap.rooms.Count);
 
         PrintRoom();
         PrintPassage();

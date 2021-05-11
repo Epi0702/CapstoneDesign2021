@@ -34,7 +34,8 @@ namespace MapAlgo
     };
     public enum PassageEventType
     {
-
+        None,
+        Battle,
     }
     public  class MapDataStruct
     {

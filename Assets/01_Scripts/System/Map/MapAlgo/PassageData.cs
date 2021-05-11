@@ -8,7 +8,7 @@ namespace MapAlgo
     public class PassageData
     {
         LocationData locationInfo = new LocationData();
-        PassageEventType passageevent;
+        public PassageEventType passageevent = PassageEventType.None;
         
         public PassageData()
         {
