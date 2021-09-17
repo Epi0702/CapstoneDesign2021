@@ -20,16 +20,16 @@ public class Monster : LivingEntity
         switch (position)
         {
             case CharacterPosition.First:
-                this.transform.localPosition = new Vector3(2.4f, 0, 0);
+                this.transform.localPosition = new Vector3(2.4f, this.transform.position.y, 0);
                 break;
             case CharacterPosition.Second:
-                this.transform.localPosition = new Vector3(0.8f, 0, 0);
+                this.transform.localPosition = new Vector3(0.8f, this.transform.position.y, 0);
                 break;
             case CharacterPosition.Third:
-                this.transform.localPosition = new Vector3(-0.8f, 0, 0);
+                this.transform.localPosition = new Vector3(-0.8f, this.transform.position.y, 0);
                 break;
             case CharacterPosition.Fourth:
-                this.transform.localPosition = new Vector3(-2.4f, 0, 0);
+                this.transform.localPosition = new Vector3(-2.4f, this.transform.position.y, 0);
                 break;
             default:
                 break;
