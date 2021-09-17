@@ -37,11 +37,14 @@ public class UIRoom : MonoBehaviour
 
     public void OnClick()
     {
-        //Debug.Log("Clicked!!");
+        Debug.Log("Clicked!!");
+        Debug.Log("!!ROOMINFO : " + roominfo);
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.prevRoomIndex = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.currentRoomIndex;
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.currentRoomIndex = roominfo.GetRoomAreaNum();
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.CurrentRoomRelSet();
-        //SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.EnterAisle();
+        //SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.CurrentRoomRelSet();
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.EnterAisle();
+
+        //PrintRel();
     }
 
     public void ButtonInActive()
@@ -56,9 +59,29 @@ public class UIRoom : MonoBehaviour
     public void CurrentRoomIconInActive()
     {
         CurrentRoomIcon.SetActive(false);
-    } 
+    }
     public void CurrentRoomIconActive()
     {
         CurrentRoomIcon.SetActive(true);
+    }
+
+    public void PrintRel()
+    {
+        if(roominfo.GetRoomRel().left != null)
+        {
+            Debug.Log("Left : " + roominfo.GetRoomRel().left.GetRoomAreaNum());
+        }       
+        if(roominfo.GetRoomRel().right != null)
+        {
+            Debug.Log("Right : " + roominfo.GetRoomRel().right.GetRoomAreaNum());
+        }       
+        if(roominfo.GetRoomRel().top != null)
+        {
+            Debug.Log("Top : " + roominfo.GetRoomRel().top.GetRoomAreaNum());
+        }       
+        if(roominfo.GetRoomRel().bottom != null)
+        {
+            Debug.Log("Bottom : " + roominfo.GetRoomRel().bottom.GetRoomAreaNum());
+        }
     }
 }

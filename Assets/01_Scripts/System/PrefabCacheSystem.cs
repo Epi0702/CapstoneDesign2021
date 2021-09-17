@@ -17,6 +17,7 @@ public class PrefabCacheSystem
 
     public void GenerateCache(string filePath, GameObject gameObject, int cacheCount, Transform parentTransform = null)
     {
+        Debug.Log("HI");
         if (Caches.ContainsKey(filePath))
         {
             Debug.LogWarning("Already cache generated!! filePath = " + filePath);

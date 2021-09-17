@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/00_Scenes/TitleScene.unity
+    path: Assets/GUI Pro Kit Fantasy RPG/Sprites/00_EquipmentIcons_256x256/00_Scenes/TitleScene.unity
     guid: a8b378a092e36f44ab509b4845a7f081
   - enabled: 1
-    path: Assets/00_Scenes/CustomizingScene.unity
+    path: Assets/GUI Pro Kit Fantasy RPG/Sprites/00_EquipmentIcons_256x256/00_Scenes/CustomizingScene.unity
     guid: f5c6dec24f86daf44b183ccb2bb834fb
   - enabled: 1
-    path: Assets/00_Scenes/MainLobbyScene.unity
+    path: Assets/GUI Pro Kit Fantasy RPG/Sprites/00_EquipmentIcons_256x256/00_Scenes/MainLobbyScene.unity
     guid: 1be9da2594ef5c047b2ea10c17a6c459
   m_configObjects: {}

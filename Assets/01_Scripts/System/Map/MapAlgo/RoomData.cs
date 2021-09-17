@@ -12,6 +12,8 @@ namespace MapAlgo
 
         public RoomRelation roomRel;
 
+        public Squad squad;
+        public int squadTypeNum;
         public void SetLocationToRealLoca(CoupleInt _location)
         {
             locationInfo.locationIndex.x += _location.x;
@@ -23,6 +25,8 @@ namespace MapAlgo
             locationInfo.locationIndex.x = _areaLocation.x + _rand.x;
             locationInfo.locationIndex.y = _areaLocation.y + _rand.y;
             locationInfo.loCT = LocationCategory.CT_Room;
+
+            squadTypeNum = UnityEngine.Random.Range(0,4);
         }
 
         //mapmanager 에서 맵뷰 room 에 초기 정보 전달
@@ -33,7 +37,8 @@ namespace MapAlgo
         }
         public void PrintRoomInfo()
         {
-            //Debug.Log("Room Num : " + locationInfo.areanum + ", " + locationInfo.locationIndex.x + ", " + locationInfo.locationIndex.y);
+            //Debug.Log("Room Num : " + locationInfo.areanum + ", " + locationInfo.locationIndex.x + ", " + locationInfo.locationIndex.y+"  "+ roomevent);
+            //Debug.Log("Room NUM : " + locationInfo.areanum+"  "+ roomevent);
         }
         public void InitRoomRel()
         {
@@ -46,10 +51,19 @@ namespace MapAlgo
             roomRel.rightAisle = null;
             roomRel.topAisle = null;
             roomRel.bottomAisle = null;
+
+            squad = null;
         }
         public CoupleInt GetRoomLoca()
         {
             return locationInfo.locationIndex;
+        }
+        public bool CompareRoomLoca(CoupleInt coupleInt)
+        {
+            if (this.GetRoomLoca().x == coupleInt.x && this.GetRoomLoca().y == coupleInt.y)
+                return true;
+            else
+                return false;
         }
         public int GetRoomAreaNum()
         {
@@ -61,21 +75,39 @@ namespace MapAlgo
         }
         public AisleData GetAisle(RoomData _targetRoom)
         {
-            if(roomRel.left == _targetRoom)
+            if (roomRel.left == _targetRoom)
             {
                 return roomRel.leftAisle;
-            }            
-            else if(roomRel.right == _targetRoom)
+            }
+            else if (roomRel.right == _targetRoom)
             {
                 return roomRel.rightAisle;
-            }            
-            else if(roomRel.top == _targetRoom)
+            }
+            else if (roomRel.top == _targetRoom)
             {
                 return roomRel.topAisle;
-            }            
-            else
+            }
+            else if (roomRel.bottom == _targetRoom)
             {
                 return roomRel.bottomAisle;
+            }
+            else
+            {
+                Debug.LogError("null ERROR!!");
+                return null;
+            }
+        }
+        public void SetRoomEvent()
+        {
+            int rand;
+            rand = Random.Range(0, 10);
+            if (rand > 4)
+            {
+                this.roomevent = RoomEventType.Battle;
+            }
+            else
+            {
+                this.roomevent = RoomEventType.None;
             }
         }
 

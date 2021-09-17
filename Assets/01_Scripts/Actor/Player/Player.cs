@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MapAlgo;
 
-public enum PlayerState
+public enum PlayerState     
 {
     None,
     NoneInRoom,
@@ -12,22 +12,17 @@ public enum PlayerState
     MoveForwardInPassage,
     BattleInPassage,
 }
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour //전체 통괄
 {
-    [SerializeField]
-    Character[] PlayerCharacter;
-
+    public List<LivingEntity> playerCharacter = new List<LivingEntity>();
+    
     public PlayerState playerState;
 
-    //Room currentRoom;
-    //Aisle currentAisle;
-    //Passage currentPassage;
+
     private void Awake()
     {
-        playerState = PlayerState.None;
-        //currentRoom = null;
-        //currentAisle = null;
-        //currentPassage = null;
+        playerState = PlayerState.NoneInRoom;
+
     }
     // Start is called before the first frame update
     void Start()
@@ -69,5 +64,36 @@ public class Player : MonoBehaviour
             playerState = PlayerState.BattleInPassage;
         }
         Debug.Log(playerState);
+    }
+    public void SetUpCharacter(int charType)
+    {
+        LivingEntity temp;
+        switch (charType)
+        {
+            case 0:
+                temp = Instantiate(Resources.Load<Knight>("Prefabs/Player/Knight"), this.transform);
+                playerCharacter.Add(temp);
+                break;
+            case 1:
+                temp = Instantiate(Resources.Load<Fighter>("Prefabs/Player/Fighter"), this.transform);
+                playerCharacter.Add(temp);
+                break;
+            default:
+                Debug.LogError("Character Type ERROR!!");
+                break;
+        }
+    }
+    public void SetPosition(int position01, int position02, int position03, int position04)
+    {
+        playerCharacter[0].SetPositionData(position01);
+        playerCharacter[1].SetPositionData(position02);
+        playerCharacter[2].SetPositionData(position03);
+        playerCharacter[3].SetPositionData(position04);
+
+        playerCharacter[0].TransformPosition();
+        playerCharacter[1].TransformPosition();
+        playerCharacter[2].TransformPosition();
+        playerCharacter[3].TransformPosition();
+
     }
 }

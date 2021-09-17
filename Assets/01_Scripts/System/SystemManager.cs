@@ -28,6 +28,16 @@ public class SystemManager : MonoBehaviour
             currentSceneMain = value;
         }
     }
+    [SerializeField]
+    MonsterTable monsterTable;
+    public MonsterTable MonsterTable
+    {
+        get
+        {
+            return monsterTable;
+        }
+    }
+
     private void Awake()
     {
         if (instance == null)

@@ -10,9 +10,10 @@ public class UIMapViewer : MonoBehaviour
     MapData gameWorldInMap;
 
     UIRoom[] room;
-    UIPassage[] passage;
+    UIPassage[][] passage;
 
-    AisleData[] aisle;
+   // RoomData[] roomData;
+    AisleData[] aisleData;
 
     int passageIndex;
 
@@ -24,29 +25,30 @@ public class UIMapViewer : MonoBehaviour
         passageIndex = 0;
         gameWorldInMap = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.gameWorld;
         room = new UIRoom[gameWorldInMap.rooms.Count];
-        aisle = new AisleData[gameWorldInMap.passages.Count];
+        //aisleData = new AisleData[gameWorldInMap.passages.Count];
 
+        passage = new UIPassage[gameWorldInMap.passages.Count][];
 
         for (int i = 0; i < gameWorldInMap.passages.Count; i++)
         {
-            aisle[i] = gameWorldInMap.passages[i];
-
-            passageIndex += aisle[i].GetPassageCount();
+            passage[i] = new UIPassage [gameWorldInMap.passages[i].GetPassageCount()];
         }
-        passage = new UIPassage[passageIndex];
 
         //Debug.Log(gameWorldInMap.rooms.Count);
 
         PrintRoom();
         PrintPassage();
+        
     }
+
     void PrintRoom()
     {
         for (int i = 0; i < gameWorldInMap.rooms.Count; i++)
         {
             room[i] = Instantiate(Resources.Load<UIRoom>("Prefabs/Map/RoomUI")) as UIRoom;
             room[i].transform.SetParent(this.transform, false);
-            room[i].roominfo = gameWorldInMap.rooms[i];
+            //room[i].roominfo = gameWorldInMap.rooms[i];
+            room[i].SetRoom(gameWorldInMap.rooms[i]);
             room[i].SetPositon(gameWorldInMap.settedMapSize, gameWorldInMap.settedAreaSize, scale);
         }
     }
@@ -56,15 +58,25 @@ public class UIMapViewer : MonoBehaviour
         {
             for (int j = 0; j < gameWorldInMap.passages[i].GetPassageCount(); j++)
             {
-                passage[i + j] = Instantiate(Resources.Load<UIPassage>("Prefabs/Map/PassageUI")) as UIPassage;
-                passage[i + j].transform.SetParent(this.transform, false);
-                passage[i + j].passageinfo = gameWorldInMap.passages[i].passage[j];
+                passage[i][j] = Instantiate(Resources.Load<UIPassage>("Prefabs/Map/PassageUI")) as UIPassage;
+                passage[i][j].transform.SetParent(this.transform, false);
+                passage[i][j].passageinfo = gameWorldInMap.passages[i].passage[j];
 
-                passage[i + j].SetPositon(gameWorldInMap.settedMapSize, gameWorldInMap.settedAreaSize, scale);
+                passage[i][j].SetPositon(gameWorldInMap.settedMapSize, gameWorldInMap.settedAreaSize, scale);
             }
         }
 
     }
+
+    public void PassageInIconActive(int passageNum, int currentIndex)
+    {
+       passage[passageNum][currentIndex].CurrentPassageIconActive();
+    } 
+    public void PassageInIconInActive(int passageNum, int currentIndex)
+    {
+       passage[passageNum][currentIndex].CurrentPassageIconInActive();
+    }
+
     public void PrevRoomSet()
     {
         prevRoomIndexInMap = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.prevRoomIndex;
@@ -89,22 +101,33 @@ public class UIMapViewer : MonoBehaviour
     public void SetCurrentRoom()
     {
         currentRoomIndexInMap = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.currentRoomIndex;
-        room[currentRoomIndexInMap].CurrentRoomIconActive();
+
+        if(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.state == currentLocationState.InRoom)
+            room[currentRoomIndexInMap].CurrentRoomIconActive();
+    }
+
+    public void SetRelRoomButton()
+    {
         if (room[currentRoomIndexInMap].roominfo.roomRel.left != null)
         {
             room[room[currentRoomIndexInMap].roominfo.roomRel.left.GetRoomAreaNum()].ButtonActive();
-        }        
+        }
         if (room[currentRoomIndexInMap].roominfo.roomRel.right != null)
         {
             room[room[currentRoomIndexInMap].roominfo.roomRel.right.GetRoomAreaNum()].ButtonActive();
-        }        
+        }
         if (room[currentRoomIndexInMap].roominfo.roomRel.top != null)
         {
             room[room[currentRoomIndexInMap].roominfo.roomRel.top.GetRoomAreaNum()].ButtonActive();
-        }        
+        }
         if (room[currentRoomIndexInMap].roominfo.roomRel.bottom != null)
         {
             room[room[currentRoomIndexInMap].roominfo.roomRel.bottom.GetRoomAreaNum()].ButtonActive();
         }
+    }
+
+    public void GetCurrentPassage()
+    {
+        
     }
 }

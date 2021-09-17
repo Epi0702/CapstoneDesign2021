@@ -11,6 +11,7 @@ namespace MapAlgo
         RoomData endRoom;
         int areasize;
         int mapsize;
+        public int AisleNum;
         public List<PassageData> passage = new List<PassageData>();
 
         public void SetInfo(RoomData _startroom, RoomData _endroom, AreaSize _areasize, MapSize _mapsize)
@@ -28,9 +29,9 @@ namespace MapAlgo
         }
         public void GeneratePassage()
         {
-            if (startRoom.roomRel.left == endRoom)
+            if (startRoom.roomRel.right == endRoom)
             {
-                ConnectHorizontal(endRoom, startRoom);
+                ConnectHorizontal(startRoom, endRoom);
             }
             //else if (startRoom.roomRel.right == endRoom)
             //{
@@ -40,7 +41,7 @@ namespace MapAlgo
             //{
             //    ConnectVertial(endRoom, startRoom);
             //}
-            else if (startRoom.roomRel.bottom == endRoom)
+            else if (startRoom.roomRel.top == endRoom)
             {
                 ConnectVertial(startRoom, endRoom);
             }
@@ -65,12 +66,16 @@ namespace MapAlgo
         void ConnectHorizontal(RoomData _startroom, RoomData _endroom)
         {
             for (int i = _startroom.GetRoomLoca().x + 1;
-                 i <= (_startroom.GetRoomAreaNum() % mapsize) * (areasize + 1) + (areasize - 1); i++)
+                 i < (_startroom.GetRoomAreaNum() % mapsize) * (areasize + 1) + (areasize); i++)
             {
                 CreatePassage(i, _startroom.GetRoomLoca().y);
             }
 
-            if (_startroom.GetRoomLoca().y <= _endroom.GetRoomLoca().y)        //start 가 아래
+            if(_startroom.GetRoomLoca().y == _endroom.GetRoomLoca().y)
+            {
+
+            }
+            if (_startroom.GetRoomLoca().y < _endroom.GetRoomLoca().y)        //start 가 아래
             {
                 for (int i = _startroom.GetRoomLoca().y; i <= _endroom.GetRoomLoca().y; i++)
                 {
@@ -91,16 +96,16 @@ namespace MapAlgo
         }
         void ConnectVertial(RoomData _startroom, RoomData _endroom)
         {
-            for (int i = _startroom.GetRoomLoca().y + 1;
-                i <= (_startroom.GetRoomAreaNum() / mapsize) * (areasize + 1) + (areasize - 1); i++)
+
+            for(int i = _startroom.GetRoomLoca().y + 1; i < (_startroom.GetRoomAreaNum() / mapsize) * (areasize + 1) + (areasize); i++)
             {
                 CreatePassage(_startroom.GetRoomLoca().x, i);
             }
-            if (_startroom.GetRoomLoca().x <= _endroom.GetRoomLoca().x)    //start가 왼쪽
+            if (_startroom.GetRoomLoca().x < _endroom.GetRoomLoca().x)    //start가 왼쪽
             {
                 for (int i = _startroom.GetRoomLoca().x; i <= _endroom.GetRoomLoca().x; i++)
                 {
-                    CreatePassage(i, (_startroom.GetRoomAreaNum() / mapsize) * (areasize + 1) + areasize);
+                    CreatePassage(i, (_startroom.GetRoomAreaNum() / mapsize) * (areasize + 1) + (areasize));
                 }
             }
             else
@@ -108,20 +113,30 @@ namespace MapAlgo
                 {
                     for (int i = _startroom.GetRoomLoca().x; i >= _endroom.GetRoomLoca().x; i--)
                     {
-                        CreatePassage(i, (_startroom.GetRoomAreaNum() / mapsize) * (areasize + 1) + areasize);
+                        CreatePassage(i, (_startroom.GetRoomAreaNum() / mapsize) * (areasize + 1) + (areasize));
                     }
                 }
             }
-            for (int i = (_startroom.GetRoomAreaNum() / mapsize + 1) * (areasize + 1); i < _endroom.GetRoomLoca().y; i++)
+            for (int i = (_startroom.GetRoomAreaNum() / mapsize) * (areasize + 1) + areasize + 1; i < _endroom.GetRoomLoca().y; i++)
             {
                 CreatePassage(_endroom.GetRoomLoca().x, i);
             }
         }
 
+
         public int GetPassageCount()
         {
             return passage.Count;
         }
+        public CoupleInt GetStartRoom()
+        {
+            return startRoom.GetRoomLoca();
+        }
+        public CoupleInt GetEndRoom()
+        {
+            return endRoom.GetRoomLoca();
+        }
+
     }
 }
 

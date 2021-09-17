@@ -8,6 +8,7 @@ namespace MapAlgo
     {
         None,
         Battle,
+        ItemRoom,
     }
     public struct RoomRelation
     {
