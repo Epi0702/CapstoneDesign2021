@@ -14,11 +14,11 @@ TagManager:
   - 
   - 
   - Player
-  - BG
+  - Monster
   - MiniMap
-  - 
-  - 
-  - 
+  - Inventory
+  - PlayerUI
+  - BG
   - 
   - 
   - 
@@ -44,6 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
+  - name: PlayerUI
+    uniqueID: 1709054305
+    locked: 0
+  - name: Item
     uniqueID: 952498699
+    locked: 0
+  - name: MiniMap
+    uniqueID: 3309943305
     locked: 0

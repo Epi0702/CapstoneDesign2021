@@ -44,7 +44,7 @@ public class MapManager : MonoBehaviour
         currentPassageIndex = 0;
         prevRoomIndex = 0;
         PassageIndexPlusForDebug.SetActive(false);
-        PassageIndexMinusForDebug.SetActive(false);
+        //PassageIndexMinusForDebug.SetActive(false);
         isBattle = false;
     }
     void Start()
@@ -98,7 +98,7 @@ public class MapManager : MonoBehaviour
     {
         //Debug.Log("EnterRoomInMap called!!");
         PassageIndexPlusForDebug.SetActive(false);
-        PassageIndexMinusForDebug.SetActive(false);
+        //PassageIndexMinusForDebug.SetActive(false);
         currentAisle = null;
         currentPassageIndex = 0;
         maxPassageIndex = 0;
@@ -127,7 +127,7 @@ public class MapManager : MonoBehaviour
         //Debug.Log("EnterAisle called!!");
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.PrevRoomSet();
         PassageIndexPlusForDebug.SetActive(true);
-        PassageIndexMinusForDebug.SetActive(true);
+        //PassageIndexMinusForDebug.SetActive(true);
 
         state = currentLocationState.InAsile;
 

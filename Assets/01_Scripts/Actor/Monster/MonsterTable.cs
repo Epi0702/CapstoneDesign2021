@@ -11,8 +11,8 @@ using UnityEngine;
 public struct MonsterStruct
 {
     public int index;
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MarshalTableConstant.charBufferSize)]
 
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MarshalTableConstant.charBufferSize)]
     public string FilePath;
 }
 

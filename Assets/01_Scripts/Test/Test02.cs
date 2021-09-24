@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class Test02 : MonoBehaviour
 {
-    Test01 test;
+    string func1 = "HelloWorld";
+    string func2 = "ByeWorld";
+
+
     // Start is called before the first frame update
     void Start()
     {
-        test = GetComponent<Test01>();
+        Invoke(func2, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            test.Score++;
-            test.PrintScore();
-        }
+    }
+    void HelloWorld()
+    {
+        Debug.Log("Hello, World!!");
+    }
+    void ByeWorld()
+    {
+        Debug.Log("GoodBye, World");
     }
 }
