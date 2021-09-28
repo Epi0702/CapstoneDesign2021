@@ -14,6 +14,15 @@ public class InGameSceneMain : BaseSceneMain
         }
     }
     [SerializeField]
+    BGScroll bgScroll;
+    public BGScroll BGScroll
+    {
+        get
+        {
+            return bgScroll;
+        }
+    }
+    [SerializeField]
     UIMapViewer uiMapViewer;
     public UIMapViewer UIMapViewer
     {
@@ -51,7 +60,7 @@ public class InGameSceneMain : BaseSceneMain
         {
             return playerController;
         }
-    }    
+    }
     [SerializeField]
     SquadController squadController;
     public SquadController SquadController
@@ -61,7 +70,15 @@ public class InGameSceneMain : BaseSceneMain
             return squadController;
         }
     }
-
+    [SerializeField]
+    ItemManager itemManager;
+    public ItemManager ItemManager
+    {
+        get
+        {
+            return itemManager;
+        }
+    }
     PrefabCacheSystem prefabCacheSystem = new PrefabCacheSystem();
     public PrefabCacheSystem PrefabCacheSystem
     {
@@ -96,6 +113,8 @@ public class InGameSceneMain : BaseSceneMain
     {
         base.OnStart();
         playerController.LoadPlayerCharacter();
+        player.TestSkillSet();
+        ItemManager.PlayerSkillSet(player.playerCharacter[0]);
     }
 
     protected override void UpdateScene()

@@ -4,7 +4,7 @@ using UnityEngine;
 public class HumanoidAnimation : CharacterAnimation
 {
 
-    protected override void SetAnimation(Acting acting)
+    public override void SetAnimation(Acting acting)
     {
         if (IsDead)
         {
@@ -95,4 +95,8 @@ public class HumanoidAnimation : CharacterAnimation
         }
     }
 
+    public override void SetAnimationOneTime(Acting acting)
+    {
+        SetAnimation(acting);
+    }
 }

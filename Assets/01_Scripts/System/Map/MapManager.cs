@@ -32,9 +32,9 @@ public class MapManager : MonoBehaviour
     EnemySpawner enemySpawner;
 
     [SerializeField]
-    GameObject PassageIndexPlusForDebug;    
-    [SerializeField]
-    GameObject PassageIndexMinusForDebug;
+    GameObject PassageIndexPlusForDebug;
+
+    bool mapMoving;
 
     void Awake()
     {
@@ -63,7 +63,7 @@ public class MapManager : MonoBehaviour
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.OnStart();
         state = currentLocationState.InRoom;
         InitWorld();
-        for(int i = 0; i < gameWorld.rooms.Count; i++)
+        for (int i = 0; i < gameWorld.rooms.Count; i++)
         {
             if (gameWorld.rooms[i].roomevent == RoomEventType.Battle)
                 battleRoomCount++;
@@ -71,10 +71,10 @@ public class MapManager : MonoBehaviour
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().EnemySpawner.initSpawner();
         for (int i = 0; i < gameWorld.rooms.Count; i++)
         {
-            if(gameWorld.rooms[i].roomevent == RoomEventType.Battle)
+            if (gameWorld.rooms[i].roomevent == RoomEventType.Battle)
             {
                 SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().EnemySpawner.GenerateSquad();// gameWorld.rooms[i].GetRoomAreaNum(), gameWorld.rooms[i].squadTypeNum);
-                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().EnemySpawner.SetSquad(battleroomIndex ,gameWorld.rooms[i].GetRoomAreaNum(), gameWorld.rooms[i].squadTypeNum); ;
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().EnemySpawner.SetSquad(battleroomIndex, gameWorld.rooms[i].GetRoomAreaNum(), gameWorld.rooms[i].squadTypeNum); ;
                 battleroomIndex++;
             }
         }
@@ -92,7 +92,7 @@ public class MapManager : MonoBehaviour
     {
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetCurrentRoom();
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.PrevRoomSet();
-        
+
     }
     void EnterRoomInMap()
     {
@@ -111,7 +111,7 @@ public class MapManager : MonoBehaviour
         //{
         //    SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetCurrentRoom();
         //}
-        if(gameWorld.rooms[currentRoomIndex].roomevent == RoomEventType.Battle)
+        if (gameWorld.rooms[currentRoomIndex].roomevent == RoomEventType.Battle)
         {
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.StartBattle(currentRoomIndex);
         }
@@ -145,7 +145,7 @@ public class MapManager : MonoBehaviour
             //Debug.Log("currentPassageIndex : " + currentPassageIndex);
             //Debug.Log("");
         }
-        else if(gameWorld.rooms[prevRoomIndex].CompareRoomLoca(currentAisle.GetEndRoom()))
+        else if (gameWorld.rooms[prevRoomIndex].CompareRoomLoca(currentAisle.GetEndRoom()))
         {
             //Debug.Log("역순");
             enterAisleDir = false;
@@ -183,7 +183,7 @@ public class MapManager : MonoBehaviour
         }
         else
         {
-            if(currentPassageIndex < 0)
+            if (currentPassageIndex < 0)
             {
                 state = currentLocationState.InRoom;
                 EnterRoomInMap();
@@ -196,31 +196,55 @@ public class MapManager : MonoBehaviour
         }
     }
 
-
-
     public void PlusIndex()
     {
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.PassageInIconInActive(currentAisle.AisleNum, currentPassageIndex);
 
+        //if (enterAisleDir == true)
+        //{
+        //    currentPassageIndex++;
+        //}
+
+        //else
+        //{
+        //    currentPassageIndex--;
+        //}
+
+        if (mapMoving == false)
+        {
+            StartCoroutine("MoveDelay");
+        }
+        //ExitAisle();
+    }
+
+    public void BattleEndRoom()
+    {
+        if (gameWorld.rooms[currentRoomIndex].roomevent == RoomEventType.Battle)
+        {
+            gameWorld.rooms[currentRoomIndex].roomevent = RoomEventType.None;
+        }
+    }
+
+    IEnumerator MoveDelay()
+    {
+        mapMoving = true;
+
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGScroll.move = true;
+        yield return new WaitForSeconds(0);
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGScroll.move = false;
+
         if (enterAisleDir == true)
         {
             currentPassageIndex++;
-            //Debug.Log("이동");
         }
 
         else
         {
             currentPassageIndex--;
-            //Debug.Log("이동");
         }
-
-        //Debug.Log("MaxPassageIndex : " + maxPassageIndex);
-        //Debug.Log("currentPassageIndex : " + currentPassageIndex);
-        //Debug.Log("");
-
         ExitAisle();
+        mapMoving = false;
     }
-
 }
 
 

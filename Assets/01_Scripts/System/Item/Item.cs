@@ -14,7 +14,7 @@ public enum ItemType
 }
 public class Item : MonoBehaviour
 {
-    public int itemCode = -1;        
+    public int itemCode = -1;
     public string itemName;             //아이템 이름
     public SpriteRenderer itemImage;    //아이템 이미지
     public ItemType itemType;
@@ -22,26 +22,29 @@ public class Item : MonoBehaviour
     public string itemFunction;
 
 
-    public Character owner;             //사용 캐릭터
-    public Monster target;              //타켓 몬스터
+    public LivingEntity owner;             //사용 캐릭터
+    public LivingEntity target;              //타켓 몬스터
     public int count;
 
     public bool isSetted = false;
 
-    private void Start()
+    private void Awake()
     {
         itemImage = GetComponent<SpriteRenderer>();
     }
+    private void Start()
+    {
+    }
     public void Update()
     {
-        
+
     }
 
     public void InitItem()
     {
         itemCode = -1;
         itemName = null;
-        itemImage.sprite = null;
+        itemImage.sprite = Resources.Load<Sprite>("Img/itemImg/colliderTest");
         itemType = ItemType.None;
         owner = null;
         target = null;
@@ -73,11 +76,97 @@ public class Item : MonoBehaviour
     }
     public void OnClickFunction()
     {
-        Debug.Log("Clicked!!");
-        Invoke(itemFunction,0);
+        switch (itemType)
+        {
+            case ItemType.None:
+                break;
+            case ItemType.Used:
+                UsedItemFuction();
+                break;
+            case ItemType.Ingredient:
+                break;
+            case ItemType.Equipment:
+                break;
+            case ItemType.Gold:
+                break;
+            case ItemType.EventItem:
+                break;
+            case ItemType.Skill:
+                SkillFunction();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public void UsedItemFuction()
+    {
+        Debug.Log("Item Clicked!!");
+        Invoke(itemFunction, 0);
+    }
+
+    public void IngredientItemFunction()
+    {
+        Debug.Log("Item Clicked!!");
+        Invoke(itemFunction, 0);
+    }
+
+    public void EquipmentItemFunction()
+    {
+        Debug.Log("Item Clicked!!");
+        Invoke(itemFunction, 0);
+    }
+
+    public void EventItemItemFunction()
+    {
+        Debug.Log("Item Clicked!!");
+        Invoke(itemFunction, 0);
+    }
+
+    public void SkillFunction()
+    {
+        if (SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.isSkillActive)
+        {
+            Debug.Log("SKill Clicked!!");
+            StartCoroutine(itemFunction);
+        }
+
     }
     public void temp()
     {
 
     }
+    IEnumerator AttackTest()
+    {
+        target = null;
+        InitTarget();
+        while (target == null)
+        {
+            
+            yield return new WaitForSeconds(0);
+            SetTarget();
+        }
+        if(target != null)
+        {
+            Debug.Log("Attack!!");
+            target.OnDamage(10);
+            //InitTarget();
+            ActionEnd();
+        }
+    }
+    public void SetTarget()
+    {
+        target = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetMonster;
+    }
+    public void InitTarget()
+    {
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetMonster = null;
+    }
+    public void ActionEnd()
+    {
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.actionEnd = true;
+        Debug.Log("Player Attack, action end");
+    }
+
 }

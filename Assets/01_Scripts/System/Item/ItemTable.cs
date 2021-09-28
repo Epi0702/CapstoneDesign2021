@@ -23,7 +23,7 @@ public class ItemTable : TableLoader<ItemStruct>
 {
     Dictionary<int, ItemStruct> itemTableDatas = new Dictionary<int, ItemStruct>();
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Load();
     }

@@ -255,7 +255,7 @@ Animator:
   m_GameObject: {fileID: 2797091703168507631}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c278133091cd84e1b9ec76c3532e1c58, type: 2}
+  m_Controller: {fileID: 9100000, guid: a9379654c8c74eb48b49e857babad727, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -642,6 +642,11 @@ MonoBehaviour:
   attackDamage: 0
   speed: 0
   position: 0
+  isMonster: 0
+  skill01Index: 0
+  skill02Index: 0
+  skill03Index: 0
+  skill04Index: 0
 --- !u!1 &2797091703758567562
 GameObject:
   m_ObjectHideFlags: 0

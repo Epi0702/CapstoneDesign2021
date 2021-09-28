@@ -7,7 +7,7 @@ public class Monster : LivingEntity
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.isMonster = true;
     }
 
     // Update is called once per frame
@@ -34,5 +34,9 @@ public class Monster : LivingEntity
             default:
                 break;
         }
+    }
+    public override void OnDamage(int damage)
+    {
+        base.OnDamage(damage);
     }
 }

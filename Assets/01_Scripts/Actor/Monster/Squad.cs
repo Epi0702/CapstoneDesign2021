@@ -8,7 +8,7 @@ public class Squad : MonoBehaviour
     public int type;
     public int roomNum;
 
-    public List<LivingEntity> enemy = new List<LivingEntity>();
+    public List<Monster> enemy = new List<Monster>();
 
     public MonsterSquadStruct monsterInfo;
 
@@ -46,7 +46,7 @@ public class Squad : MonoBehaviour
     }
     public void SetUpMonster(int monsterType)
     {
-        LivingEntity temp;
+        Monster temp;
         switch (monsterType)
         {
             case 0:
@@ -71,5 +71,19 @@ public class Squad : MonoBehaviour
         
 
         return true;
+    }
+    public bool isAllDead()
+    {
+        int count = 0;
+
+        for(int i = 0; i < enemy.Count; i ++)
+        {
+            if (enemy[i].dead)
+                count++;
+        }
+        if (enemy.Count == count)
+            return true;
+        else
+            return false;
     }
 }

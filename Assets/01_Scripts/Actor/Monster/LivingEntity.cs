@@ -19,6 +19,8 @@ public abstract class LivingEntity : MonoBehaviour
     public CharacterPosition position;
     protected int size;
 
+    public bool isMonster;
+
     public bool dead { get; set; }
     public event Action onDeath;
 
@@ -80,7 +82,10 @@ public abstract class LivingEntity : MonoBehaviour
     }
     public virtual void OnDamage(int damage)
     {
-        currentHp -= damage;
+        this.currentHp -= damage;
+        if (this.currentHp <= 0)
+            this.currentHp = 0;
+        Debug.Log("currentHP : " + currentHp);
         if (currentHp <= 0 && !dead)
         {
             Die();
@@ -95,6 +100,8 @@ public abstract class LivingEntity : MonoBehaviour
             onDeath();
         }
         dead = true;
+        Debug.Log("Dead!!");
+        this.gameObject.SetActive(false);
     }
     public virtual void Skill00()
     {
@@ -111,5 +118,10 @@ public abstract class LivingEntity : MonoBehaviour
     public virtual void Skill03()
     {
 
+    }
+
+    public void OnDebug()
+    {
+        Debug.Log("Max HP : " + maxHp + ", currentHP : " + currentHp);
     }
 }

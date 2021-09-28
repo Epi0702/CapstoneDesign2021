@@ -1,3 +1,5 @@
 itemCode,itemType,itemImgaePath,itemName,functionName,description
 0,1,Img/ItemImg/item_red_potion,Red Potion,temp,A potion that restores a small amount of HP
 1,5,Img/ItemImg/item_key_bronze,Key,temp,key to open Chest
+1000,10,Img/SkillImg/Knight/Knight01,Smash,AttackTest,
+1001,10,Img/SkillImg/Fighter/Fighter01,Crash,AttackTest,

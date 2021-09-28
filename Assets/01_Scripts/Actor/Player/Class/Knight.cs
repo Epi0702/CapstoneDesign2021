@@ -8,12 +8,18 @@ public class Knight : Character
     // Start is called before the first frame update
     void Start()
     {
-        speed = 10;
+        Setup();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public override void Setup()
+    {
+        base.Setup();
+        speed = 10;
     }
 }

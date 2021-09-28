@@ -8,8 +8,10 @@ public class Zombie : Monster
     Animator anim;
 
     // Start is called before the first frame update
-    private void Enable()
+    private void Awake()
     {
+        this.isMonster = true;
+
         Setup();
         //Image = Instantiate(Resources.Load<GameObject>)
     }
@@ -47,12 +49,6 @@ public class Zombie : Monster
     {
 
     }
-
-    public override void OnDamage(int damage)
-    {
-
-    }
-
     public override void Die()
     {
         base.Die();

@@ -101,7 +101,7 @@ namespace MapAlgo
         {
             int rand;
             rand = Random.Range(0, 10);
-            if (rand > 4)
+            if (true)
             {
                 this.roomevent = RoomEventType.Battle;
             }

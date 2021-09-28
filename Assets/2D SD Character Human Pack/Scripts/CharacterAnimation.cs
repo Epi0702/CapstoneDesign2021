@@ -46,5 +46,7 @@ public abstract class CharacterAnimation : MonoBehaviour
         SetAnimation(Acting.Idle);
     }
 
-    protected abstract void SetAnimation(Acting acting);
+    public abstract void SetAnimation(Acting acting);
+
+    public abstract void SetAnimationOneTime(Acting acting);
 }

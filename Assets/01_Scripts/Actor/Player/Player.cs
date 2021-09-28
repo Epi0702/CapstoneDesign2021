@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using MapAlgo;
 
 public enum PlayerState     
@@ -14,10 +15,12 @@ public enum PlayerState
 }
 public class Player : MonoBehaviour //전체 통괄
 {
-    public List<LivingEntity> playerCharacter = new List<LivingEntity>();
+    public List<Character> playerCharacter = new List<Character>();
     
     public PlayerState playerState;
 
+    [SerializeField]
+    Scrollbar[] playerHP;
 
     private void Awake()
     {
@@ -67,7 +70,7 @@ public class Player : MonoBehaviour //전체 통괄
     }
     public void SetUpCharacter(int charType)
     {
-        LivingEntity temp;
+        Character temp;
         switch (charType)
         {
             case 0:
@@ -95,5 +98,33 @@ public class Player : MonoBehaviour //전체 통괄
         playerCharacter[2].TransformPosition();
         playerCharacter[3].TransformPosition();
 
+    }
+
+    public void TestSkillSet()
+    {
+        playerCharacter[0].SetDataForTest(1000, 1000, 1000, 1000);
+        playerCharacter[1].SetDataForTest(1000, 1000, 1000, 1000);
+        playerCharacter[2].SetDataForTest(1001, 1001, 1001, 1001);
+        playerCharacter[3].SetDataForTest(1001, 1001, 1001, 1001);
+    }
+
+    public void SelectedCharacterEffect()
+    {
+
+    }
+
+    public bool isAllDead()
+    {
+        int count = 0;
+
+        for (int i = 0; i < playerCharacter.Count; i++)
+        {
+            if (playerCharacter[i].dead)
+                count++;
+        }
+        if (playerCharacter.Count == count)
+            return true;
+        else
+            return false;
     }
 }

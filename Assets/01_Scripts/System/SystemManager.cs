@@ -37,7 +37,25 @@ public class SystemManager : MonoBehaviour
             return monsterTable;
         }
     }
+    [SerializeField]
+    ItemTable itemTable;
+    public ItemTable ItemTable
+    {
+        get
+        {
+            return itemTable;
+        }
+    }
 
+    [SerializeField]
+    TestSceneMain testSceneMain;
+    public TestSceneMain TestSceneMain
+    {
+        get
+        {
+            return testSceneMain;
+        }
+    }
     private void Awake()
     {
         if (instance == null)

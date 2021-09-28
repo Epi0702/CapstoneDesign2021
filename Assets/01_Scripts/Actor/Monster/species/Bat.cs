@@ -6,8 +6,9 @@ public class Bat : Monster
 {
     private void Awake()
     {
+        this.isMonster = true;
+
         Setup();
-        //Image = Instantiate(Resources.Load<GameObject>)
     }
     private void Start()
     {
@@ -34,12 +35,6 @@ public class Bat : Monster
     {
 
     }
-
-    public override void OnDamage(int damage)
-    {
-
-    }
-
     public override void Die()
     {
         base.Die();

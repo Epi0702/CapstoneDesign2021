@@ -7,4 +7,6 @@ public class GameData
 {
     public string User_id = "test";
     public string PW = "1234";
+
+    
 }
