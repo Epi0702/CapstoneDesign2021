@@ -11,6 +11,7 @@ public class Squad : MonoBehaviour
     public List<Monster> enemy = new List<Monster>();
 
     public MonsterSquadStruct monsterInfo;
+    Difficulty squadDifficulty;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class Squad : MonoBehaviour
     }
     public void SetSquad()
     {
+        squadDifficulty = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.mapDifficulty;
         SetUpMonster(monsterInfo.enemy00);
         SetUpMonster(monsterInfo.enemy01);
         SetUpMonster(monsterInfo.enemy02);
@@ -51,10 +53,12 @@ public class Squad : MonoBehaviour
         {
             case 0:
                 temp = Instantiate(Resources.Load<Zombie>("Prefabs/Monster/Zombie"), this.transform);
+                temp.SetDifficulty(squadDifficulty);
                 enemy.Add(temp);
                 break;
             case 1:
                 temp = Instantiate(Resources.Load<Bat>("Prefabs/Monster/Bat"), this.transform);
+                temp.SetDifficulty(squadDifficulty);
                 enemy.Add(temp);
                 break;
             default:

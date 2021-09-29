@@ -244,7 +244,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   attackDamage: 0
+  defense: 0
   speed: 0
+  critical: 0
   position: 0
   isMonster: 0
 --- !u!61 &6509862145437150133
@@ -394,7 +396,7 @@ GameObject:
   - component: {fileID: 5159776924482091087}
   - component: {fileID: 2242720498105876745}
   m_Layer: 9
-  m_Name: Bat
+  m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

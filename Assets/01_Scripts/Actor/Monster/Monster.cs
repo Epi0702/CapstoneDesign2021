@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Monster : LivingEntity
 {
+    protected GameObject monsterSprite;
+    protected MonsterAnimation anim;
+
+    protected Difficulty difficulty;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        this.isMonster = true;
+        Setup();
     }
 
     // Update is called once per frame
@@ -35,8 +40,60 @@ public class Monster : LivingEntity
                 break;
         }
     }
+    public override void Setup()
+    {
+        base.Setup();
+        this.isMonster = true;
+        monsterSprite = transform.Find("Monster").gameObject;
+
+        anim = monsterSprite.GetComponent<MonsterAnimation>();
+
+    }
+
+    public virtual void SetDifficulty(Difficulty dif)
+    {
+
+    }
+
     public override void OnDamage(int damage)
     {
         base.OnDamage(damage);
     }
+    public override void Attack()
+    {
+        int randnum = UnityEngine.Random.Range(0, 4);
+
+        switch (randnum)
+        {
+            case 0:
+                Skill01();
+                break;
+            case 1:
+                Skill01();
+                break;
+            case 2:
+                Skill01();
+                break;
+            case 3:
+                Skill01();
+                break;
+        }
+    }
+    public virtual void Skill00()
+    {
+
+    }
+    public virtual void Skill01()
+    {
+
+    }
+    public virtual void Skill02()
+    {
+
+    }
+    public virtual void Skill03()
+    {
+
+    }
+
 }

@@ -9,6 +9,12 @@ public class Character : LivingEntity   //각 캐릭터
     public int skill03Index;
     public int skill04Index;
 
+    public int level;
+    public int maxExp;
+    public int currentExp;
+
+    public string className;
+
     HumanoidAnimation anim;
     GameObject characterSprite;
 
@@ -23,6 +29,10 @@ public class Character : LivingEntity   //각 캐릭터
     {
 
     }
+    public virtual void SetStats()
+    {
+
+    }
     public override void Setup()
     {
         base.Setup();
@@ -30,7 +40,6 @@ public class Character : LivingEntity   //각 캐릭터
         characterSprite = transform.Find("Character").gameObject;
 
         anim = characterSprite.GetComponent<HumanoidAnimation>();
-        Debug.Log(anim);
     }
     public override void TransformPosition()
     {
@@ -60,7 +69,24 @@ public class Character : LivingEntity   //각 캐릭터
         this.skill03Index = skill03Num;
         this.skill04Index = skill04Num;
     }
-
+    public void LoadStats(int level, int maxHp, int currentHp,int atk, int def, int spd, int cri, int curExp)
+    {
+        this.level = level;
+        SetMaxEXPByLevel();
+        this.maxHp = maxHp;
+        this.currentHp = currentHp;
+        this.attackDamage = atk;
+        this.defense = def;
+        this.speed = spd;
+        this.critical = cri;
+        this.currentExp = curExp;
+    }
+    public void InitCharacter()
+    {
+        this.level = 1;
+        SetMaxEXPByLevel();
+        this.currentExp = 0;
+    }
     public override void Attack()
     {
         
@@ -69,5 +95,39 @@ public class Character : LivingEntity   //각 캐릭터
     {
         anim.SetAnimation(Acting.Smash);
         anim.SetAnimation(Acting.Idle);
+    }
+    public void SetMaxEXPByLevel()
+    {
+        switch (level)
+        {
+            case 1:
+                this.maxExp = 10;
+                break;
+            case 2:
+                this.maxExp = 30;
+                break;
+            case 3:
+                this.maxExp = 90;
+                break;
+            case 4:
+                this.maxExp = 270;
+                break;
+            case 5:
+                this.maxExp = 810;
+                break;
+
+            default:
+                Debug.LogError("Level Range ERROR!!");
+                break;
+        }
+    }
+    public void LevelUp()
+    {
+        if(currentExp >= maxExp)
+        {
+            currentExp -= maxExp;
+            level++;
+            SetMaxEXPByLevel();
+        }
     }
 }

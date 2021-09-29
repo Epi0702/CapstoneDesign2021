@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 2797091703168507629}
   - component: {fileID: 4372667932663218693}
   m_Layer: 9
-  m_Name: Zombie
+  m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -624,7 +624,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   attackDamage: 0
+  defense: 0
   speed: 0
+  critical: 0
   position: 0
   isMonster: 0
 --- !u!61 &7428081528645282221

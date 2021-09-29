@@ -13,9 +13,13 @@ public enum CharacterPosition
 public abstract class LivingEntity : MonoBehaviour
 {
     public int maxHp = 100;
-    public int currentHp { get; set; }
+    public int currentHp;// { get; set; }
     public int attackDamage;
+    public int defense;
     public int speed;
+    public int critical;
+
+
     public CharacterPosition position;
     protected int size;
 
@@ -37,23 +41,7 @@ public abstract class LivingEntity : MonoBehaviour
     }
     public virtual void Attack()
     {
-        int randnum = UnityEngine.Random.Range(0, 4);
 
-        switch (randnum)
-        {
-            case 0:
-                Skill00();
-                break;
-            case 1:
-                Skill01();
-                break;
-            case 2:
-                Skill02();
-                break;
-            case 3:
-                Skill03();
-                break;
-        }
     }
     public virtual void SetPositionData(int pos)
     {
@@ -102,22 +90,6 @@ public abstract class LivingEntity : MonoBehaviour
         dead = true;
         Debug.Log("Dead!!");
         this.gameObject.SetActive(false);
-    }
-    public virtual void Skill00()
-    {
-
-    }
-    public virtual void Skill01()
-    {
-
-    }
-    public virtual void Skill02()
-    {
-
-    }
-    public virtual void Skill03()
-    {
-
     }
 
     public void OnDebug()

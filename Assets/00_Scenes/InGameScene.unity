@@ -3017,6 +3017,7 @@ MonoBehaviour:
   - {fileID: 1962209284}
   - {fileID: 2137327050}
   - {fileID: 1627867740}
+  isSkillActive: 0
 --- !u!4 &1259360470
 Transform:
   m_ObjectHideFlags: 0
@@ -3955,7 +3956,7 @@ Transform:
   m_GameObject: {fileID: 1450876462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 18, y: 10, z: 1}
+  m_LocalScale: {x: 36, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 7926190197147449589}
   m_RootOrder: 1
@@ -7675,7 +7676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScrollDatas:
   - RenderForScroll: {fileID: 1450876463}
-    Speed: 0.3
+    Speed: 0.15
     OffsetX: 0
   move: 0
 --- !u!222 &8058764086763938672

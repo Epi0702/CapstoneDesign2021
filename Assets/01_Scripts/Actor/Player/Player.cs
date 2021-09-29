@@ -15,9 +15,11 @@ public enum PlayerState
 }
 public class Player : MonoBehaviour //전체 통괄
 {
-    public List<Character> playerCharacter = new List<Character>();
-    
     public PlayerState playerState;
+    public List<Character> playerCharacter = new List<Character>();
+
+    public int[] characterKillCount = new int[4];
+    
 
     [SerializeField]
     Scrollbar[] playerHP;

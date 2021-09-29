@@ -8,6 +8,12 @@ public enum currentLocationState
     InRoom,
     InAsile,
 }
+public enum Difficulty
+{
+    Easy = 0,
+    Normal = 1,
+    Hard = 2,
+}
 public class MapManager : MonoBehaviour
 {
     [SerializeField]
@@ -36,6 +42,8 @@ public class MapManager : MonoBehaviour
 
     bool mapMoving;
 
+    public Difficulty mapDifficulty;
+
     void Awake()
     {
         battleRoomCount = 0;
@@ -46,6 +54,7 @@ public class MapManager : MonoBehaviour
         PassageIndexPlusForDebug.SetActive(false);
         //PassageIndexMinusForDebug.SetActive(false);
         isBattle = false;
+        mapDifficulty = Difficulty.Easy;
     }
     void Start()
     {
@@ -230,7 +239,7 @@ public class MapManager : MonoBehaviour
         mapMoving = true;
 
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGScroll.move = true;
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(1f);
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGScroll.move = false;
 
         if (enterAisleDir == true)

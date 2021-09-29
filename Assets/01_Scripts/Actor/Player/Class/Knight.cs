@@ -21,5 +21,6 @@ public class Knight : Character
     {
         base.Setup();
         speed = 10;
+        className = "Knight";
     }
 }

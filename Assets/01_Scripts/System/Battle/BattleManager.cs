@@ -18,8 +18,8 @@ public class BattleManager : MonoBehaviour
     public bool actionEnd;
     public bool isattacked;
 
-    [SerializeField]
-    Player player;
+
+    public Player player;
 
     public List<Squad> enemySquad = new List<Squad>();
 
@@ -39,7 +39,7 @@ public class BattleManager : MonoBehaviour
     public Monster targetMonster;
 
     public Monster selectedMonster;
-    public Character targetCharacter;
+    public List<Character> targetCharacter = new List<Character>();
 
     BattleOrder battleOrder;
 
@@ -53,7 +53,7 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         Battle_V2();
+        Battle_V2();
     }
     public void SetUpSquadsInfo(List<Squad> list)
     {
@@ -64,7 +64,7 @@ public class BattleManager : MonoBehaviour
         selectedCharacter = null;
         targetMonster = null;
         selectedMonster = null;
-        targetCharacter = null;
+        targetCharacter.Clear();
         Debug.Log("Target Init");
     }
     public void InitBattleManager()
@@ -163,9 +163,10 @@ public class BattleManager : MonoBehaviour
             debugbool = true;
         }
 
-        if(turnManager[attackCount].dead)
+        if (turnManager[attackCount].dead)
         {
-            Debug.Log(turnManager[attackCount].GetType()+"(죽음) called!! ");
+            Debug.Log(turnManager[attackCount].GetType() + "(죽음) called!! ");
+            debugbool = false;
             battleOrder = BattleOrder.TurnEnd;
         }
         else if (turnManager[attackCount].isMonster == false)
@@ -211,7 +212,7 @@ public class BattleManager : MonoBehaviour
             StartCoroutine("BattleAnimationDelay");
 
         }
-        if(attackAnim)
+        if (attackAnim)
         {
             InitSelTarget();
             debugbool = false;
@@ -228,7 +229,7 @@ public class BattleManager : MonoBehaviour
         {
             //GameOver;
         }
-        else if(enemySquad[currentSquad].isAllDead())   //플레이어 승리
+        else if (enemySquad[currentSquad].isAllDead())   //플레이어 승리
         {
             BattleOver();
         }
@@ -247,7 +248,7 @@ public class BattleManager : MonoBehaviour
                 Debug.Log("action end called");
                 battleOrder = BattleOrder.Action;
             }
-                
+
         }
 
     }
