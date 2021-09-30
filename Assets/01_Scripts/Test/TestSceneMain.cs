@@ -18,13 +18,15 @@ public class TestSceneMain : BaseSceneMain
     public LivingEntity target = null;
 
     public bool delay;
-
+    int count = 0;
+    int count2 = 0;
     // Start is called before the first frame update
 
+    GameObject BG;
     void Start()
     {
-        hpbar.InitHPbar(100, 100);
-        delay = false;
+
+        
     }
 
     // Update is called once per frame
@@ -39,7 +41,7 @@ public class TestSceneMain : BaseSceneMain
     }
     public void OnTestHPbar()
     {
-        hpbar.DecreaseHP(10);
+       // hpbar.DecreaseHP(10);
     }
     public void OnTestDelay()
     {
@@ -60,4 +62,28 @@ public class TestSceneMain : BaseSceneMain
         Debug.Log("Coroutine Called!!");
         delay = false;
     }
+
+    IEnumerator StopTest()
+    {
+
+        while(true)
+        {
+            count++;
+            Debug.Log(count);
+            yield return new WaitForSeconds(1f);
+        }
+    } 
+    IEnumerator StopTest2()
+    {
+
+        while(true)
+        {
+            if (count >= 5)
+                StopAllCoroutines();
+            count2++;
+            Debug.Log(count2);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 enum BattleOrder
 {
@@ -34,12 +35,19 @@ public class BattleManager : MonoBehaviour
     bool debugbool;
 
     bool coroutineCheck;
+    bool coroutineCheck2;
 
     public Character selectedCharacter;
     public Monster targetMonster;
 
     public Monster selectedMonster;
-    public List<Character> targetCharacter = new List<Character>();
+
+
+    public List<LivingEntity> targetEntity = new List<LivingEntity>();
+
+    public List<int> damageList = new List<int>();
+
+    public Action<LivingEntity, int> DamageInputEvent;
 
     BattleOrder battleOrder;
 
@@ -64,7 +72,9 @@ public class BattleManager : MonoBehaviour
         selectedCharacter = null;
         targetMonster = null;
         selectedMonster = null;
-        targetCharacter.Clear();
+        targetEntity.Clear();
+        damageList.Clear();
+        DamageInputEvent = null;
         Debug.Log("Target Init");
     }
     public void InitBattleManager()
@@ -193,6 +203,7 @@ public class BattleManager : MonoBehaviour
             debugbool = false;
             attackAnim = false;
             coroutineCheck = false;
+            coroutineCheck2 = false;
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.isSkillActive = false;
 
             battleOrder = BattleOrder.ActionEnd;
@@ -206,12 +217,20 @@ public class BattleManager : MonoBehaviour
             Debug.Log("Animation Start!!");
             debugbool = true;
         }
-
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.SetSkillSelectedFrameAllOff();
         if (!attackAnim && !coroutineCheck)
         {
             StartCoroutine("BattleAnimationDelay");
 
+
         }
+
+        if(coroutineCheck && coroutineCheck2)
+        {
+            //HP애니메이션
+            StartCoroutine("HPBarAnitmationDelay");
+        }
+
         if (attackAnim)
         {
             InitSelTarget();
@@ -252,57 +271,6 @@ public class BattleManager : MonoBehaviour
         }
 
     }
-    //public void Battle()
-    //{
-    //    if (turnEnd)
-    //    {
-    //        TurnSet();      //턴 리스트 set
-    //        attackCount = 0;
-    //        turnEnd = false;
-
-    //        Debug.Log(turnManager[attackCount].GetType());
-    //    }
-
-    //    else if (!turnEnd)
-    //    {
-    //        if (actionEnd)
-    //        {
-    //            // ActionInit();
-    //            if (enemySquad[currentSquad].isAllDead())
-    //                BattleOver();
-    //            ActionEnd();
-    //            if (!turnEnd)
-    //                // Debug.Log(turnManager[attackCount].GetType());
-    //                actionEnd = false;
-    //        }
-    //        else
-    //        {
-    //            if (turnManager[attackCount].isMonster == false)
-    //            {
-    //                //Debug.Log("Player Turn");
-    //                selectedCharacter = (Character)turnManager[attackCount];
-    //                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.PlayerSkillSet(selectedCharacter);
-
-    //            }
-
-
-    //            else
-    //            {
-    //                //Debug.Log("Monster Turn");
-    //                turnManager[attackCount].Attack();
-    //                //Debug.Log(turnManager[attackCount].GetType() + " ATTACK!!");
-    //                actionEnd = true;
-    //            }
-
-
-    //        }
-    //    }
-    //}
-    //public void ActionInit()
-    //{
-    //    attackterm = false;
-    //    isattacked = false;
-    //}
     public void ActionEnd()
     {
 
@@ -363,6 +331,23 @@ public class BattleManager : MonoBehaviour
         coroutineCheck = true;
         yield return new WaitForSeconds(3f);
         Debug.Log("Animation End!!");
+        coroutineCheck2 = true;
+
+    }
+    IEnumerator HPBarAnitmationDelay()
+    {
+        coroutineCheck2 = false;
+
+        for (int i = 0; i < targetEntity.Count; i++)
+        {
+            DamageInputEvent(targetEntity[i], damageList[i]);
+        }
+
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().PlayerController.PrintCurrentHp();
+
+        yield return new WaitForSeconds(2f);
+
+        Debug.Log("HP Updated");
         attackAnim = true;
     }
 

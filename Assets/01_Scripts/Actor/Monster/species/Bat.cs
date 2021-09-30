@@ -27,6 +27,7 @@ public class Bat : Monster
         //speed = 5;
         
     }
+
     void SetStatsByDifficulty()
     {
         switch (difficulty)
@@ -35,7 +36,8 @@ public class Bat : Monster
                 {
                     maxHp = 20;
                     currentHp = maxHp;
-                    attackDamage = 5;
+                    attackDamage = 20;
+                    defense = 5;
                     speed = 5;
                 }
                 break;
@@ -43,7 +45,8 @@ public class Bat : Monster
                 {
                     maxHp = 25;
                     currentHp = maxHp;
-                    attackDamage = 7;
+                    attackDamage = 20;
+                    defense = 5;
                     speed = 6;
                 }
                 break;
@@ -51,7 +54,8 @@ public class Bat : Monster
                 {
                     maxHp = 30;
                     currentHp = maxHp;
-                    attackDamage = 10;
+                    attackDamage = 20;
+                    defense = 5;
                     speed = 7;
                 }
                 break;
@@ -74,6 +78,7 @@ public class Bat : Monster
     public override void Die()
     {
         base.Die();
+        Debug.Log("Bat Die");
     }
 
     public void Test()
@@ -92,10 +97,10 @@ public class Bat : Monster
         while (!check)
         {
             int randtarget = UnityEngine.Random.Range(0, 4);
-            if (tempplayer.playerCharacter[randtarget] != null && tempplayer.playerCharacter[randtarget] != dead)
+            if (IsTargetAlive(tempplayer.playerCharacter[randtarget]))
             {
                 tempplayer.playerCharacter[randtarget].OnDamage(this.attackDamage);
-                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetCharacter.Add(tempplayer.playerCharacter[randtarget]);
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(tempplayer.playerCharacter[randtarget]);
                 Debug.Log("Target Set!!!");
                 check = true;
             }
@@ -104,20 +109,51 @@ public class Bat : Monster
     public override void Skill01()      //후방 두명 공격
     {
         Player tempplayer = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.player;
+        int damage = attackDamage;//데미지 설정
 
-
-        if (tempplayer.playerCharacter[2] != null || tempplayer.playerCharacter[2] != dead)
+        if (IsTargetAlive(tempplayer.playerCharacter[2]))
         {
-            tempplayer.playerCharacter[2].OnDamage(this.attackDamage);
-            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetCharacter.Add(tempplayer.playerCharacter[2]);
+            //tempplayer.playerCharacter[2].OnDamage(this.attackDamage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(tempplayer.playerCharacter[2]);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.damageList.Add(damage);
         }
-        if (tempplayer.playerCharacter[3] != null || tempplayer.playerCharacter[3] != dead)
+        if (IsTargetAlive(tempplayer.playerCharacter[3]))
         {
-            tempplayer.playerCharacter[3].OnDamage(this.attackDamage);
-            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetCharacter.Add(tempplayer.playerCharacter[3]);
+            //tempplayer.playerCharacter[3].OnDamage(this.attackDamage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(tempplayer.playerCharacter[3]);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.damageList.Add(damage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.DamageInputEvent += DamageSet;
         }
-
     }
+    public bool IsTargetAlive(LivingEntity character)
+    {
+        if (character != null || character != dead)
+            return true;
+        else
+            return false;
+    }
+    public void DamageSet(LivingEntity character, int damage)
+    {
+        character.OnDamage(damage);
+    }
+     
+    //public override void Skill01()      //후방 두명 공격
+    //{
+    //    Player tempplayer = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.player;
+
+
+    //    if (tempplayer.playerCharacter[2] != null || tempplayer.playerCharacter[2] != dead)
+    //    {
+    //        tempplayer.playerCharacter[2].OnDamage(this.attackDamage);
+    //        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetCharacter.Add(tempplayer.playerCharacter[2]);
+    //    }
+    //    if (tempplayer.playerCharacter[3] != null || tempplayer.playerCharacter[3] != dead)
+    //    {
+    //        tempplayer.playerCharacter[3].OnDamage(this.attackDamage);
+    //        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetCharacter.Add(tempplayer.playerCharacter[3]);
+    //    }
+
+    //}
     public override void Skill02()
     {
         

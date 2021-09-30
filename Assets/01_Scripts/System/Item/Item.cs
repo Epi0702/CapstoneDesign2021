@@ -16,10 +16,12 @@ public class Item : MonoBehaviour
 {
     public int itemCode = -1;
     public string itemName;             //아이템 이름
-    public SpriteRenderer itemImage;    //아이템 이미지
     public ItemType itemType;
     public string description;
     public string itemFunction;
+
+    public GameObject Icon;
+    public SpriteRenderer itemImage;    //아이템 이미지
 
 
     public LivingEntity owner;             //사용 캐릭터
@@ -28,9 +30,20 @@ public class Item : MonoBehaviour
 
     public bool isSetted = false;
 
+
+    public bool skillSelected;               //스킬 선택
+    public bool skillActive;               //스킬 발동
+    public bool skillCancel;               //스킬 중복선택        스킬 발동하면 true됨
+    public bool targetSet;                  //타겟 셋
+
+    public SkillClick skillClick;
+
     private void Awake()
     {
-        itemImage = GetComponent<SpriteRenderer>();
+        Icon = transform.Find("Icon").gameObject;
+        itemImage = Icon.GetComponent<SpriteRenderer>();
+
+        skillClick = GetComponent<SkillClick>();
     }
     private void Start()
     {
@@ -126,34 +139,47 @@ public class Item : MonoBehaviour
 
     public void SkillFunction()
     {
-        if (SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.isSkillActive)
-        {
-            Debug.Log("SKill Clicked!!");
-            StartCoroutine(itemFunction);
-        }
+        StopAllCoroutines();
+        Debug.Log("SKill Clicked!!");
+
+        StartCoroutine("CheckSkillCancel");
+        StartCoroutine(itemFunction);
 
     }
     public void temp()
     {
 
     }
+    IEnumerator CheckSkillCancel()
+    {
+        while(skillSelected)
+        {
+            //Debug.Log("Checking");
+            yield return null;
+        }
+        StopAllCoroutines();
+    }
     IEnumerator AttackTest()
     {
+        Debug.Log("Coroutine 2");
         target = null;
         InitTarget();
         while (target == null)
         {
-            
-            yield return new WaitForSeconds(0);
+
+            yield return null;
+
             SetTarget();
         }
-        if(target != null)
+        if (target != null)
         {
             Debug.Log("Attack!!");
             target.OnDamage(10);
             //InitTarget();
             ActionEnd();
         }
+        StopAllCoroutines();
+        Debug.Log("SkillSuccess");
     }
     public void SetTarget()
     {
@@ -166,7 +192,6 @@ public class Item : MonoBehaviour
     public void ActionEnd()
     {
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.actionEnd = true;
-        Debug.Log("Player Attack, action end");
     }
 
 }

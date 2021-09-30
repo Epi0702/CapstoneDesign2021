@@ -103,7 +103,7 @@ public class MapManager : MonoBehaviour
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.PrevRoomSet();
 
     }
-    void EnterRoomInMap()
+    public void EnterRoomInMap()
     {
         //Debug.Log("EnterRoomInMap called!!");
         PassageIndexPlusForDebug.SetActive(false);
@@ -133,6 +133,7 @@ public class MapManager : MonoBehaviour
     }
     public void EnterAisle()
     {
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGManager.SetCurrentAisleBG();
         //Debug.Log("EnterAisle called!!");
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.PrevRoomSet();
         PassageIndexPlusForDebug.SetActive(true);
@@ -181,8 +182,9 @@ public class MapManager : MonoBehaviour
         {
             if (currentPassageIndex + 1 > maxPassageIndex)
             {
-                state = currentLocationState.InRoom;
-                EnterRoomInMap();
+                //state = currentLocationState.InRoom;
+                //EnterRoomInMap();
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGManager.EnterRoom();
                 //Debug.Log("EnterRoom!!");
                 //Debug.Log("CurrentRoomNUM : " + currentRoomIndex);
             }
@@ -194,8 +196,9 @@ public class MapManager : MonoBehaviour
         {
             if (currentPassageIndex < 0)
             {
-                state = currentLocationState.InRoom;
-                EnterRoomInMap();
+                //state = currentLocationState.InRoom;
+                //EnterRoomInMap();
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGManager.EnterRoom();
                 //Debug.Log("EnterRoom!!");
                 //Debug.Log("CurrentRoomNUM : " + currentRoomIndex);
             }
@@ -238,9 +241,9 @@ public class MapManager : MonoBehaviour
     {
         mapMoving = true;
 
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGScroll.move = true;
-        yield return new WaitForSeconds(1f);
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGScroll.move = false;
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGManager.GetCurrentAisle().move = true;
+        yield return new WaitForSeconds(0f);//1f
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGManager.GetCurrentAisle().move = false;
 
         if (enterAisleDir == true)
         {

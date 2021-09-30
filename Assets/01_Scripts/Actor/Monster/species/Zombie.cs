@@ -23,16 +23,56 @@ public class Zombie : Monster
     {
         base.Setup();
 
-        maxHp = 20;
-        currentHp = maxHp;
+        //maxHp = 20;
+        //currentHp = maxHp;
 
-        attackDamage = 5;
-        defense = 0;
-        speed = 7;
+        //attackDamage = 20;
+        //defense = 0;
+        //speed = 7;
 
-        critical = 10;
+        //critical = 10;
 
-        size = 1;
+        //size = 1;
+    }
+    void SetStatsByDifficulty()
+    {
+        switch (difficulty)
+        {
+            case Difficulty.Easy:
+                {
+                    maxHp = 20;
+                    currentHp = maxHp;
+                    attackDamage = 20;
+                    defense = 5;
+                    speed = 5;
+                }
+                break;
+            case Difficulty.Normal:
+                {
+                    maxHp = 25;
+                    currentHp = maxHp;
+                    attackDamage = 20;
+                    defense = 5;
+                    speed = 6;
+                }
+                break;
+            case Difficulty.Hard:
+                {
+                    maxHp = 30;
+                    currentHp = maxHp;
+                    attackDamage = 20;
+                    defense = 5;
+                    speed = 7;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    public override void SetDifficulty(Difficulty dif)
+    {
+        this.difficulty = dif;
+        SetStatsByDifficulty();
     }
     public override void SetPositionData(int pos)
     {
@@ -70,7 +110,7 @@ public class Zombie : Monster
             if (tempplayer.playerCharacter[randtarget] != null && tempplayer.playerCharacter[randtarget] != dead)
             {
                 tempplayer.playerCharacter[randtarget].OnDamage(this.attackDamage);
-                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetCharacter.Add(tempplayer.playerCharacter[randtarget]);
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(tempplayer.playerCharacter[randtarget]);
                 Debug.Log("Target Set!!!");
                 check = true;
             }
@@ -80,19 +120,31 @@ public class Zombie : Monster
     public override void Skill01()      //전방 두명 공격
     {
         Player tempplayer = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.player;
+        int damage = attackDamage;//데미지 설정
 
-
-        if (tempplayer.playerCharacter[0] != null || tempplayer.playerCharacter[0] != dead)
+        if (IsTargetAlive(tempplayer.playerCharacter[2]))
         {
-            tempplayer.playerCharacter[0].OnDamage(this.attackDamage);
-            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetCharacter.Add(tempplayer.playerCharacter[0]);
+            //tempplayer.playerCharacter[2].OnDamage(this.attackDamage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(tempplayer.playerCharacter[2]);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.damageList.Add(damage);
         }
-        if (tempplayer.playerCharacter[1] != null || tempplayer.playerCharacter[1] != dead)
+        if (IsTargetAlive(tempplayer.playerCharacter[3]))
         {
-            tempplayer.playerCharacter[1].OnDamage(this.attackDamage);
-            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetCharacter.Add(tempplayer.playerCharacter[1]);
+            //tempplayer.playerCharacter[3].OnDamage(this.attackDamage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(tempplayer.playerCharacter[3]);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.damageList.Add(damage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.DamageInputEvent += DamageSet;
         }
-
     }
-
+    public bool IsTargetAlive(LivingEntity character)
+    {
+        if (character != null || character != dead)
+            return true;
+        else
+            return false;
+    }
+    public void DamageSet(LivingEntity character, int damage)
+    {
+        character.OnDamage(damage);
+    }
 }

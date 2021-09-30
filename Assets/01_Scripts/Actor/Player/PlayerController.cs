@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     HPbar[] PlayerHpBar;
+
+    int[] beforeHp = new int[4];
     // Start is called before the first frame update
     void Start()
     {
@@ -45,8 +47,17 @@ public class PlayerController : MonoBehaviour
             {
                 PlayerHpBar[i].SetOnOff(true);
                 PlayerHpBar[i].InitHPbar(player.playerCharacter[i].maxHp, player.playerCharacter[i].currentHp);
+                beforeHp[i] = player.playerCharacter[i].currentHp;
             }
 
+        }
+    }
+
+    public void PrintCurrentHp()
+    {
+        for (int i = 0; i < player.playerCharacter.Count; i++)
+        {
+            PlayerHpBar[i].DecreaseHP(player.playerCharacter[i].currentHp);
         }
     }
 }

@@ -11,6 +11,7 @@ public class ItemManager : MonoBehaviour
     public Item[] playerskill = new Item[4];
 
     public bool isSkillActive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,5 +33,17 @@ public class ItemManager : MonoBehaviour
         playerskill[3].SetItemInfo(itemDataTable.GetItem(character.skill04Index));
     }
 
-    
+    public void SetSkillSelectedFrameAllOff()
+    {
+        for (int i = 0; i < 4; i++)
+            playerskill[i].skillClick.SelectedFrameOnOff(false);
+    }
+
+    public void SetSkillClickedFalse()
+    {
+        for (int i = 0; i < 4; i++)
+            playerskill[i].skillSelected = false;
+    }
+
+
 }

@@ -37,16 +37,24 @@ public class HPbar : MonoBehaviour
         SetHpBar();
         SetBeforeHpBar();
     }
-    public void DecreaseHP(int damage)
+    //public void DecreaseHP(int damage)
+    //{
+    //    currentHP = currentHP - damage;
+    //    filled_p = CurrentHpPercentage();
+    //    SetHpBar();                 //현재 체력 감소까지
+
+
+    //    Debug.Log("currentHP : " + filled.fillAmount);
+    //    StartCoroutine("Decrease");
+
+    //}
+
+    public void DecreaseHP(int currentHp)
     {
-        currentHP = currentHP - damage;
+        this.currentHP = currentHp;
         filled_p = CurrentHpPercentage();
-        SetHpBar();                 //현재 체력 감소까지
-
-
-        Debug.Log("currentHP : " + filled.fillAmount);
+        SetHpBar();
         StartCoroutine("Decrease");
-
     }
     IEnumerator Decrease()
     {
@@ -54,7 +62,7 @@ public class HPbar : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             filled_before.fillAmount -= (filled_before_p - filled_p) / 10;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.15f);
         }
         filled_before_p = CurrentHpPercentage();
     }

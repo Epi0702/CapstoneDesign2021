@@ -24,17 +24,17 @@ public class Monster : LivingEntity
     {
         switch (position)
         {
-            case CharacterPosition.First:
-                this.transform.localPosition = new Vector3(2.4f, this.transform.position.y, 0);
-                break;
-            case CharacterPosition.Second:
-                this.transform.localPosition = new Vector3(0.8f, this.transform.position.y, 0);
+            case CharacterPosition.Fourth:
+                this.transform.localPosition = new Vector3(2.49f, this.transform.position.y, 0);
                 break;
             case CharacterPosition.Third:
-                this.transform.localPosition = new Vector3(-0.8f, this.transform.position.y, 0);
+                this.transform.localPosition = new Vector3(0.83f, this.transform.position.y, 0);
                 break;
-            case CharacterPosition.Fourth:
-                this.transform.localPosition = new Vector3(-2.4f, this.transform.position.y, 0);
+            case CharacterPosition.Second:
+                this.transform.localPosition = new Vector3(-0.83f, this.transform.position.y, 0);
+                break;
+            case CharacterPosition.First:
+                this.transform.localPosition = new Vector3(-2.49f, this.transform.position.y, 0);
                 break;
             default:
                 break;
@@ -49,7 +49,10 @@ public class Monster : LivingEntity
         anim = monsterSprite.GetComponent<MonsterAnimation>();
 
     }
-
+    public override void Die()
+    {
+        base.Die();
+    }
     public virtual void SetDifficulty(Difficulty dif)
     {
 

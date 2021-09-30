@@ -14,12 +14,12 @@ public class InGameSceneMain : BaseSceneMain
         }
     }
     [SerializeField]
-    BGScroll bgScroll;
-    public BGScroll BGScroll
+    BGManager bGManager;
+    public BGManager BGManager
     {
         get
         {
-            return bgScroll;
+            return bGManager;
         }
     }
     [SerializeField]

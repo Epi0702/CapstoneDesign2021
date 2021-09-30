@@ -47,16 +47,16 @@ public class Character : LivingEntity   //각 캐릭터
         switch (position)
         {
             case CharacterPosition.First:
-                this.transform.localPosition = new Vector3(2.4f, 0, 0);
+                this.transform.localPosition = new Vector3(2.49f, 0, 0);
                 break;
             case CharacterPosition.Second:
-                this.transform.localPosition = new Vector3(0.8f, 0, 0);
+                this.transform.localPosition = new Vector3(0.83f, 0, 0);
                 break;
             case CharacterPosition.Third:
-                this.transform.localPosition = new Vector3(-0.8f, 0, 0);
+                this.transform.localPosition = new Vector3(-0.83f, 0, 0);
                 break;
             case CharacterPosition.Fourth:
-                this.transform.localPosition = new Vector3(-2.4f, 0, 0);
+                this.transform.localPosition = new Vector3(-2.49f, 0, 0);
                 break;
             default:
                 break;

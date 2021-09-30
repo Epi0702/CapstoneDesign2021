@@ -74,11 +74,19 @@ public abstract class LivingEntity : MonoBehaviour
         if (this.currentHp <= 0)
             this.currentHp = 0;
         Debug.Log("currentHP : " + currentHp);
+
         if (currentHp <= 0 && !dead)
         {
             Die();
         }
+    }
 
+    public virtual void IsDead()
+    {
+        if (currentHp <= 0 && !dead)
+        {
+            Die();
+        }
     }
 
     public virtual void Die()
