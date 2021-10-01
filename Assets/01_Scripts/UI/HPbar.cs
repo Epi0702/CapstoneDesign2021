@@ -59,10 +59,10 @@ public class HPbar : MonoBehaviour
     IEnumerator Decrease()
     {
         //filled.fillAmount = (float)targetHP;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 50; i++)
         {
-            filled_before.fillAmount -= (filled_before_p - filled_p) / 10;
-            yield return new WaitForSeconds(0.15f);
+            filled_before.fillAmount -= (filled_before_p - filled_p) / 30;
+            yield return new WaitForSeconds(0.03f);
         }
         filled_before_p = CurrentHpPercentage();
     }

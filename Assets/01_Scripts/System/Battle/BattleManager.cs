@@ -49,6 +49,9 @@ public class BattleManager : MonoBehaviour
 
     public Action<LivingEntity, int> DamageInputEvent;
 
+    [SerializeField]
+    EnemyController enemyController;
+
     BattleOrder battleOrder;
 
     // Start is called before the first frame update
@@ -106,6 +109,7 @@ public class BattleManager : MonoBehaviour
                 currentSquad = i;
             }
         }
+        enemyController.SetSquad(enemySquad[currentSquad]);
         isBattle = true;
         battleOrder = BattleOrder.TurnSet;
     }
@@ -344,6 +348,7 @@ public class BattleManager : MonoBehaviour
         }
 
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().PlayerController.PrintCurrentHp();
+        enemyController.PrintCurrentHp();
 
         yield return new WaitForSeconds(2f);
 

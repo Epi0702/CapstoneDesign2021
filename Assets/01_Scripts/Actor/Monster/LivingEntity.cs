@@ -70,7 +70,7 @@ public abstract class LivingEntity : MonoBehaviour
     }
     public virtual void OnDamage(int damage)
     {
-        this.currentHp -= damage;
+        this.currentHp -= (damage - defense);
         if (this.currentHp <= 0)
             this.currentHp = 0;
         Debug.Log("currentHP : " + currentHp);
