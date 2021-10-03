@@ -58,10 +58,12 @@ public class HPbar : MonoBehaviour
     }
     IEnumerator Decrease()
     {
+        float temp;
+        temp = filled_before_p - filled_p;
         //filled.fillAmount = (float)targetHP;
         for (int i = 0; i < 50; i++)
         {
-            filled_before.fillAmount -= (filled_before_p - filled_p) / 30;
+            filled_before.fillAmount -= temp / 50;
             yield return new WaitForSeconds(0.03f);
         }
         filled_before_p = CurrentHpPercentage();

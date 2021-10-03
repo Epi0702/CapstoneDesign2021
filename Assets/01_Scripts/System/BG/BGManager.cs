@@ -68,15 +68,20 @@ public class BGManager : MonoBehaviour
     {
         enterTerm = false;
         anim.Play("Black_fadeIn");
+
         yield return new WaitForSeconds(1f);
         ChangeEvent(roomAisle);
         yield return new WaitForSeconds(1f);
+        if(!roomAisle)
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.PassageIndexPlusForDebug.SetActive(true);
         anim.Play("Black_fadeOut");
         ChangeEvent = null;
         enterTerm = true;
     }
     public void EnterRoom()
     {
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.PassageIndexPlusForDebug.SetActive(false);
+
         SetCurrentRoomBG();
         StartCoroutine("EnterRoomTerm");
     }

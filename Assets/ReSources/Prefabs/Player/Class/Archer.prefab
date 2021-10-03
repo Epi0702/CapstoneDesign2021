@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpriteLibraryAsset: {fileID: 11400000, guid: 4e37cd19244824aa596de7850c08dbda,
+  m_SpriteLibraryAsset: {fileID: 11400000, guid: b937e2c7ff911402baa4f22a31c47006,
     type: 2}
 --- !u!114 &4372667932663218693
 MonoBehaviour:
@@ -361,7 +361,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d5be0c1c20f4940179f0b8fd5ce1a6c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5670cbd24fef4594b873cdd1362347c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -458,7 +458,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d284e2e74ae874685a147f5039bcc044, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 50dcc71f333ec403b8e3028d687e42b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -555,7 +555,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e23f10d75142e48798f2cc21a23f9063, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7ae9f5cd955134dfaa486ffcb8610fcf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: -0.6622639
-  m_labelHash: 9.9180626e-24
+  m_labelHash: -1.8556405e-19
 --- !u!1 &2797091703419844058
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 2797091703419844057}
   - component: {fileID: 7479983659747038515}
   m_Layer: 8
-  m_Name: Knight
+  m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -725,7 +725,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: af879fd4cda304ad0b59fe256c8b7ad1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bc22d89ab03146f4b47f88c7779292d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -826,7 +826,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 007b9b09283c14c5880b9f98ea918df8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64abb547e24174365a269f573755f454, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -923,7 +923,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: af35b6c39fc944fd5b0c55d9075360cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c2969e92198a44c898ff5e3a14d4c31, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -961,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: -0.6622639
-  m_labelHash: 4.641703e+16
+  m_labelHash: 2.5513847e-23
 --- !u!1 &2797091704213700354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,7 +1033,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dc2d24f6884a248bd944806aed382b6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1835d67fa87e94566baa2ff22712de68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1241,7 +1241,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 825c68cca6c534c38af38dafd8ce9f6d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4a9cdf0443eb248c995007f6e97c61b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1338,7 +1338,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4c98296d1657344938f560860f9932fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 75f6a367c694d4cd79e6a1e746dabcc5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1376,4 +1376,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 0.024146153
-  m_labelHash: 1.2760649e+11
+  m_labelHash: 1.6280128e-15

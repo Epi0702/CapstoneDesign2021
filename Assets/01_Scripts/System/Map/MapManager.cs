@@ -37,8 +37,7 @@ public class MapManager : MonoBehaviour
     public int battleRoomCount;
     EnemySpawner enemySpawner;
 
-    [SerializeField]
-    GameObject PassageIndexPlusForDebug;
+    public GameObject PassageIndexPlusForDebug;
 
     bool mapMoving;
 
@@ -136,7 +135,7 @@ public class MapManager : MonoBehaviour
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGManager.SetCurrentAisleBG();
         //Debug.Log("EnterAisle called!!");
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.PrevRoomSet();
-        PassageIndexPlusForDebug.SetActive(true);
+        
         //PassageIndexMinusForDebug.SetActive(true);
 
         state = currentLocationState.InAsile;

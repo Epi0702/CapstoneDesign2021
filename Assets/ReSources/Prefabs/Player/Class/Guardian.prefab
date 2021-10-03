@@ -255,7 +255,7 @@ Animator:
   m_GameObject: {fileID: 2797091703168507631}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c278133091cd84e1b9ec76c3532e1c58, type: 2}
+  m_Controller: {fileID: 9100000, guid: a9379654c8c74eb48b49e857babad727, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -555,7 +555,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e23f10d75142e48798f2cc21a23f9063, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f96a2264e972740cf92ecd4d077ca7e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: -0.6622639
-  m_labelHash: 9.9180626e-24
+  m_labelHash: 3.3142242e+30
 --- !u!1 &2797091703419844058
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 2797091703419844057}
   - component: {fileID: 7479983659747038515}
   m_Layer: 8
-  m_Name: Knight
+  m_Name: Guardian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,21 +639,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 100
-  currentHp: 0
   attackDamage: 0
-  defense: 0
   speed: 0
-  critical: 0
   position: 0
   isMonster: 0
   skill01Index: 0
   skill02Index: 0
   skill03Index: 0
   skill04Index: 0
-  level: 0
-  maxExp: 0
-  currentExp: 0
-  className: 
 --- !u!1 &2797091703758567562
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,7 +916,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: af35b6c39fc944fd5b0c55d9075360cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e23f10d75142e48798f2cc21a23f9063, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -961,7 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: -0.6622639
-  m_labelHash: 4.641703e+16
+  m_labelHash: 9.9180626e-24
 --- !u!1 &2797091704213700354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,7 +1331,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4c98296d1657344938f560860f9932fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b2d76e150f2e43fc8217a990c488ac6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1376,4 +1369,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 0.024146153
-  m_labelHash: 1.2760649e+11
+  m_labelHash: -468977.94
