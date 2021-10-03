@@ -1,8 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Login : MonoBehaviour
@@ -14,23 +11,33 @@ public class Login : MonoBehaviour
     public GameObject SignUpPanel;
     public GameObject StartButton;
 
-    //private string AdminID = "test";
-    //private string AdminPW = "1234";
+    string LoginURL = "http://capston.dothome.co.kr/login.php";
+    int result = -1;
+    string[] data;
 
-    private bool idCheck;
-    private bool pwCheck;
+    public void Update()
+    {
+        StartCoroutine(LoginToDB(IDText.text, PWText.text)); //php에서 로그인 체크
+    }
 
     public void ClickLoginButton()
     {
-        idCheck = SystemManager.Instance.GetCurrentSceneMain<TitleSceneMain>().CheckUserID(IDText.text);
-        pwCheck = SystemManager.Instance.GetCurrentSceneMain<TitleSceneMain>().CheckUserPW(PWText.text);
-        //if (IDText.text.Equals(AdminID) && PWText.text.Equals(AdminPW))
-        if (idCheck && pwCheck)
+        if (result == 0) //로그인 성공 & 캐릭터 없음 -> 커스터마이징 씬
         {
-            //SceneManager.LoadScene("CustomizingScene");
             SystemManager.Instance.GetCurrentSceneMain<TitleSceneMain>().MoveToCustomizingScene();
         }
-        else
+        else if (result == 1) //로그인 성공 & 캐릭터 있음 -> 메인로비 씬
+        {
+            SystemManager.Instance.GetCurrentSceneMain<TitleSceneMain>().MoveToMainLobbyScene();
+            GameManager.updateUserInfo(int.Parse(data[1]), int.Parse(data[2]), data[3], short.Parse(data[4]), int.Parse(data[5]), short.Parse(data[6]), int.Parse(data[7]), int.Parse(data[8]));
+        }
+        else if (result == 2) //비밀번호 틀림
+        {
+            error.SetActive(true);
+            IDText.text = "";
+            PWText.text = "";
+        }
+        else //계정 없음
         {
             error.SetActive(true);
             IDText.text = "";
@@ -57,5 +64,20 @@ public class Login : MonoBehaviour
     public void ClickSignUpX()
     {
         SignUpPanel.SetActive(false);
+    }
+
+    IEnumerator LoginToDB(string username, string password)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("id", username);
+        form.AddField("pw", password);
+
+        WWW www = new WWW(LoginURL, form);
+
+        yield return www;
+
+        data = www.text.Split(','); //받아온 로그인정보, 유저정보 구분
+
+        result = int.Parse(data[0]);
     }
 }

@@ -25,18 +25,15 @@ public class TitleSceneMain : BaseSceneMain
         userPW = DataController.Instance.gameData.PW;
     }
 
-    public bool CheckUserID(string _userID)
-    {
-        return userID.Equals(_userID);
-    }   
-    public bool CheckUserPW(string _userPW)
-    {
-        return userPW.Equals(_userPW);
-    }
-
     public void MoveToCustomizingScene()
     {
         loadScene.gameObject.SetActive(true);
         loadScene.SceneLoader(1);
+    }
+
+    public void MoveToMainLobbyScene()
+    {
+        loadScene.gameObject.SetActive(true);
+        SceneManager.LoadScene("MainLobbyScene");
     }
 }
