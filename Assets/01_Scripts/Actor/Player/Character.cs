@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+
 
 public class Character : LivingEntity   //각 캐릭터
 {
@@ -17,6 +19,8 @@ public class Character : LivingEntity   //각 캐릭터
 
     HumanoidAnimation anim;
     GameObject characterSprite;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +41,9 @@ public class Character : LivingEntity   //각 캐릭터
     {
         base.Setup();
         this.isMonster = false;
+
+        //renderer = this.GetComponent<SortingGroup>();
+
         characterSprite = transform.Find("Character").gameObject;
 
         anim = characterSprite.GetComponent<HumanoidAnimation>();
@@ -47,16 +54,16 @@ public class Character : LivingEntity   //각 캐릭터
         switch (position)
         {
             case CharacterPosition.First:
-                this.transform.localPosition = new Vector3(2.49f, 0, 0);
+                this.transform.localPosition = new Vector3(-2.51f, -0.5f, 0);
                 break;
             case CharacterPosition.Second:
-                this.transform.localPosition = new Vector3(0.83f, 0, 0);
+                this.transform.localPosition = new Vector3(-4.17f, -0.5f, 0);
                 break;
             case CharacterPosition.Third:
-                this.transform.localPosition = new Vector3(-0.83f, 0, 0);
+                this.transform.localPosition = new Vector3(-5.83f, -0.5f, 0);
                 break;
             case CharacterPosition.Fourth:
-                this.transform.localPosition = new Vector3(-2.49f, 0, 0);
+                this.transform.localPosition = new Vector3(-7.49f, -0.5f, 0);
                 break;
             default:
                 break;
@@ -73,13 +80,17 @@ public class Character : LivingEntity   //각 캐릭터
     {
         this.level = level;
         SetMaxEXPByLevel();
-        this.maxHp = maxHp;
-        this.currentHp = currentHp;
-        this.attackDamage = atk;
-        this.defense = def;
-        this.speed = spd;
-        this.critical = cri;
+        this.stats.maxHp = maxHp;
+        this.stats.currentHp = currentHp;
+        this.stats.attackDamage = atk;
+        this.stats.defense = def;
+        this.stats.speed = spd;
+        this.stats.critical = cri;
         this.currentExp = curExp;
+    }
+    public virtual void InitCharacterStats()
+    {
+
     }
     public void InitCharacter()
     {
@@ -94,7 +105,15 @@ public class Character : LivingEntity   //각 캐릭터
     public void TestAnimation()
     {
         anim.SetAnimation(Acting.Smash);
+        //anim.SetAnimation(Acting.Idle);
+    }
+    public void TestAnimation2()
+    {
         anim.SetAnimation(Acting.Idle);
+    }
+    public override void SetAnimation(Acting act)
+    {
+        anim.SetAnimation(act);
     }
     public void SetMaxEXPByLevel()
     {

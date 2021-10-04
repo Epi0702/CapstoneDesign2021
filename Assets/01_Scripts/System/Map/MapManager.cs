@@ -239,9 +239,10 @@ public class MapManager : MonoBehaviour
     IEnumerator MoveDelay()
     {
         mapMoving = true;
-
+        PassageIndexPlusForDebug.SetActive(false);
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().PlayerController.SetPlayerAnim(Acting.Walk);
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGManager.GetCurrentAisle().move = true;
-        yield return new WaitForSeconds(0f);//1f
+        yield return new WaitForSeconds(1f);//1f
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGManager.GetCurrentAisle().move = false;
 
         if (enterAisleDir == true)
@@ -254,6 +255,9 @@ public class MapManager : MonoBehaviour
             currentPassageIndex--;
         }
         ExitAisle();
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().PlayerController.SetPlayerAnim(Acting.Idle);
+        PassageIndexPlusForDebug.SetActive(true);
+
         mapMoving = false;
     }
 }

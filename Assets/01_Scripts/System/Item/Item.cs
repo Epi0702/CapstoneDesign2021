@@ -12,6 +12,11 @@ public enum ItemType
     EventItem = 5,      //열쇠 등 이벤트 해결용 아이템
     Skill = 10,         //스킬
 }
+public struct RewardItem
+{
+    public int itemCode;
+    public int count;
+}
 public class Item : MonoBehaviour
 {
     public int itemCode = -1;
@@ -27,6 +32,7 @@ public class Item : MonoBehaviour
     public LivingEntity owner;             //사용 캐릭터
     public LivingEntity target;              //타켓 몬스터
     public int count;
+    public int maxcount;
 
     public bool isSetted = false;
 
@@ -37,6 +43,7 @@ public class Item : MonoBehaviour
     public bool targetSet;                  //타겟 셋
 
     public SkillClick skillClick;
+    Character selected_character;
 
     private void Awake()
     {
@@ -55,13 +62,13 @@ public class Item : MonoBehaviour
 
     public void InitItem()
     {
-        itemCode = -1;
+        itemCode = 0;
         itemName = null;
-        itemImage.sprite = Resources.Load<Sprite>("Img/itemImg/colliderTest");
+        itemImage.sprite = Resources.Load<Sprite>("Img/itemImg/none_item");
         itemType = ItemType.None;
         owner = null;
         target = null;
-        count = -1;
+        count = 0;
 
         isSetted = false;
     }
@@ -73,25 +80,24 @@ public class Item : MonoBehaviour
         itemType = (ItemType)itemData.itemType;
         description = itemData.description;
         itemFunction = itemData.functionName;
-
-
-        if (isNeedItemCount())
-            count = 1;
+        maxcount = itemData.maxCount;
 
         isSetted = true;
     }
-    bool isNeedItemCount()
+    public bool isNeedItemCount()
     {
-        if (this.itemType == ItemType.Used || this.itemType == ItemType.Ingredient || this.itemType == ItemType.EventItem)
+        if (this.itemType == ItemType.Used || this.itemType == ItemType.Ingredient || this.itemType == ItemType.Gold)
             return true;
         else
             return false;
     }
+
     public void OnClickFunction()
     {
         switch (itemType)
         {
             case ItemType.None:
+                NoneItemFunction();
                 break;
             case ItemType.Used:
                 UsedItemFuction();
@@ -101,6 +107,7 @@ public class Item : MonoBehaviour
             case ItemType.Equipment:
                 break;
             case ItemType.Gold:
+                GoldItemFunction();
                 break;
             case ItemType.EventItem:
                 break;
@@ -112,7 +119,11 @@ public class Item : MonoBehaviour
         }
 
     }
-
+    public void NoneItemFunction()
+    {
+        Debug.Log("Item Clicked!!");
+        Invoke(itemFunction, 0);
+    }
     public void UsedItemFuction()
     {
         Debug.Log("Item Clicked!!");
@@ -130,6 +141,10 @@ public class Item : MonoBehaviour
         Debug.Log("Item Clicked!!");
         Invoke(itemFunction, 0);
     }
+    public void GoldItemFunction()
+    {
+        Debug.Log("돈이 최고야");
+    }
 
     public void EventItemItemFunction()
     {
@@ -139,20 +154,23 @@ public class Item : MonoBehaviour
 
     public void SkillFunction()
     {
+
         StopAllCoroutines();
+
+        selected_character = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.selectedCharacter;
         Debug.Log("SKill Clicked!!");
 
         StartCoroutine("CheckSkillCancel");
         StartCoroutine(itemFunction);
 
     }
-    public void temp()
+    void None()
     {
-
+        Debug.Log("None Clikcked!!");
     }
     IEnumerator CheckSkillCancel()
     {
-        while(skillSelected)
+        while (skillSelected)
         {
             //Debug.Log("Checking");
             yield return null;
@@ -192,6 +210,71 @@ public class Item : MonoBehaviour
     public void ActionEnd()
     {
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.actionEnd = true;
+    }
+    public void DamageSet(LivingEntity character, int damage)
+    {
+        character.OnDamage(damage);
+    }
+    public void PlayerAnimate(Acting act)
+    {
+        selected_character.SetAnimation(act);
+    }
+
+
+    IEnumerator Knight01()
+    {
+        target = null;
+        InitTarget();
+        while (target == null)
+        {
+
+            yield return null;
+
+            SetTarget();
+        }
+        if (target != null)
+        {
+            Debug.Log("Knight01 Active");
+            //target.OnDamage(selected_character.stats.attackDamage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(target);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.damageList.Add(selected_character.stats.attackDamage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.DamageInputEvent += DamageSet;
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.attackerAnimEvent += PlayerAnimate;
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.playerAct = Acting.Smash;
+            //InitTarget();
+            ActionEnd();
+        }
+        StopAllCoroutines();
+        Debug.Log("SkillSuccess");
+    }
+
+    IEnumerator Fighter01()
+    {
+        target = null;
+        InitTarget();
+        while (target == null)
+        {
+
+            yield return null;
+
+            SetTarget();
+        }
+        if (target != null)
+        {
+            Debug.Log("Fighter01 Active");
+            //target.OnDamage(selected_character.stats.attackDamage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(target);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.damageList.Add(selected_character.stats.attackDamage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.DamageInputEvent += DamageSet;
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.attackerAnimEvent += PlayerAnimate;
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.playerAct = Acting.Smash;
+            //InitTarget();
+            ActionEnd();
+        }
+        StopAllCoroutines();
+        Debug.Log("SkillSuccess");
+
+
     }
 
 }

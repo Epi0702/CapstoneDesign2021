@@ -42,8 +42,8 @@ public class EnemyController : MonoBehaviour
             if (!squad.enemy[i].dead && squad.enemy[i] != null)
             {
                 EnemyHpBar[i].SetOnOff(true);
-                EnemyHpBar[i].InitHPbar(squad.enemy[i].maxHp, squad.enemy[i].currentHp);
-                beforeHp[i] = squad.enemy[i].currentHp;
+                EnemyHpBar[i].InitHPbar(squad.enemy[i].stats.maxHp, squad.enemy[i].stats.currentHp);
+                beforeHp[i] = squad.enemy[i].stats.currentHp;
             }
         }
     }
@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour
     {
         for (int i = 0; i < squad.enemy.Count; i++)
         {
-            EnemyHpBar[i].DecreaseHP(squad.enemy[i].currentHp);
+            EnemyHpBar[i].DecreaseHP(squad.enemy[i].stats.currentHp);
         }
     }
 }

@@ -32,6 +32,7 @@ public class InGameSceneMain : BaseSceneMain
         }
     }
 
+
     [SerializeField]
     BattleManager battleManager;
     public BattleManager BattleManager
@@ -39,6 +40,15 @@ public class InGameSceneMain : BaseSceneMain
         get
         {
             return battleManager;
+        }
+    }
+    [SerializeField]
+    BattleResultManager battleResultManager;
+    public BattleResultManager BattleResultManager
+    {
+        get
+        {
+            return battleResultManager;
         }
     }
 
@@ -77,6 +87,15 @@ public class InGameSceneMain : BaseSceneMain
         get
         {
             return itemManager;
+        }
+    }
+    [SerializeField]
+    AnimationManager animationManager;
+    public AnimationManager AnimationManager
+    {
+        get
+        {
+            return animationManager;
         }
     }
     PrefabCacheSystem prefabCacheSystem = new PrefabCacheSystem();

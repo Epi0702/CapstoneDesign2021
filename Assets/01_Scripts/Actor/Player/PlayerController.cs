@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
         player.SetUpCharacter(1);
         player.SetUpCharacter(1);
 
+        
 
         player.SetPosition(0, 1, 2, 3);
         SetPlayerHPbar();
@@ -46,8 +47,8 @@ public class PlayerController : MonoBehaviour
             if (!player.playerCharacter[i].dead)
             {
                 PlayerHpBar[i].SetOnOff(true);
-                PlayerHpBar[i].InitHPbar(player.playerCharacter[i].maxHp, player.playerCharacter[i].currentHp);
-                beforeHp[i] = player.playerCharacter[i].currentHp;
+                PlayerHpBar[i].InitHPbar(player.playerCharacter[i].stats.maxHp, player.playerCharacter[i].stats.currentHp);
+                beforeHp[i] = player.playerCharacter[i].stats.currentHp;
             }
 
         }
@@ -57,7 +58,14 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < player.playerCharacter.Count; i++)
         {
-            PlayerHpBar[i].DecreaseHP(player.playerCharacter[i].currentHp);
+            PlayerHpBar[i].DecreaseHP(player.playerCharacter[i].stats.currentHp);
+        }
+    }
+    public void SetPlayerAnim(Acting act)
+    {
+        for(int i = 0; i<player.playerCharacter.Count; i++)
+        {
+            player.playerCharacter[i].SetAnimation(act);
         }
     }
 }

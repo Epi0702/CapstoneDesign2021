@@ -20,7 +20,13 @@ public class Knight : Character
     public override void Setup()
     {
         base.Setup();
-        speed = 10;
         className = "Knight";
+    }
+    public override void InitCharacterStats()
+    {
+        InitEntity(100, 100, 20, 5, 11, 20);
+        ResetStats();
+        InitTempStats();
+        InitCharacter();
     }
 }

@@ -27,6 +27,26 @@ public class Bat : Monster
         //speed = 5;
         
     }
+    public override void TransformPosition() //for monster
+    {
+        switch (position)
+        {
+            case CharacterPosition.Fourth:
+                this.transform.localPosition = new Vector3(7.49f, 0.5f, 0);
+                break;
+            case CharacterPosition.Third:
+                this.transform.localPosition = new Vector3(5.83f, 0.5f, 0);
+                break;
+            case CharacterPosition.Second:
+                this.transform.localPosition = new Vector3(4.17f, 0.5f, 0);
+                break;
+            case CharacterPosition.First:
+                this.transform.localPosition = new Vector3(2.51f, 0.5f, 0);
+                break;
+            default:
+                break;
+        }
+    }
 
     void SetStatsByDifficulty()
     {
@@ -34,29 +54,29 @@ public class Bat : Monster
         {
             case Difficulty.Easy:
                 {
-                    maxHp = 20;
-                    currentHp = maxHp;
-                    attackDamage = 20;
-                    defense = 5;
-                    speed = 5;
+                    stats.maxHp = 10;
+                    stats.currentHp = stats.maxHp;
+                    stats. attackDamage= 20;
+                    stats.defense = 5;
+                    stats.speed = 5;
                 }
                 break;
             case Difficulty.Normal:
                 {
-                    maxHp = 25;
-                    currentHp = maxHp;
-                    attackDamage = 20;
-                    defense = 5;
-                    speed = 6;
+                    stats.maxHp = 25;
+                    stats.currentHp = stats.maxHp;
+                    stats.attackDamage = 20;
+                    stats.defense = 5;
+                    stats.speed = 6;
                 }
                 break;
             case Difficulty.Hard:
                 {
-                    maxHp = 30;
-                    currentHp = maxHp;
-                    attackDamage = 20;
-                    defense = 5;
-                    speed = 7;
+                    stats.maxHp = 30;
+                    stats.currentHp = stats.maxHp;
+                    stats.attackDamage = 20;
+                    stats.defense = 5;
+                    stats.speed = 7;
                 }
                 break;
             default:
@@ -83,39 +103,47 @@ public class Bat : Monster
 
     public void Test()
     {
-        Debug.Log("Bat HP : " + currentHp);
+        Debug.Log("Bat HP : " + stats.currentHp);
     }
 
     public override void Attack()
     {
         base.Attack();
     }
-    public override void Skill00()          //한명 공격
+    public override void Skill00()
     {
         Player tempplayer = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.player;
+        int damage = stats.attackDamage;//데미지 설정
         bool check = false;
         while (!check)
         {
             int randtarget = UnityEngine.Random.Range(0, 4);
-            if (IsTargetAlive(tempplayer.playerCharacter[randtarget]))
+            if (tempplayer.playerCharacter[randtarget] != null && tempplayer.playerCharacter[randtarget] != dead)
             {
-                tempplayer.playerCharacter[randtarget].OnDamage(this.attackDamage);
                 SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(tempplayer.playerCharacter[randtarget]);
-                Debug.Log("Target Set!!!");
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.damageList.Add(damage);
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.DamageInputEvent += DamageSet;
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.monsterattackerAnimEvent += MonsterAnimate;
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.monsterAct = MonsterActing.Attack;
                 check = true;
             }
         }
     }
+
+    
     public override void Skill01()      //후방 두명 공격
     {
         Player tempplayer = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.player;
-        int damage = attackDamage;//데미지 설정
+        int damage = stats.attackDamage;//데미지 설정
 
         if (IsTargetAlive(tempplayer.playerCharacter[2]))
         {
             //tempplayer.playerCharacter[2].OnDamage(this.attackDamage);
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(tempplayer.playerCharacter[2]);
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.damageList.Add(damage);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.DamageInputEvent += DamageSet;
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.monsterattackerAnimEvent += MonsterAnimate;
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.monsterAct = MonsterActing.Attack;
         }
         if (IsTargetAlive(tempplayer.playerCharacter[3]))
         {
@@ -123,6 +151,8 @@ public class Bat : Monster
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetEntity.Add(tempplayer.playerCharacter[3]);
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.damageList.Add(damage);
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.DamageInputEvent += DamageSet;
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.monsterattackerAnimEvent += MonsterAnimate;
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.monsterAct = MonsterActing.Attack;
         }
     }
     public bool IsTargetAlive(LivingEntity character)

@@ -51,5 +51,5 @@ public abstract class MonsterCharacterAnimation : MonoBehaviour
         SetAnimation(MonsterActing.Idle);
     }
 
-    protected abstract void SetAnimation(MonsterActing Monsteracting);
+    public abstract void SetAnimation(MonsterActing Monsteracting);
 }

@@ -7,6 +7,7 @@ enum BattleOrder
 {
     None,
     TurnSet,
+    DebuffSet,
     Action,
     ActionEnd,
     TurnEnd,
@@ -26,7 +27,7 @@ public class BattleManager : MonoBehaviour
 
     public List<LivingEntity> turnManager = new List<LivingEntity>();
 
-    int currentSquad;
+    public int currentSquad;
 
     int attackCount;
 
@@ -34,8 +35,8 @@ public class BattleManager : MonoBehaviour
 
     bool debugbool;
 
-    bool coroutineCheck;
-    bool coroutineCheck2;
+    public bool coroutineCheck;
+    public bool coroutineCheck2;
 
     public Character selectedCharacter;
     public Monster targetMonster;
@@ -46,6 +47,7 @@ public class BattleManager : MonoBehaviour
     public List<LivingEntity> targetEntity = new List<LivingEntity>();
 
     public List<int> damageList = new List<int>();
+    bool isdamaged;
 
     public Action<LivingEntity, int> DamageInputEvent;
 
@@ -64,7 +66,8 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Battle_V2();
+        if(isBattle)
+            Battle_V2();
     }
     public void SetUpSquadsInfo(List<Squad> list)
     {
@@ -110,7 +113,8 @@ public class BattleManager : MonoBehaviour
             }
         }
         enemyController.SetSquad(enemySquad[currentSquad]);
-        isBattle = true;
+        //isBattle = true;
+        StartCoroutine("BattleStartDelay");
         battleOrder = BattleOrder.TurnSet;
     }
     public void TurnSet()
@@ -130,7 +134,7 @@ public class BattleManager : MonoBehaviour
         }
         turnManager.Sort(delegate (LivingEntity x, LivingEntity y)
         {
-            return x.speed.CompareTo(y.speed);
+            return x.stats.speed.CompareTo(y.stats.speed);
         });
         turnManager.Reverse();
         turnEnd = false;
@@ -140,12 +144,16 @@ public class BattleManager : MonoBehaviour
 
     public void Battle_V2()
     {
+        
         switch (battleOrder)
         {
             case BattleOrder.None:
                 break;
             case BattleOrder.TurnSet:
                 BattleOrder_TurnSet();
+                break;
+            case BattleOrder.DebuffSet:
+                BattleOrder_DebuffSet();
                 break;
             case BattleOrder.Action:
                 BattleOrder_Action();
@@ -166,7 +174,45 @@ public class BattleManager : MonoBehaviour
         TurnSet();
         attackCount = 0;
         actionEnd = false;
-        battleOrder = BattleOrder.Action;
+        battleOrder = BattleOrder.DebuffSet;
+    }
+    public void BattleOrder_DebuffSet()
+    {
+        if (turnManager[attackCount].debuff.isBleeding)
+        {
+            turnManager[attackCount].BleedingActive();
+            //애니메이션
+            if(turnManager[attackCount].dead)
+            {
+                Debug.Log(turnManager[attackCount].GetType() + "(죽음) called!! ");
+                battleOrder = BattleOrder.TurnEnd;
+            }
+            else if (turnManager[attackCount].debuff.isStruned)
+            {
+                turnManager[attackCount].SturnActive();
+                //애니메이션
+                battleOrder = BattleOrder.TurnEnd;
+            }
+            else
+            {
+                battleOrder = BattleOrder.Action;
+            }
+        }
+        else
+        {
+            if (turnManager[attackCount].debuff.isStruned)
+            {
+                turnManager[attackCount].SturnActive();
+                //애니메이션
+                battleOrder = BattleOrder.TurnEnd;
+            }
+            else
+            {
+                battleOrder = BattleOrder.Action;
+            }
+        }
+
+
     }
     public void BattleOrder_Action()
     {
@@ -183,6 +229,7 @@ public class BattleManager : MonoBehaviour
             debugbool = false;
             battleOrder = BattleOrder.TurnEnd;
         }
+
         else if (turnManager[attackCount].isMonster == false)
         {
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.isSkillActive = true;
@@ -192,7 +239,6 @@ public class BattleManager : MonoBehaviour
             selectedCharacter = (Character)turnManager[attackCount];
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.PlayerSkillSet(selectedCharacter);
         }
-
         else
         {
             //Debug.Log("Monster Turn");
@@ -224,13 +270,31 @@ public class BattleManager : MonoBehaviour
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.SetSkillSelectedFrameAllOff();
         if (!attackAnim && !coroutineCheck)
         {
-            StartCoroutine("BattleAnimationDelay");
+            if (turnManager[attackCount].isMonster == false)
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.PlayerAttackMonster();
+            else
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().AnimationManager.MonsterAtackPlayer();
 
-
+            isdamaged = false;
         }
 
-        if(coroutineCheck && coroutineCheck2)
+        if (coroutineCheck && coroutineCheck2)
         {
+            if(!isdamaged)
+            {
+                isdamaged = true;
+                for (int i = 0; i < targetEntity.Count; i++)
+                {
+                    DamageInputEvent(targetEntity[i], damageList[i]);
+                }
+                Debug.Log("Damaged!!");
+                for (int i = 0; i < targetEntity.Count; i++)
+                {
+                    targetEntity[i].GetDamage();
+                }
+
+            }
+
             //HP애니메이션
             StartCoroutine("HPBarAnitmationDelay");
         }
@@ -300,12 +364,14 @@ public class BattleManager : MonoBehaviour
     public void BattleOver()
     {
         Debug.Log("Battle End!!");
+        enemyController.SetEnemyHPbar();
         isBattle = false;
         player.playerState = PlayerState.NoneInRoom;
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.BattleEndRoom();
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetCurrentRoom();
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetRelRoomButton();
+        //SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.BattleEndRoom();
+        //SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetCurrentRoom();
+        //SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetRelRoomButton();
         battleOrder = BattleOrder.None;
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleResultManager.BattleWin();
     }
     public void CheatBattleEnd()
     {
@@ -342,10 +408,7 @@ public class BattleManager : MonoBehaviour
     {
         coroutineCheck2 = false;
 
-        for (int i = 0; i < targetEntity.Count; i++)
-        {
-            DamageInputEvent(targetEntity[i], damageList[i]);
-        }
+
 
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().PlayerController.PrintCurrentHp();
         enemyController.PrintCurrentHp();
@@ -355,5 +418,10 @@ public class BattleManager : MonoBehaviour
         Debug.Log("HP Updated");
         attackAnim = true;
     }
-
+    IEnumerator BattleStartDelay()
+    {
+        isBattle = false;
+        yield return new WaitForSeconds(5f);
+        isBattle = true;
+    }
 }

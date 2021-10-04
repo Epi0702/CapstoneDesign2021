@@ -17,6 +17,7 @@ public struct ItemStruct
     public string functionName;
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MarshalTableConstant.charBufferSize)]
     public string description;
+    public int maxCount;
 
 }
 public class ItemTable : TableLoader<ItemStruct>

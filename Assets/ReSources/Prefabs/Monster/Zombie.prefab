@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 6778bf0b9f45c4fbe808c2a825e1145a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -167,7 +167,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 067669f142295418ea719ed6e24db675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -536,7 +536,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 630c8bfc03af849bbabf23df5888e062, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -588,6 +588,7 @@ GameObject:
   - component: {fileID: 3569150661831298131}
   - component: {fileID: 7428081528645282221}
   - component: {fileID: 5264511232495363477}
+  - component: {fileID: 3799202947791480071}
   m_Layer: 9
   m_Name: Zombie
   m_TagString: Untagged
@@ -622,13 +623,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72741df4db9d600448f540c6dbee1b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  attackDamage: 0
-  defense: 0
-  speed: 0
-  critical: 0
   position: 0
   isMonster: 0
+  gettedDamage: 0
+  renderer: {fileID: 0}
 --- !u!61 &7428081528645282221
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -667,6 +665,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b32939a181e53b4186ef984e8802c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!210 &3799202947791480071
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797091703419844058}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &2797091704089927726
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +751,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e6f1e7e26b2d44a64a639abf388f1337, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -839,7 +848,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 234300cad7b0742dab90a77dacbe4dfa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1046,7 +1055,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 501a2b51ece2a43f69112670c270aea8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

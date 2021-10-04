@@ -36,8 +36,8 @@ public class TestSceneMain : BaseSceneMain
     }
     public void OnDebug()
     {
-        Debug.Log("Player  : " + player.currentHp);
-        Debug.Log("Monster : " + monster.currentHp);
+        Debug.Log("Player  : " + player.stats.currentHp);
+        Debug.Log("Monster : " + monster.stats.currentHp);
     }
     public void OnTestHPbar()
     {

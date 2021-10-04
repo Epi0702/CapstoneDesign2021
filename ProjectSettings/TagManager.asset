@@ -42,11 +42,20 @@ TagManager:
   - name: BG
     uniqueID: 3627817059
     locked: 0
+  - name: blur
+    uniqueID: 767756153
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: HpBar
     uniqueID: 4134993851
+    locked: 0
+  - name: Player
+    uniqueID: 238297961
+    locked: 0
+  - name: HighlightPlayer
+    uniqueID: 2772194275
     locked: 0
   - name: BlackBG
     uniqueID: 2118421343

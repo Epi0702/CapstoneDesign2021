@@ -1,5 +1,38 @@
-itemCode,itemType,itemImgaePath,itemName,functionName,description
-0,1,Img/ItemImg/item_red_potion,Red Potion,temp,A potion that restores a small amount of HP
-1,5,Img/ItemImg/item_key_bronze,Key,temp,key to open Chest
-1000,10,Img/SkillImg/Knight/Knight01,Smash,AttackTest,
-1001,10,Img/SkillImg/Fighter/Fighter01,Crash,AttackTest,
+itemCode,itemType,itemImgaePath,itemName,functionName,description,maxcount
+0,0,Img/ItemImg/none_item,None,None,,0
+1,4,img/itemImg/gold_01,Gold_small,None,돈,2000
+2,4,img/itemImg/gold_02,Gold_medium,None,많은 돈,2000
+3,4,img/itemImg/gold_03,Gold_Large,None,아주 많은 돈,2000
+4,1,Img/ItemImg/item_red_potion,빨간 포션,temp,A potion that restores a small amount of HP,3
+5,5,Img/ItemImg/item_key_bronze,열쇠,temp,key to open Chest,3
+1000,10,Img/SkillImg/Knight/01,나이트스킬1,Knight01,기본 공격,0
+1001,10,,,,,0
+1002,10,,,,,0
+1003,10,Img/SkillImg/Knight/02,나이트스킬2,Knight02,공격 + 스피드 감소,0
+1004,10,,,,,0
+1005,10,,,,,0
+1006,10,Img/SkillImg/Knight/03,나이트스킬3,Knight03,공격 + 출혈,0
+1007,10,,,,,0
+1008,10,,,,,0
+1009,10,Img/SkillImg/Knight/04,나이트스킬4,Knight04,전열2명 공격,0
+1010,10,,,,,0
+1011,10,,,,,0
+1012,10,Img/SkillImg/Knight/05,나이트스킬5,Knight05,,0
+1013,10,,,,,0
+1014,10,,,,,0
+1015,10,Img/SkillImg/Knight/06,나이트스킬6,Knight06,,0
+1016,10,,,,,0
+1017,10,,,,,0
+1018,10,Img/SkillImg/Knight/07,나이트스킬7,Knight07,,0
+1019,10,,,,,0
+1020,10,,,,,0
+1021,10,Img/SkillImg/Knight/08,나이트스킬8,Knight08,,0
+1022,10,,,,,0
+1023,10,,,,,0
+1024,10,Img/SkillImg/Fighter/01,파이터스킬1,Fighter01,기본 공격,0
+1025,10,,,,,0
+1026,10,,,,,0
+1027,10,,,,,0
+1028,10,,,,,0
+1029,10,,,,,0
+1030,10,,,,,0

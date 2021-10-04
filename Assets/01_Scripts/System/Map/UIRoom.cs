@@ -5,6 +5,7 @@ using MapAlgo;
 public class UIRoom : MonoBehaviour
 {
     public RoomData roominfo;
+    [SerializeField]
     RectTransform rect;
     [SerializeField]
     GameObject Button;
@@ -83,5 +84,10 @@ public class UIRoom : MonoBehaviour
         {
             Debug.Log("Bottom : " + roominfo.GetRoomRel().bottom.GetRoomAreaNum());
         }
+    }
+    public void SetSize(int size)
+    {
+        this.rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);
+        this.rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size);
     }
 }

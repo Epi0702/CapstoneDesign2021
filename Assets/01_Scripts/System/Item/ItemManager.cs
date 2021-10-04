@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
     public ItemTable itemDataTable;
 
     public Item[] inventory = new Item[1];
+    [SerializeField]
+    Text[] itemcount;
 
     public Item[] playerskill = new Item[4];
 
     public bool isSkillActive;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +23,12 @@ public class ItemManager : MonoBehaviour
         //itemDataTable.Load();
         isSkillActive = false;
         for (int i = 0; i < inventory.Length; i++)
-            inventory[i].InitItem();
+            inventory[i].SetItemInfo(itemDataTable.GetItem(0));
+        inventory[0].SetItemInfo(itemDataTable.GetItem(1));
+
+
+        InitItemCount();
+        CountItem();
     }
     public void OnTestButton()
     {
@@ -44,6 +54,27 @@ public class ItemManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
             playerskill[i].skillSelected = false;
     }
-
+    void InitItemCount()
+    {
+        for (int i = 0; i < itemcount.Length; i++)
+        {
+            if (inventory[i].isNeedItemCount())
+                itemcount[i].gameObject.SetActive(true);
+            else
+                itemcount[i].gameObject.SetActive(false);
+        }
+    }
+    public void CountItem()
+    {
+        for (int i = 0; i < itemcount.Length; i++)
+        {
+            if (inventory[i].isNeedItemCount())
+            {
+                itemcount[i].gameObject.SetActive(true);
+                itemcount[i].text = inventory[i].count.ToString();
+            }
+                
+        }
+    }
 
 }

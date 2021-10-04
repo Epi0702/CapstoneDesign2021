@@ -106,8 +106,14 @@ public class Player : MonoBehaviour //전체 통괄
     {
         playerCharacter[0].SetDataForTest(1000, 1000, 1000, 1000);
         playerCharacter[1].SetDataForTest(1000, 1000, 1000, 1000);
-        playerCharacter[2].SetDataForTest(1001, 1001, 1001, 1001);
-        playerCharacter[3].SetDataForTest(1001, 1001, 1001, 1001);
+        playerCharacter[2].SetDataForTest(1024, 1024, 1024, 1024);
+        playerCharacter[3].SetDataForTest(1024, 1024, 1024, 1024);
+
+
+        playerCharacter[0].InitCharacterStats();
+        playerCharacter[1].InitCharacterStats();
+        playerCharacter[2].InitCharacterStats();
+        playerCharacter[3].InitCharacterStats();
     }
 
     public void SelectedCharacterEffect()

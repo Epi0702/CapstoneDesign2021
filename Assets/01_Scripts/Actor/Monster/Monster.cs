@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Monster : LivingEntity
 {
@@ -8,6 +9,8 @@ public class Monster : LivingEntity
     protected MonsterAnimation anim;
 
     protected Difficulty difficulty;
+
+    protected Monster selected_monster;
 
     // Start is called before the first frame update
     void Awake()
@@ -25,16 +28,16 @@ public class Monster : LivingEntity
         switch (position)
         {
             case CharacterPosition.Fourth:
-                this.transform.localPosition = new Vector3(2.49f, this.transform.position.y, 0);
+                this.transform.localPosition = new Vector3(7.49f, -0.5f, 0);
                 break;
             case CharacterPosition.Third:
-                this.transform.localPosition = new Vector3(0.83f, this.transform.position.y, 0);
+                this.transform.localPosition = new Vector3(5.83f, -0.5f, 0);
                 break;
             case CharacterPosition.Second:
-                this.transform.localPosition = new Vector3(-0.83f, this.transform.position.y, 0);
+                this.transform.localPosition = new Vector3(4.17f, -0.5f, 0);
                 break;
             case CharacterPosition.First:
-                this.transform.localPosition = new Vector3(-2.49f, this.transform.position.y, 0);
+                this.transform.localPosition = new Vector3(2.51f, -0.5f, 0);
                 break;
             default:
                 break;
@@ -65,14 +68,15 @@ public class Monster : LivingEntity
     public override void Attack()
     {
         int randnum = UnityEngine.Random.Range(0, 4);
+        selected_monster = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.selectedMonster;
 
         switch (randnum)
         {
             case 0:
-                Skill01();
+                Skill00();
                 break;
             case 1:
-                Skill01();
+                Skill00();
                 break;
             case 2:
                 Skill01();
@@ -81,6 +85,10 @@ public class Monster : LivingEntity
                 Skill01();
                 break;
         }
+    }
+    public void MonsterAnimate(MonsterActing act)
+    {
+        selected_monster.SetAnimation(act);
     }
     public virtual void Skill00()
     {
@@ -98,5 +106,44 @@ public class Monster : LivingEntity
     {
 
     }
+    public void TestAnimation()
+    {
+        anim.Hurt();
+    }
+    public void TestAnimation2()
+    {
+        anim.Idle();
+    }
+    public override void SetAnimation(MonsterActing act)
+    {
+        anim.SetAnimation(act);
+    }
+    public virtual RewardItem GenerateItem()
+    {
+        int randnum = UnityEngine.Random.Range(0, 100);
+        RewardItem rewardItem;
+        if(randnum > 75)
+        {
+            rewardItem.itemCode = 1;
+            rewardItem.count = 500;
+        }
+        else if(randnum > 50)
+        {
+            rewardItem.itemCode = 1;
+            rewardItem.count = 750;
+        }
+        else if(randnum >25)
+        {
+            rewardItem.itemCode = 4;
+            rewardItem.count = 1;
+        }
+        else
+        {
+            rewardItem.itemCode = 0;
+            rewardItem.count = 0;
 
+        }
+
+        return rewardItem;
+    }
 }

@@ -5,6 +5,7 @@ using MapAlgo;
 public class UIPassage : MonoBehaviour
 {
     public PassageData passageinfo;
+    [SerializeField]
     RectTransform rect;
 
     [SerializeField]
@@ -42,5 +43,10 @@ public class UIPassage : MonoBehaviour
     {
         CurrentPassageIcon.SetActive(true);
         //Debug.Log(this.passageinfo.GetLoca());
+    }
+    public void SetSize(int size)
+    {
+        this.rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);
+        this.rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size);
     }
 }

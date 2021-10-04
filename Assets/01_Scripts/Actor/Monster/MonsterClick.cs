@@ -12,6 +12,7 @@ public class MonsterClick : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log(monster.GetType());
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetMonster = monster;
+        if(!monster.dead)
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.targetMonster = monster;
     }
 }

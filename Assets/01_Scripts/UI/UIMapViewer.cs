@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using MapAlgo;
 
 public class UIMapViewer : MonoBehaviour
@@ -19,6 +20,15 @@ public class UIMapViewer : MonoBehaviour
 
     int currentRoomIndexInMap;
     int prevRoomIndexInMap;
+
+    [SerializeField]
+    Slider test;
+
+    float prev;
+    float current;
+
+    float test_num;
+
     public void OnStart()
     {
         //temp = this.transform;
@@ -38,7 +48,55 @@ public class UIMapViewer : MonoBehaviour
 
         PrintRoom();
         PrintPassage();
-        
+        prev = current = 0.5f;
+    }
+    private void Update()
+    {
+        testSlider();
+        if (prev != current)
+        {
+            scale = (int)test_num;
+            MoveRoom();
+            MoveAisle();
+            current = prev;
+        }
+    }
+    void testSlider()
+    {
+        test_num = Mathf.Lerp(50, 75, test.value);
+//        Debug.Log(test_num);
+        prev = test_num;
+    }
+    void MoveRoom()
+    {
+        for (int i = 0; i < gameWorldInMap.rooms.Count; i++)
+        {
+            room[i].transform.SetParent(this.transform, false);
+            //room[i].roominfo = gameWorldInMap.rooms[i];
+            room[i].SetRoom(gameWorldInMap.rooms[i]);
+            room[i].SetPositon(gameWorldInMap.settedMapSize, gameWorldInMap.settedAreaSize, scale);
+            room[i].SetSize((int)test_num);
+        }
+
+    }
+
+    void MoveAisle()
+    {
+        for (int i = 0; i < gameWorldInMap.passages.Count; i++)
+        {
+            for (int j = 0; j < gameWorldInMap.passages[i].GetPassageCount(); j++)
+            {
+                passage[i][j].transform.SetParent(this.transform, false);
+                passage[i][j].passageinfo = gameWorldInMap.passages[i].passage[j];
+
+                passage[i][j].SetPositon(gameWorldInMap.settedMapSize, gameWorldInMap.settedAreaSize, scale);
+                passage[i][j].SetSize((int)test_num);
+
+
+
+            }
+        }
+
     }
 
     void PrintRoom()
