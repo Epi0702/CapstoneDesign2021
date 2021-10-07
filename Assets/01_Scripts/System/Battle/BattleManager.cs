@@ -56,6 +56,8 @@ public class BattleManager : MonoBehaviour
 
     BattleOrder battleOrder;
 
+    public bool playerSkillActive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -232,6 +234,8 @@ public class BattleManager : MonoBehaviour
 
         else if (turnManager[attackCount].isMonster == false)
         {
+            playerSkillActive = true;
+            PlayerSKillActive();
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.isSkillActive = true;
             /*
              * 현재 턴 캐릭터 설정, 스킬셋을 현재 캐릭터 스킬로 교체
@@ -250,10 +254,12 @@ public class BattleManager : MonoBehaviour
 
         if (actionEnd)
         {
+            playerSkillActive = false;
             debugbool = false;
             attackAnim = false;
             coroutineCheck = false;
             coroutineCheck2 = false;
+            PlayerSKillActive();
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.isSkillActive = false;
 
             battleOrder = BattleOrder.ActionEnd;
@@ -283,10 +289,7 @@ public class BattleManager : MonoBehaviour
             if(!isdamaged)
             {
                 isdamaged = true;
-                for (int i = 0; i < targetEntity.Count; i++)
-                {
-                    DamageInputEvent(targetEntity[i], damageList[i]);
-                }
+
                 Debug.Log("Damaged!!");
                 for (int i = 0; i < targetEntity.Count; i++)
                 {
@@ -367,9 +370,6 @@ public class BattleManager : MonoBehaviour
         enemyController.SetEnemyHPbar();
         isBattle = false;
         player.playerState = PlayerState.NoneInRoom;
-        //SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.BattleEndRoom();
-        //SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetCurrentRoom();
-        //SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetRelRoomButton();
         battleOrder = BattleOrder.None;
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleResultManager.BattleWin();
     }
@@ -393,6 +393,10 @@ public class BattleManager : MonoBehaviour
         //Debug.Log("Enemy02 HP : " + monster[1].currentHp);
         //Debug.Log("Enemy03 HP : " + monster[2].currentHp);
         //Debug.Log("Enemy04 HP : " + monster[3].currentHp);
+    }
+    public void PlayerSKillActive()
+    {
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.SkillUnActiveImg(!playerSkillActive);
     }
 
     IEnumerator BattleAnimationDelay()

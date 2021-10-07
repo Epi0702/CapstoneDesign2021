@@ -69,6 +69,8 @@ public abstract class LivingEntity : MonoBehaviour
 
     public SortingGroup renderer;
 
+    DamageText dmgtxt;
+
     //활성화 리셋
     protected virtual void OnEnable()
     {
@@ -79,6 +81,7 @@ public abstract class LivingEntity : MonoBehaviour
     {
         gettedDamage = 0;
         renderer = this.GetComponent<SortingGroup>();
+        dmgtxt = transform.GetComponentInChildren<DamageText>();
     }
     public virtual void Attack()
     {
@@ -112,10 +115,12 @@ public abstract class LivingEntity : MonoBehaviour
     public virtual void OnDamage(int damage)
     {
         gettedDamage = (damage - stats.defense);
+        dmgtxt.PrintDamage(gettedDamage);
     }
     public virtual void GetDamage()
     {
         this.stats.currentHp -= gettedDamage;
+
         if (this.stats.currentHp <= 0)
             this.stats.currentHp = 0;
         Debug.Log("currentHP : " + stats.currentHp);
@@ -142,8 +147,9 @@ public abstract class LivingEntity : MonoBehaviour
         }
         dead = true;
         Debug.Log("Dead!!");
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
     }
+
 
     public void OnDebug()
     {

@@ -20,6 +20,8 @@ public class TestSceneMain : BaseSceneMain
     public bool delay;
     int count = 0;
     int count2 = 0;
+    [SerializeField]
+    DamageText dmgtxt;
     // Start is called before the first frame update
 
     GameObject BG;
@@ -41,7 +43,7 @@ public class TestSceneMain : BaseSceneMain
     }
     public void OnTestHPbar()
     {
-       // hpbar.DecreaseHP(10);
+        dmgtxt.PrintDamage(50);
     }
     public void OnTestDelay()
     {

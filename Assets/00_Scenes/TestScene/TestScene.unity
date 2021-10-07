@@ -1741,7 +1741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 192976851}
   - component: {fileID: 192976850}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cave_v2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1786,7 +1786,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -667150237
   m_SortingLayer: -2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 45daec20da7ac1643a5cc87191b5017b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3272,6 +3272,7 @@ MonoBehaviour:
   position: 0
   isMonster: 0
   gettedDamage: 0
+  renderer: {fileID: 0}
   skill01Index: 0
   skill02Index: 0
   skill03Index: 0
@@ -3280,7 +3281,6 @@ MonoBehaviour:
   maxExp: 0
   currentExp: 0
   className: 
-  renderer: {fileID: 0}
 --- !u!1 &508573028
 GameObject:
   m_ObjectHideFlags: 0
@@ -8288,6 +8288,7 @@ MonoBehaviour:
   position: 0
   isMonster: 0
   gettedDamage: 0
+  renderer: {fileID: 0}
   skill01Index: 0
   skill02Index: 0
   skill03Index: 0
@@ -8296,7 +8297,6 @@ MonoBehaviour:
   maxExp: 0
   currentExp: 0
   className: 
-  renderer: {fileID: 0}
 --- !u!1 &1358358153
 GameObject:
   m_ObjectHideFlags: 0
@@ -9927,6 +9927,7 @@ MonoBehaviour:
   position: 0
   isMonster: 0
   gettedDamage: 0
+  renderer: {fileID: 0}
   skill01Index: 0
   skill02Index: 0
   skill03Index: 0
@@ -9935,7 +9936,6 @@ MonoBehaviour:
   maxExp: 0
   currentExp: 0
   className: 
-  renderer: {fileID: 0}
 --- !u!4 &1677383641
 Transform:
   m_ObjectHideFlags: 0
@@ -10179,6 +10179,7 @@ MonoBehaviour:
   position: 0
   isMonster: 0
   gettedDamage: 0
+  renderer: {fileID: 0}
   skill01Index: 0
   skill02Index: 0
   skill03Index: 0
@@ -10187,7 +10188,6 @@ MonoBehaviour:
   maxExp: 0
   currentExp: 0
   className: 
-  renderer: {fileID: 0}
 --- !u!1 &1711575649
 GameObject:
   m_ObjectHideFlags: 0
@@ -10807,6 +10807,7 @@ MonoBehaviour:
   position: 0
   isMonster: 0
   gettedDamage: 0
+  renderer: {fileID: 0}
   skill01Index: 0
   skill02Index: 0
   skill03Index: 0
@@ -10815,7 +10816,6 @@ MonoBehaviour:
   maxExp: 0
   currentExp: 0
   className: 
-  renderer: {fileID: 0}
 --- !u!4 &1847715617
 Transform:
   m_ObjectHideFlags: 0
@@ -11685,19 +11685,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26129b89757c494ca2f3abba6dde935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPlayerEntity: {fileID: 0}
-  TestEntity:
-  - {fileID: 2094650455}
-  - {fileID: 1847715616}
-  - {fileID: 1677383640}
-  targetEntity:
-  - {fileID: 3569150661217987680}
-  - {fileID: 3569150660756309148}
-  playerCurrent: {fileID: 97778494}
   bm: {fileID: 0}
   blurPanel: {fileID: 1673516832}
   currentPlayerTrans: {fileID: 0}
   currentMonsterTrans: {fileID: 0}
+  playerAct: 0
+  monsterAct: 0
+  targetPlayerTrans: []
+  targetMonsterTrans: []
 --- !u!4 &1994318805
 Transform:
   m_ObjectHideFlags: 0
@@ -12867,6 +12862,7 @@ MonoBehaviour:
   position: 0
   isMonster: 0
   gettedDamage: 0
+  renderer: {fileID: 0}
   skill01Index: 0
   skill02Index: 0
   skill03Index: 0
@@ -12875,7 +12871,6 @@ MonoBehaviour:
   maxExp: 0
   currentExp: 0
   className: 
-  renderer: {fileID: 0}
 --- !u!4 &2094650456
 Transform:
   m_ObjectHideFlags: 0
@@ -16452,6 +16447,125 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CategoryHash: -0.6622639
   m_labelHash: -2.977024e-14
+--- !u!1001 &7418116250093932073
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7418116249227586955, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_Name
+      value: Damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418116249227586959, guid: 20052c2bf4755974099991c6a12c3c21,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 20052c2bf4755974099991c6a12c3c21, type: 3}
 --- !u!61 &7428081527579205986
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16702,6 +16816,7 @@ MonoBehaviour:
   position: 0
   isMonster: 0
   gettedDamage: 0
+  renderer: {fileID: 0}
   skill01Index: 0
   skill02Index: 0
   skill03Index: 0
@@ -16710,4 +16825,3 @@ MonoBehaviour:
   maxExp: 0
   currentExp: 0
   className: 
-  renderer: {fileID: 0}

@@ -55,6 +55,13 @@ public class Monster : LivingEntity
     public override void Die()
     {
         base.Die();
+        StartCoroutine("DeadAnim");
+    }
+    IEnumerator DeadAnim()
+    {
+        anim.SetAnimation(MonsterActing.Die);
+        yield return new WaitForSeconds(1f);
+        this.gameObject.SetActive(false);
     }
     public virtual void SetDifficulty(Difficulty dif)
     {

@@ -15,6 +15,8 @@ public class ItemManager : MonoBehaviour
 
     public bool isSkillActive;
 
+    [SerializeField]
+    GameObject invt;
 
 
     // Start is called before the first frame update
@@ -29,6 +31,8 @@ public class ItemManager : MonoBehaviour
 
         InitItemCount();
         CountItem();
+        invt.SetActive(false);
+        //SkillUnActiveImg(false);
     }
     public void OnTestButton()
     {
@@ -46,7 +50,13 @@ public class ItemManager : MonoBehaviour
     public void SetSkillSelectedFrameAllOff()
     {
         for (int i = 0; i < 4; i++)
-            playerskill[i].skillClick.SelectedFrameOnOff(false);
+            playerskill[i].skill.SelectedFrameOnOff(false);
+    }
+
+    public void SkillUnActiveImg(bool onoff)
+    {
+        for (int i = 0; i < 4; i++)
+            playerskill[i].skill.UnActive(onoff);
     }
 
     public void SetSkillClickedFalse()

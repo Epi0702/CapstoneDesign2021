@@ -107,6 +107,7 @@ public class AnimationManager : MonoBehaviour
 
         for (int i = 0; i < bm.targetEntity.Count; i++)
         {
+            bm.DamageInputEvent(bm.targetEntity[i], bm.damageList[i]);
             bm.targetEntity[i].SetAnimation(MonsterActing.Hurt);
         }
         yield return new WaitForSeconds(1.5f);
@@ -163,6 +164,7 @@ public class AnimationManager : MonoBehaviour
 
         for (int i = 0; i < bm.targetEntity.Count; i++)
         {
+            bm.DamageInputEvent(bm.targetEntity[i], bm.damageList[i]);
             bm.targetEntity[i].SetAnimation(Acting.Hurt);
         }
         yield return new WaitForSeconds(1.5f);

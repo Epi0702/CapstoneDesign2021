@@ -42,15 +42,16 @@ public class Item : MonoBehaviour
     public bool skillCancel;               //스킬 중복선택        스킬 발동하면 true됨
     public bool targetSet;                  //타겟 셋
 
-    public SkillClick skillClick;
+    public Skill skill;
     Character selected_character;
+
 
     private void Awake()
     {
         Icon = transform.Find("Icon").gameObject;
         itemImage = Icon.GetComponent<SpriteRenderer>();
 
-        skillClick = GetComponent<SkillClick>();
+        skill = GetComponent<Skill>();
     }
     private void Start()
     {

@@ -123,11 +123,11 @@ public class MapManager : MonoBehaviour
         {
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.StartBattle(currentRoomIndex);
         }
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetCurrentRoom();
 
         if (SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.isBattle == false)
         {
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetRelRoomButton();
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().UIMapViewer.SetCurrentRoom();
         }
     }
     public void EnterAisle()
