@@ -19,7 +19,6 @@ public class Bat : Monster
     public override void Setup()
     {
         base.Setup();
-
         //maxHp = 20;
         //currentHp = maxHp;
 
@@ -54,15 +53,17 @@ public class Bat : Monster
         {
             case Difficulty.Easy:
                 {
+                    name = "약한 박쥐";
                     stats.maxHp = 10;
                     stats.currentHp = stats.maxHp;
                     stats. attackDamage= 20;
                     stats.defense = 5;
-                    stats.speed = 5;
+                    stats.speed = 15;
                 }
                 break;
             case Difficulty.Normal:
                 {
+                    name = "박쥐"; 
                     stats.maxHp = 25;
                     stats.currentHp = stats.maxHp;
                     stats.attackDamage = 20;
@@ -72,6 +73,7 @@ public class Bat : Monster
                 break;
             case Difficulty.Hard:
                 {
+                    name = "강한 박쥐";
                     stats.maxHp = 30;
                     stats.currentHp = stats.maxHp;
                     stats.attackDamage = 20;

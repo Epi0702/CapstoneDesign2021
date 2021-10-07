@@ -68,12 +68,14 @@ public class SystemManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
-    }
-    void Start()
-    {
+
         BaseSceneMain baseSceneMain = GameObject.FindObjectOfType<BaseSceneMain>();
         Debug.Log("OnSceneLoaded! baseSceneMain.name = " + baseSceneMain.name);
         SystemManager.Instance.CurrentSceneMain = baseSceneMain;
+    }
+    void Start()
+    {
+
     }
     public T GetCurrentSceneMain<T>() where T : BaseSceneMain
     {

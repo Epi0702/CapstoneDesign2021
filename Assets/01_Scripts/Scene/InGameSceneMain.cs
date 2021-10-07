@@ -122,18 +122,20 @@ public class InGameSceneMain : BaseSceneMain
     }
 
     public int StageNum;
-
+    public Character selectedCharacter;
     protected override void OnAwake()
     {
         base.OnAwake();
-        StageNum = 0;
+        playerController.LoadPlayerCharacter();
+        player.TestSkillSet();
     }
     protected override void OnStart()
     {
         base.OnStart();
-        playerController.LoadPlayerCharacter();
-        player.TestSkillSet();
-        ItemManager.PlayerSkillSet(player.playerCharacter[0]);
+        StageNum = 0;
+
+        //ItemManager.PlayerSkillSet(player.playerCharacter[0]);
+        //battleManager.InitSelectedPlayer();
     }
 
     protected override void UpdateScene()

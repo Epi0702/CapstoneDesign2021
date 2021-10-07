@@ -22,7 +22,6 @@ public class Zombie : Monster
     public override void Setup()
     {
         base.Setup();
-
         //maxHp = 20;
         //currentHp = maxHp;
 
@@ -40,15 +39,17 @@ public class Zombie : Monster
         {
             case Difficulty.Easy:
                 {
+                    name = "약한 좀비";
                     stats.maxHp = 10;
                     stats.currentHp = stats.maxHp;
                     stats.attackDamage = 20;
                     stats.defense = 5;
-                    stats.speed = 5;
+                    stats.speed = 15;
                 }
                 break;
             case Difficulty.Normal:
                 {
+                    name = "좀비";
                     stats.maxHp = 25;
                     stats.currentHp = stats.maxHp;
                     stats.attackDamage = 20;
@@ -58,6 +59,7 @@ public class Zombie : Monster
                 break;
             case Difficulty.Hard:
                 {
+                    name = "강한 좀비";
                     stats.maxHp = 30;
                     stats.currentHp = stats.maxHp;
                     stats.attackDamage = 20;

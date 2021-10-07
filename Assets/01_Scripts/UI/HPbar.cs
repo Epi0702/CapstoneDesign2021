@@ -64,7 +64,7 @@ public class HPbar : MonoBehaviour
         for (int i = 0; i < 50; i++)
         {
             filled_before.fillAmount -= temp / 50;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.015f);
         }
         filled_before_p = CurrentHpPercentage();
     }

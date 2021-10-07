@@ -12,6 +12,8 @@ public class Monster : LivingEntity
 
     protected Monster selected_monster;
 
+    public string name;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -129,17 +131,17 @@ public class Monster : LivingEntity
     {
         int randnum = UnityEngine.Random.Range(0, 100);
         RewardItem rewardItem;
-        if(randnum > 75)
+        if(randnum > 80)
         {
             rewardItem.itemCode = 1;
             rewardItem.count = 500;
         }
-        else if(randnum > 50)
+        else if(randnum > 70)
         {
             rewardItem.itemCode = 1;
             rewardItem.count = 750;
         }
-        else if(randnum >25)
+        else if(randnum >60)
         {
             rewardItem.itemCode = 4;
             rewardItem.count = 1;

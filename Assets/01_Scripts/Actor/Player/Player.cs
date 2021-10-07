@@ -24,6 +24,8 @@ public class Player : MonoBehaviour //전체 통괄
     [SerializeField]
     Scrollbar[] playerHP;
 
+    [SerializeField]
+    GameObject currentPlayerIcon;
     private void Awake()
     {
         playerState = PlayerState.NoneInRoom;
@@ -32,7 +34,7 @@ public class Player : MonoBehaviour //전체 통괄
     // Start is called before the first frame update
     void Start()
     {
-        
+        //currentPlayerIcon.SetActive(false);    
     }
 
     // Update is called once per frame
@@ -77,10 +79,12 @@ public class Player : MonoBehaviour //전체 통괄
         {
             case 0:
                 temp = Instantiate(Resources.Load<Knight>("Prefabs/Player/Knight"), this.transform);
+                temp.Setup();
                 playerCharacter.Add(temp);
                 break;
             case 1:
                 temp = Instantiate(Resources.Load<Fighter>("Prefabs/Player/Fighter"), this.transform);
+                temp.Setup();
                 playerCharacter.Add(temp);
                 break;
             default:
@@ -134,5 +138,33 @@ public class Player : MonoBehaviour //전체 통괄
             return true;
         else
             return false;
+    }
+    public void ActivePlayerIcon(bool onoff)
+    {
+        currentPlayerIcon.SetActive(onoff);
+    }
+    public void SetPlayerIcon()
+    {
+        Character temp;
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.Test();
+        temp = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter;
+        
+        switch (temp.position)
+        {
+            case CharacterPosition.First:
+                currentPlayerIcon.transform.position = new Vector3(-2.5f, 1.5f, 0);
+                break;
+            case CharacterPosition.Second:
+                currentPlayerIcon.transform.position = new Vector3(-4.18f, 1.5f, 0);
+                break;
+            case CharacterPosition.Third:
+                currentPlayerIcon.transform.position = new Vector3(-5.84f, 1.5f, 0);
+                break;
+            case CharacterPosition.Fourth:
+                currentPlayerIcon.transform.position = new Vector3(-7.5f, 1.5f, 0);
+                break;
+            default:
+                break;
+        }
     }
 }

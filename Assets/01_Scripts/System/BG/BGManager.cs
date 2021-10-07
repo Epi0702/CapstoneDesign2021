@@ -75,6 +75,7 @@ public class BGManager : MonoBehaviour
         if(!roomAisle)
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().MapManager.PassageIndexPlusForDebug.SetActive(true);
         anim.Play("Black_fadeOut");
+        yield return new WaitForSeconds(5/6f);
         ChangeEvent = null;
         enterTerm = true;
     }

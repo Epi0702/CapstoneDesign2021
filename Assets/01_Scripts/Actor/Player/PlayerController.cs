@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         SetPlayerHPbar();
+        
     }
 
     // Update is called once per frame
@@ -30,10 +31,11 @@ public class PlayerController : MonoBehaviour
         player.SetUpCharacter(1);
         player.SetUpCharacter(1);
 
-        
 
         player.SetPosition(0, 1, 2, 3);
+
         SetPlayerHPbar();
+
     }
 
     public void SetPlayerHPbar()

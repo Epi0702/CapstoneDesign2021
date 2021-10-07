@@ -38,7 +38,7 @@ public class BattleManager : MonoBehaviour
     public bool coroutineCheck;
     public bool coroutineCheck2;
 
-    public Character selectedCharacter;
+   // public Character selectedCharacter;
     public Monster targetMonster;
 
     public Monster selectedMonster;
@@ -58,11 +58,29 @@ public class BattleManager : MonoBehaviour
 
     public bool playerSkillActive;
 
+    [SerializeField]
+    GameObject battleStartLogo;
+
+    public MonsterInfoUI monsterinfoUI;
+    public PlayerInfoUI playerinfoUI;
+
+    [SerializeField]
+    ItemManager itmManager;
+
+    
+    void Awake()
+    {
+
+
+    }
     // Start is called before the first frame update
     void Start()
     {
         InitBattleManager();
         debugbool = false;
+
+        monsterinfoUI.gameObject.SetActive(false);
+        SetSelectedFirst();
     }
 
     // Update is called once per frame
@@ -77,7 +95,7 @@ public class BattleManager : MonoBehaviour
     }
     public void InitSelTarget()
     {
-        selectedCharacter = null;
+        //selectedCharacter = null;
         targetMonster = null;
         selectedMonster = null;
         targetEntity.Clear();
@@ -87,10 +105,12 @@ public class BattleManager : MonoBehaviour
     }
     public void InitBattleManager()
     {
+        battleStartLogo.SetActive(false);   
         isBattle = false;
         turn = 0;
         currentSquad = -1;
 
+        //selectedCharacter = null;
         InitSelTarget();
     }
     public void StartBattle(int currentRoomIndex)
@@ -234,14 +254,16 @@ public class BattleManager : MonoBehaviour
 
         else if (turnManager[attackCount].isMonster == false)
         {
+
             playerSkillActive = true;
             PlayerSKillActive();
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.isSkillActive = true;
             /*
              * 현재 턴 캐릭터 설정, 스킬셋을 현재 캐릭터 스킬로 교체
              */
-            selectedCharacter = (Character)turnManager[attackCount];
-            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.PlayerSkillSet(selectedCharacter);
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter = (Character)turnManager[attackCount];
+            //player.ActivePlayerIcon(true);
+            SetSelectedPlayer();
         }
         else
         {
@@ -366,6 +388,7 @@ public class BattleManager : MonoBehaviour
 
     public void BattleOver()
     {
+        //player.ActivePlayerIcon(false);
         Debug.Log("Battle End!!");
         enemyController.SetEnemyHPbar();
         isBattle = false;
@@ -399,6 +422,25 @@ public class BattleManager : MonoBehaviour
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.SkillUnActiveImg(!playerSkillActive);
     }
 
+    public void SetSelectedPlayer()
+    {
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.PlayerSkillSet(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter);
+        player.SetPlayerIcon();
+        Debug.Log(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter.className);
+        playerinfoUI.GetPlayerInfo(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter);
+    }
+    public void SetSelectedFirst()
+    {
+        for (int i = player.playerCharacter.Count - 1; i >= 0; i--)
+        {
+            if (player.playerCharacter[i].dead == false)
+            {
+                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter = player.playerCharacter[i];
+            }
+        }
+
+        SetSelectedPlayer();
+    }
     IEnumerator BattleAnimationDelay()
     {
         //애니메이션 셋
@@ -417,7 +459,7 @@ public class BattleManager : MonoBehaviour
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().PlayerController.PrintCurrentHp();
         enemyController.PrintCurrentHp();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         Debug.Log("HP Updated");
         attackAnim = true;
@@ -425,7 +467,13 @@ public class BattleManager : MonoBehaviour
     IEnumerator BattleStartDelay()
     {
         isBattle = false;
-        yield return new WaitForSeconds(5f);
+        battleStartLogo.SetActive(true);
+        yield return new WaitForSeconds(4.5f);
+        battleStartLogo.SetActive(false);
         isBattle = true;
+    }
+    public void Test()
+    {
+
     }
 }

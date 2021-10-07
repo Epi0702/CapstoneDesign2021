@@ -13,6 +13,9 @@ public class DamageText : MonoBehaviour
     public int damage;
 
     public bool enable;
+
+    
+    RectTransform recttrans;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +56,10 @@ public class DamageText : MonoBehaviour
     public void Init()
     {
         enable = false;
-        transform.position = new Vector3(0, 0, 0);
+        //transform.position = new Vector3(0, 0, 0);
+        transform.localPosition = new Vector3(0,0,0);
+        
+        //recttrans.anchoredPosition = new Vector3(0, 0, 0);
         alpha.a = 1;
         this.gameObject.SetActive(false);
     }

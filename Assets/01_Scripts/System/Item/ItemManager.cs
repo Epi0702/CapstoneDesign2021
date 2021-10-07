@@ -26,7 +26,6 @@ public class ItemManager : MonoBehaviour
         isSkillActive = false;
         for (int i = 0; i < inventory.Length; i++)
             inventory[i].SetItemInfo(itemDataTable.GetItem(0));
-        inventory[0].SetItemInfo(itemDataTable.GetItem(1));
 
 
         InitItemCount();

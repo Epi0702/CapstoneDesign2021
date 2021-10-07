@@ -16,7 +16,13 @@ public class BattleResultManager : MonoBehaviour
 
     [SerializeField]
     Text[] rewardCount;
-    bool empty;
+
+    [SerializeField]
+    Button GetButton;
+    bool empty; 
+    
+    int rewardsItemcount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +37,21 @@ public class BattleResultManager : MonoBehaviour
     void GenerateItem()
     {
         RewardItem rewardItem;
+        rewardItem.itemCode = 0;
+        rewardItem.count = 0;
+        Debug.Log(rewardItem.itemCode + " " + rewardItem.count);
+        rewardsItemcount = 0;
+
         for (int i =0; i< bm.enemySquad[bm.currentSquad].enemy.Count; i++)
         {
             rewardItem = bm.enemySquad[bm.currentSquad].enemy[i].GenerateItem();
-            rewardItems[i].SetItemInfo(itm.itemDataTable.GetItem(rewardItem.itemCode));
-            rewardItems[i].count = rewardItem.count;
+
+            if(rewardItem.itemCode != 0)
+            {
+                rewardItems[rewardsItemcount].SetItemInfo(itm.itemDataTable.GetItem(rewardItem.itemCode));
+                rewardItems[rewardsItemcount].count = rewardItem.count;
+                rewardsItemcount++;
+            }
         }
         
     }
@@ -47,8 +63,8 @@ public class BattleResultManager : MonoBehaviour
     }
     public void BattleWin()
     {
-        SetOnOffPanel(true);
         GenerateItem();
+        SetOnOffPanel(true);
     }
     public void OnYesButton()
     {
@@ -72,9 +88,9 @@ public class BattleResultManager : MonoBehaviour
                 GetRewardToInventory(rewardItems[i]);
             }
         }
-        SetOnOffPanel(false);
-        InitRewards();
+
         itm.CountItem();
+        OnNoButton();
     }
     public void GetRewardToInventory(Item reward)
     {
@@ -89,12 +105,15 @@ public class BattleResultManager : MonoBehaviour
                         if (itm.inventory[i].maxcount - itm.inventory[i].count > reward.count)
                         {
                             itm.inventory[i].count += reward.count;
+                            reward.count = 0;
                         }
                         else
                         {
-                            reward.count -= (itm.inventory[i].maxcount - itm.inventory[i].count);
                             itm.inventory[i].count = itm.inventory[i].maxcount;
+                            reward.count -= (itm.inventory[i].maxcount - itm.inventory[i].count);
                         }
+
+
                     }
                 }
             }
@@ -117,10 +136,24 @@ public class BattleResultManager : MonoBehaviour
     {
         for(int i = 0; i< rewardItems.Length; i++)
         {
-            rewardItems[i].gameObject.SetActive(onoff);
-            rewardCount[i].gameObject.SetActive(onoff);
-            rewardCount[i].text = rewardItems[i].count.ToString();
+            if(rewardItems[i].itemCode != -1)
+            {
+                rewardItems[i].gameObject.SetActive(onoff);
+                rewardCount[i].gameObject.SetActive(onoff);
+                rewardCount[i].text = rewardItems[i].count.ToString();
+            }
+            else
+            {
+                rewardItems[i].gameObject.SetActive(false);
+                rewardCount[i].gameObject.SetActive(false);
+            }
         }
+        if (rewardsItemcount == 0)
+        {
+            GetButton.gameObject.SetActive(false);
+        }
+        else
+            GetButton.gameObject.SetActive(true);
         rewardPanel.gameObject.SetActive(onoff);
     }
 }
