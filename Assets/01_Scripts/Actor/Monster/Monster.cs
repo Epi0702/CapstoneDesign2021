@@ -58,6 +58,7 @@ public class Monster : LivingEntity
     {
         base.Die();
         StartCoroutine("DeadAnim");
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.killCount++;
     }
     IEnumerator DeadAnim()
     {

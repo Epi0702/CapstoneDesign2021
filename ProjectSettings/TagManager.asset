@@ -69,3 +69,9 @@ TagManager:
   - name: MiniMap
     uniqueID: 3309943305
     locked: 0
+  - name: Credits
+    uniqueID: 1885464347
+    locked: 0
+  - name: CreditPlayer
+    uniqueID: 3217078257
+    locked: 0

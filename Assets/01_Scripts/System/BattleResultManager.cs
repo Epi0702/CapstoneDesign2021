@@ -53,6 +53,8 @@ public class BattleResultManager : MonoBehaviour
                 rewardsItemcount++;
             }
         }
+        if (rewardsItemcount == 0)
+            GenerateItem();
         
     }
     public void InitRewards()

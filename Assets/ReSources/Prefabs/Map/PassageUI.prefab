@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fe47c8346c134334393884980db4b711, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 43c30b70713f61a4196a3dbe4c0dc65a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51483a716a741f7478777c751c9315ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rect: {fileID: 0}
   CurrentPassageIcon: {fileID: 4630977818872398804}
 --- !u!1001 &2396024152465289686
 PrefabInstance:
@@ -139,12 +140,12 @@ PrefabInstance:
     - target: {fileID: 7789139029685074140, guid: bce3852c3663ce347aecf553c03512c3,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7789139029685074140, guid: bce3852c3663ce347aecf553c03512c3,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7789139029685074140, guid: bce3852c3663ce347aecf553c03512c3,
         type: 3}

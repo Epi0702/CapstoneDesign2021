@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System;
+
 
 public class DataController : MonoBehaviour
 {
@@ -33,6 +35,7 @@ public class DataController : MonoBehaviour
 
     public string GameDataFileName = "TRPGSAVE.json";
     public GameData _gameDAta;
+    public JsonParse _jsonP;
     public GameData gameData
     {
         get
@@ -54,6 +57,7 @@ public class DataController : MonoBehaviour
             Debug.Log("Load Success!!");
             string FromJsonData = File.ReadAllText(filePath);
             _gameDAta = JsonUtility.FromJson<GameData>(FromJsonData);
+            //_jsonP.LoadCharacter();
         }
         else
         {
@@ -73,5 +77,7 @@ public class DataController : MonoBehaviour
     {
         Debug.Log("Quit Auto Save");
         SaveGameData();
-    }
+    }    
 }
+
+

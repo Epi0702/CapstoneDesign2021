@@ -21,7 +21,7 @@ public class ScrollContanetsCount : MonoBehaviour {
 			transform.GetComponent<RectTransform> ().sizeDelta = contentsSize;
 
 			contentsPos.x = 1000f;
-			transform.GetComponent<RectTransform> ().position = contentsPos;
+			//transform.GetComponent<RectTransform> ().position = contentsPos;
 		} 
 		else if (ScrollView.GetComponent<ScrollRect> ().vertical == true)
 		

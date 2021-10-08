@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using System;
 
-
+[Serializable]
 public class Character : LivingEntity   //각 캐릭터
 {
     public int skill01Index;
@@ -20,7 +21,7 @@ public class Character : LivingEntity   //각 캐릭터
     HumanoidAnimation anim;
     GameObject characterSprite;
 
-
+    public PlayerCharacterClass characterClass;
 
     // Start is called before the first frame update
     void Start()
@@ -120,19 +121,19 @@ public class Character : LivingEntity   //각 캐릭터
         switch (level)
         {
             case 1:
-                this.maxExp = 10;
+                this.maxExp = 100;
                 break;
             case 2:
-                this.maxExp = 30;
+                this.maxExp = 300;
                 break;
             case 3:
-                this.maxExp = 90;
+                this.maxExp = 900;
                 break;
             case 4:
-                this.maxExp = 270;
+                this.maxExp = 1800;
                 break;
             case 5:
-                this.maxExp = 810;
+                this.maxExp = 2700;
                 break;
 
             default:

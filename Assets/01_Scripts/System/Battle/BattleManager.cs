@@ -67,7 +67,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     ItemManager itmManager;
 
-    
+    public int killCount;
     void Awake()
     {
 
@@ -109,6 +109,7 @@ public class BattleManager : MonoBehaviour
         isBattle = false;
         turn = 0;
         currentSquad = -1;
+        killCount = 0;
 
         //selectedCharacter = null;
         InitSelTarget();
@@ -390,6 +391,7 @@ public class BattleManager : MonoBehaviour
     {
         //player.ActivePlayerIcon(false);
         Debug.Log("Battle End!!");
+        killCount++;
         enemyController.SetEnemyHPbar();
         isBattle = false;
         player.playerState = PlayerState.NoneInRoom;

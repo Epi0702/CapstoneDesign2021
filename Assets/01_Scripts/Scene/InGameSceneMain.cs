@@ -123,6 +123,10 @@ public class InGameSceneMain : BaseSceneMain
 
     public int StageNum;
     public Character selectedCharacter;
+
+
+
+
     protected override void OnAwake()
     {
         base.OnAwake();
@@ -141,5 +145,9 @@ public class InGameSceneMain : BaseSceneMain
     protected override void UpdateScene()
     {
         base.UpdateScene();
+    }
+    public void test()
+    {
+
     }
 }

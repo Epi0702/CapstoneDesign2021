@@ -4,13 +4,13 @@ using UnityEngine;
 public enum PlayerCharacterClass
 {
     Knight = 0,
-    Crusader = 1,
-    Swordsman = 2,
-    Monk = 3,
+    Fighter = 1,
+    Warrior = 2,
+    Caster = 3,
     Archer = 4,
-    Ninja = 5,
+    Debuffer = 5,
     Priest = 6,
-    Bishop = 7,
+    Paladin = 7,
 }
 public class PlayerCharacter : MonoBehaviour
 {

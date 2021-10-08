@@ -21,6 +21,7 @@ public class Knight : Character
     {
         base.Setup();
         className = "Knight";
+        characterClass = 0;
     }
     public override void InitCharacterStats()
     {
