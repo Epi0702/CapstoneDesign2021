@@ -48,5 +48,6 @@ public class CustomizingSceneMain : BaseSceneMain
     {
         loadScene.gameObject.SetActive(true);
         loadScene.SceneLoader(2);
+        //LoadScene.Instance.SceneLoader(SceneName.MainMenuScene);
     }
 }

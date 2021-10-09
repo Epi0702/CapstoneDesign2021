@@ -69,6 +69,7 @@ public class UIMapViewer : MonoBehaviour
     }
     void MoveRoom()
     {
+        Debug.Log(gameWorldInMap.rooms.Count);
         for (int i = 0; i < gameWorldInMap.rooms.Count; i++)
         {
             room[i].transform.SetParent(this.transform, false);

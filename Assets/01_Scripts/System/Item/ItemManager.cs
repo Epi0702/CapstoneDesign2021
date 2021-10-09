@@ -20,10 +20,14 @@ public class ItemManager : MonoBehaviour
 
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        itemDataTable = SystemManager.Instance.ItemTable;
+        isSkillActive = false;
+
+    }
     void Start()
     {
-        //itemDataTable.Load();
-        isSkillActive = false;
         for (int i = 0; i < inventory.Length; i++)
             inventory[i].SetItemInfo(itemDataTable.GetItem(0));
 

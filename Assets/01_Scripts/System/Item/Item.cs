@@ -158,7 +158,7 @@ public class Item : MonoBehaviour
 
         StopAllCoroutines();
 
-        selected_character = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter;
+        selected_character = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.selectedCharacter;
         Debug.Log("SKill Clicked!!");
 
         StartCoroutine("CheckSkillCancel");

@@ -57,13 +57,13 @@ public class MapManager : MonoBehaviour
     }
     void Start()
     {
-        CreateWorld();
+        //CreateWorld();
     }
     void Update()
     {
 
     }
-    void CreateWorld()          //세이브 데이터에 맵 없을시 생성
+    public void CreateWorld()          //세이브 데이터에 맵 없을시 생성
     {
         int battleroomIndex = 0;
         gameWorld = new MapData();
@@ -256,7 +256,8 @@ public class MapManager : MonoBehaviour
         }
         ExitAisle();
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().PlayerController.SetPlayerAnim(Acting.Idle);
-        PassageIndexPlusForDebug.SetActive(true);
+        if(!SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BGManager.roomAisle)
+            PassageIndexPlusForDebug.SetActive(true);
 
         mapMoving = false;
     }

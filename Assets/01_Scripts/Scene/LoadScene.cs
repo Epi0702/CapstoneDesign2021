@@ -3,13 +3,52 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum SceneName
+{
+    TitleScene = 0,
+    CustomizingScene = 1,
+    MainMenuScene = 2,
+    InGameScene = 3,
+}
+
 public class LoadScene : MonoBehaviour
 {
     public Slider loadingSlider;
+    //public GameObject Img;
+    //public SceneName currentSceneIndex;
 
-    public void SceneLoader(int _SceneIndex)
+
+    //private static LoadScene instance;
+    //public static LoadScene Instance        //singleT
+    //{
+    //    get
+    //    {
+    //        if (!instance)
+    //        {
+    //            instance = FindObjectOfType(typeof(LoadScene)) as LoadScene;
+
+    //            if (instance == null)
+    //                Debug.Log("no Singleton obj");
+    //        }
+    //        return instance;
+    //    }
+    //}
+    //private void Awake()
+    //{
+    //    if (instance != null)
+    //    {
+    //        Debug.LogWarning("Can't have two instance of singletone");
+    //        DestroyImmediate(this);
+    //        return;
+    //    }
+    //    instance = this;
+    //    DontDestroyOnLoad(this);
+    //}
+
+    public void SceneLoader(/*SceneName scenenameint*/ int sceneindex)
     {
-        StartCoroutine(LoadAsynchronously(_SceneIndex));
+        //Img.SetActive(true);
+        StartCoroutine(LoadAsynchronously(sceneindex));
     }
     IEnumerator LoadAsynchronously(int sceneIndex)
     {
@@ -23,5 +62,12 @@ public class LoadScene : MonoBehaviour
 
             yield return null;
         }
+        //Img.SetActive(false);
+    }
+    public void SetSceneManager()
+    {
+        BaseSceneMain baseSceneMain = GameObject.FindObjectOfType<BaseSceneMain>();
+        SystemManager.Instance.CurrentSceneMain = baseSceneMain;
+      
     }
 }

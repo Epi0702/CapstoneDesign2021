@@ -147,7 +147,7 @@ public class Player : MonoBehaviour //전체 통괄
     {
         Character temp;
         SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.Test();
-        temp = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter;
+        temp = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.selectedCharacter;
         
         switch (temp.position)
         {

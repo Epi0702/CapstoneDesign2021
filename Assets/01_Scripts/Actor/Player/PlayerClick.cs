@@ -21,7 +21,7 @@ public class PlayerClick : MonoBehaviour
         Debug.Log("Player Clicked!!");
         if (!SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.isBattle && !character.dead)
         {
-            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter = character;
+            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.selectedCharacter = character;
             SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.SetSelectedPlayer();
         }
 

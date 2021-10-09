@@ -68,6 +68,9 @@ public class BattleManager : MonoBehaviour
     ItemManager itmManager;
 
     public int killCount;
+
+    public Character selectedCharacter;
+
     void Awake()
     {
 
@@ -80,7 +83,7 @@ public class BattleManager : MonoBehaviour
         debugbool = false;
 
         monsterinfoUI.gameObject.SetActive(false);
-        SetSelectedFirst();
+        //SetSelectedFirst();
     }
 
     // Update is called once per frame
@@ -262,7 +265,7 @@ public class BattleManager : MonoBehaviour
             /*
              * 현재 턴 캐릭터 설정, 스킬셋을 현재 캐릭터 스킬로 교체
              */
-            SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter = (Character)turnManager[attackCount];
+            selectedCharacter = (Character)turnManager[attackCount];
             //player.ActivePlayerIcon(true);
             SetSelectedPlayer();
         }
@@ -391,6 +394,7 @@ public class BattleManager : MonoBehaviour
     {
         //player.ActivePlayerIcon(false);
         Debug.Log("Battle End!!");
+        monsterinfoUI.gameObject.SetActive(false);
         killCount++;
         enemyController.SetEnemyHPbar();
         isBattle = false;
@@ -426,18 +430,19 @@ public class BattleManager : MonoBehaviour
 
     public void SetSelectedPlayer()
     {
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.PlayerSkillSet(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter);
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().ItemManager.PlayerSkillSet(selectedCharacter);
         player.SetPlayerIcon();
-        Debug.Log(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter.className);
-        playerinfoUI.GetPlayerInfo(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter);
+     
+        playerinfoUI.GetPlayerInfo(selectedCharacter);
     }
     public void SetSelectedFirst()
     {
+        //Debug.Log(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter.GetType());
         for (int i = player.playerCharacter.Count - 1; i >= 0; i--)
         {
             if (player.playerCharacter[i].dead == false)
             {
-                SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter = player.playerCharacter[i];
+                selectedCharacter = player.playerCharacter[i];
             }
         }
 

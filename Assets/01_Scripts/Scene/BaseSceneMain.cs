@@ -28,7 +28,7 @@ public class BaseSceneMain : MonoBehaviour
 
     protected virtual void OnStart()
     {
-
+        SystemManager.Instance.CurrentSceneMain = GameObject.FindObjectOfType<BaseSceneMain>();
     }
     public virtual void Initialize()
     {
@@ -41,4 +41,8 @@ public class BaseSceneMain : MonoBehaviour
     protected virtual void Terminate()
     {
     }
+    //public virtual void ChangeNextSceneIndex(SceneName _index)
+    //{
+    //    LoadScene.Instance.currentSceneIndex = _index;
+    //}
 }

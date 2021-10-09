@@ -46,7 +46,7 @@ public class AnimationManager : MonoBehaviour
     {
         //currentPlayerTrans = currentMonsterTrans = null;
         //targetMonsterTrans = null;
-        currentPlayerTrans = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter.gameObject;
+        currentPlayerTrans = SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.selectedCharacter.gameObject;
         for (int i = 0; i < bm.targetEntity.Count; i++)
         {
             targetMonsterTrans[i] = bm.targetEntity[i].gameObject;
@@ -89,7 +89,7 @@ public class AnimationManager : MonoBehaviour
 
         currentPlayerTrans.transform.position = new Vector3(-1.5f, -0.5f, -6);
         currentPlayerTrans.transform.localScale = new Vector3(2, 2, 1);
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter.renderer.sortingOrder = 2;
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.selectedCharacter.renderer.sortingOrder = 2;
 
 
         for (int i = 0; i < bm.targetEntity.Count; i++)
@@ -115,9 +115,9 @@ public class AnimationManager : MonoBehaviour
 
         currentPlayerTrans.transform.position = new Vector3(0, 0, 0);
         currentPlayerTrans.transform.localScale = new Vector3(1, 1, 1);
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter.SetAnimation(Acting.Idle);
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter.TransformPosition();
-        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().selectedCharacter.renderer.sortingOrder = 0;
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.selectedCharacter.SetAnimation(Acting.Idle);
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.selectedCharacter.TransformPosition();
+        SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.selectedCharacter.renderer.sortingOrder = 0;
 
 
         for (int i = 0; i < bm.targetEntity.Count; i++)

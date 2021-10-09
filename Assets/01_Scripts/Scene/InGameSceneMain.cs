@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class InGameSceneMain : BaseSceneMain
 {
+
     [SerializeField]
-    MapManager mapmanager;
+    MapManager mapManager;
     public MapManager MapManager
     {
         get
         {
-            return mapmanager;
+            return mapManager;
+        }
+    }    
+    [SerializeField]
+    BattleManager battleManager;
+    public BattleManager BattleManager
+    {
+        get
+        {
+            return battleManager;
         }
     }
+    [SerializeField]
+    BattleResultManager battleResultManager;
     [SerializeField]
     BGManager bGManager;
     public BGManager BGManager
@@ -32,18 +44,6 @@ public class InGameSceneMain : BaseSceneMain
         }
     }
 
-
-    [SerializeField]
-    BattleManager battleManager;
-    public BattleManager BattleManager
-    {
-        get
-        {
-            return battleManager;
-        }
-    }
-    [SerializeField]
-    BattleResultManager battleResultManager;
     public BattleResultManager BattleResultManager
     {
         get
@@ -51,7 +51,6 @@ public class InGameSceneMain : BaseSceneMain
             return battleResultManager;
         }
     }
-
     [SerializeField]
     EnemySpawner enemySpawner;
     public EnemySpawner EnemySpawner
@@ -61,7 +60,6 @@ public class InGameSceneMain : BaseSceneMain
             return enemySpawner;
         }
     }
-
     [SerializeField]
     PlayerController playerController;
     public PlayerController PlayerController
@@ -122,32 +120,37 @@ public class InGameSceneMain : BaseSceneMain
     }
 
     public int StageNum;
-    public Character selectedCharacter;
-
-
 
 
     protected override void OnAwake()
     {
         base.OnAwake();
-        playerController.LoadPlayerCharacter();
-        player.TestSkillSet();
     }
     protected override void OnStart()
     {
         base.OnStart();
         StageNum = 0;
 
-        //ItemManager.PlayerSkillSet(player.playerCharacter[0]);
-        //battleManager.InitSelectedPlayer();
+        GameStart();
     }
 
     protected override void UpdateScene()
     {
         base.UpdateScene();
+
+            
+        
     }
     public void test()
     {
 
+    }
+    void GameStart()
+    {
+        playerController.LoadPlayerCharacter();
+        player.TestSkillSet();
+
+        BattleManager.SetSelectedFirst();
+        MapManager.CreateWorld();
     }
 }

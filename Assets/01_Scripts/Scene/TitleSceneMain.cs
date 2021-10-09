@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class TitleSceneMain : BaseSceneMain
 {
+    private string userID;
+    private string userPW;
     [SerializeField]
     LoadScene loadScene;
     public LoadScene LoadScene
@@ -15,18 +17,16 @@ public class TitleSceneMain : BaseSceneMain
             return loadScene;
         }
     }
-
-    private string userID;
-    private string userPW;
-
     protected override void OnStart()
     {
+        base.OnStart();
         userID = DataController.Instance.gameData.User_id;
         userPW = DataController.Instance.gameData.PW;
     }
 
     public void MoveToCustomizingScene()
     {
+        //LoadScene.Instance.SceneLoader(SceneName.CustomizingScene);
         loadScene.gameObject.SetActive(true);
         loadScene.SceneLoader(1);
     }
@@ -35,5 +35,6 @@ public class TitleSceneMain : BaseSceneMain
     {
         loadScene.gameObject.SetActive(true);
         SceneManager.LoadScene("MainLobbyScene");
+        //LoadScene.Instance.SceneLoader(SceneName.MainMenuScene);
     }
 }

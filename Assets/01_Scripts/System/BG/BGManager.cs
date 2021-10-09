@@ -17,7 +17,7 @@ public class BGManager : MonoBehaviour
 
     Action<bool> ChangeEvent;
 
-    bool roomAisle;
+    public bool roomAisle;
 
     bool enterTerm;
     // Start is called before the first frame update

@@ -25,7 +25,12 @@ public class SystemManager : MonoBehaviour
     {
         set
         {
+            Debug.Log("!!Input Start");
             currentSceneMain = value;
+            if (currentSceneMain == null)
+                Debug.Log("!!");
+            else
+                Debug.Log("!!"+currentSceneMain.GetType());
         }
     }
     [SerializeField]
@@ -69,13 +74,13 @@ public class SystemManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        BaseSceneMain baseSceneMain = GameObject.FindObjectOfType<BaseSceneMain>();
-        Debug.Log("OnSceneLoaded! baseSceneMain.name = " + baseSceneMain.name);
-        SystemManager.Instance.CurrentSceneMain = baseSceneMain;
+
     }
     void Start()
     {
-
+        BaseSceneMain baseSceneMain = GameObject.FindObjectOfType<BaseSceneMain>();
+        Debug.Log("OnSceneLoaded! baseSceneMain.name = " + baseSceneMain.name);
+        SystemManager.Instance.CurrentSceneMain = baseSceneMain;
     }
     public T GetCurrentSceneMain<T>() where T : BaseSceneMain
     {
