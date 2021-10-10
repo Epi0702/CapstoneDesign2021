@@ -7,10 +7,13 @@ public class JsonParse : MonoBehaviour
 {
     //GameData _gameData;
 
-    List<SaveCharacter> characterList = new List<SaveCharacter>();
 
+    List<SaveCharacter> saveCharacterList = new List<SaveCharacter>();
+    List<SaveItem> saveitemList = new List<SaveItem>();
 
-    public SaveCharacter CreateCharacter(Character character)
+    List<Character> characterList = new List<Character>();
+    List<MainLobbyItem> itemList = new List<MainLobbyItem>();
+    public SaveCharacter CreateSaveCharacter(Character character)
     {
         SaveCharacter InnerCharacter = new SaveCharacter();
         InnerCharacter.characterClass = character.characterClass;
@@ -31,32 +34,133 @@ public class JsonParse : MonoBehaviour
         InnerCharacter.origin_critical = character.stats.origin_critical;
         return InnerCharacter;
     }
-
-
-    public void SaveCharacter()
+    public Character CreateCharacter(SaveCharacter character)
     {
-        characterList.Add(CreateCharacter(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.player.playerCharacter[0]));
-        characterList.Add(CreateCharacter(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.player.playerCharacter[1]));
-        characterList.Add(CreateCharacter(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.player.playerCharacter[2]));
-        characterList.Add(CreateCharacter(SystemManager.Instance.GetCurrentSceneMain<InGameSceneMain>().BattleManager.player.playerCharacter[3]));
+        Character _character = new Character();
+        _character.characterClass = character.characterClass;
+        _character.skill01Index = character.skill01Index;
+        _character.skill02Index = character.skill02Index;
+        _character.skill03Index = character.skill03Index;
+        _character.skill04Index = character.skill04Index;
 
-        DataController.Instance.gameData.characters = characterList.ToArray();
+        _character.level = character.level;
+        _character.maxExp = character.maxExp;
+        _character.currentExp = character.currentExp;
 
-        //string generatedJsonString = JsonUtility.ToJson(mainObject);
-        //Debug.Log("generatedJsonString: " + generatedJsonString);
+        _character.stats.maxHp = character.maxHp;
+        _character.stats.currentHp = character.currentHp;
+        _character.stats.origin_attackDamage = character.origin_attackDamage;
+        _character.stats.origin_defense = character.origin_defense; ;
+        _character.stats.origin_speed = character.origin_speed;
+        _character.stats.origin_critical = character.origin_critical;
+
+        return _character;
+    }
+    public SaveItem CreateSaveItem(MainLobbyItem item)
+    {
+        SaveItem InnerItem = new SaveItem();
+
+        InnerItem.itemCode = item.itemCode;
+        InnerItem.count = item.count;
+
+        return InnerItem;
+    }
+    public MainLobbyItem CreateItem(SaveItem item)
+    {
+        MainLobbyItem _item = new MainLobbyItem();
+
+        _item.itemCode = item.itemCode;
+        _item.count = item.count;
+
+        return _item;
     }
 
-    public void LoadCharacter()
+
+    public void SavePartyCharacter()
+    {
+        saveCharacterList.Clear();
+        for (int i = 0; i < SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().partyCharacters.Count; i++)
+        {
+            saveCharacterList.Add(CreateSaveCharacter(SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().partyCharacters[i]));
+        }
+        DataController.Instance.gameData.partyCharacter = null;
+        DataController.Instance.gameData.partyCharacter = saveCharacterList.ToArray();
+    }
+    public void SaveAllCharacter()
+    {
+        saveCharacterList.Clear();
+        for (int i = 0; i < SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().allCharacters.Count; i++)
+        {
+            saveCharacterList.Add(CreateSaveCharacter(SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().allCharacters[i]));
+        }
+        DataController.Instance.gameData.partyCharacter = null;
+        DataController.Instance.gameData.partyCharacter = saveCharacterList.ToArray();
+    }
+    public List<Character> LoadPartyCharacter()
     {
         characterList.Clear();
+        saveCharacterList.Clear();
 
-        for(int i = 0; i< DataController.Instance.gameData.characters.Length; i++)
+        for (int i = 0; i < DataController.Instance.gameData.partyCharacter.Length; i++)
         {
-            characterList.Add(DataController.Instance.gameData.characters[i]);
+            saveCharacterList.Add(DataController.Instance.gameData.partyCharacter[i]);
+            characterList.Add(CreateCharacter(saveCharacterList[i]));
         }
+
+        return characterList;
+    }
+    public List<Character> LoadAllCharacter()
+    {
+        characterList.Clear();
+        saveCharacterList.Clear();
+
+        for (int i = 0; i < DataController.Instance.gameData.characters.Length; i++)
+        {
+            saveCharacterList.Add(DataController.Instance.gameData.characters[i]);
+            characterList.Add(CreateCharacter(saveCharacterList[i]));
+        }
+
+        return characterList;
     }
 
 
+
+
+
+    public void SaveInventoryItem()
+    {
+        saveitemList.Clear();
+        for (int i = 0; i < SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().inventory.Count; i++)
+        {
+            saveitemList.Add(CreateSaveItem(SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().inventory[i]));
+        }
+        DataController.Instance.gameData.inventory = null;
+        DataController.Instance.gameData.inventory = saveitemList.ToArray();
+    }
+    public void SaveInSafeItem()
+    {
+        saveitemList.Clear();
+        for (int i = 0; i < SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().InSafe.Count; i++)
+        {
+            saveitemList.Add(CreateSaveItem(SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().InSafe[i]));
+        }
+        DataController.Instance.gameData.insafe = null;
+        DataController.Instance.gameData.insafe = saveitemList.ToArray();
+    }
+    public List<MainLobbyItem> LoadInSafeItem()
+    {
+        itemList.Clear();
+        saveitemList.Clear();
+
+        for (int i = 0; i < DataController.Instance.gameData.insafe.Length; i++)
+        {
+            saveitemList.Add(DataController.Instance.gameData.insafe[i]);
+            itemList.Add(CreateItem(saveitemList[i]));
+        }
+
+        return itemList;
+
+    }
 }
 
 [Serializable]
@@ -79,5 +183,12 @@ public class SaveCharacter
     public int origin_defense;
     public int origin_speed;
     public int origin_critical;
-    
+
+}
+
+[Serializable]
+public class SaveItem
+{
+    public int itemCode;
+    public int count;
 }

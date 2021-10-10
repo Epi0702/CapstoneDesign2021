@@ -10,5 +10,9 @@ public class GameData
 
     public int gold;
 
+    public SaveCharacter[] partyCharacter;
     public SaveCharacter[] characters;
+
+    public SaveItem[] inventory;
+    public SaveItem[] insafe;
 }

@@ -60,6 +60,15 @@ public class SystemManager : MonoBehaviour
         {
             return testSceneMain;
         }
+    }  
+    [SerializeField]
+    JsonParse jsonParse;
+    public JsonParse JsonParse
+    {
+        get
+        {
+            return jsonParse;
+        }
     }
     private void Awake()
     {

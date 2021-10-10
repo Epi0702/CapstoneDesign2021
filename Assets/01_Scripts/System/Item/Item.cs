@@ -20,10 +20,11 @@ public struct RewardItem
 public class Item : MonoBehaviour
 {
     public int itemCode = -1;
-    public string itemName;             //아이템 이름
-    public ItemType itemType;
-    public string description;
-    public string itemFunction;
+    public string itemName = "";             //아이템 이름
+    public ItemType itemType = ItemType.None;
+    public string description = "";
+    public string itemFunction = "";
+    public int price = 0;
 
     public GameObject Icon;
     public SpriteRenderer itemImage;    //아이템 이미지
@@ -82,7 +83,7 @@ public class Item : MonoBehaviour
         description = itemData.description;
         itemFunction = itemData.functionName;
         maxcount = itemData.maxCount;
-
+        price = itemData.price;
         isSetted = true;
     }
     public bool isNeedItemCount()
