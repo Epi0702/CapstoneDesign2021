@@ -18,7 +18,9 @@ public class Warrior : Character
     public override void Setup()
     {
         base.Setup();
-        className = "Warrior";
+        className = "Warrior"; 
+        characterClass = PlayerCharacterClass.Warrior;
+
     }
     public override void InitCharacterStats()
     {

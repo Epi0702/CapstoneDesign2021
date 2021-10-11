@@ -10,12 +10,17 @@ public class ShopManager : MonoBehaviour
     [SerializeField]
     ScrollRect sellItem;
 
-    List<SellItemSlot> sellItems = new List<SellItemSlot>();
+    List<SellItemSlot> buyItems = new List<SellItemSlot>();
 
     [SerializeField]
     GameObject DescriptionPanel;
     [SerializeField]
     Text Description;
+
+    [SerializeField]
+    Button SellButton;
+    [SerializeField]
+    InventoryManager ivManager;
 
     public int sellItemCount;
 
@@ -33,12 +38,15 @@ public class ShopManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (ivManager.selectedItem_index != -1)
+            ActiveSellButton(true);
+        else
+            ActiveSellButton(false);
     }
 
     public void InitShopBuy()
     {
-        sellItems.Clear();
+        buyItems.Clear();
     }
     public void SetShopBuy(int itemIndex)
     {
@@ -47,7 +55,8 @@ public class ShopManager : MonoBehaviour
         temp = Instantiate(Resources.Load<SellItemSlot>("Prefabs/Shop/Slot_001"));
         temp.transform.parent = buyItem.transform;
         temp.SetItem(SystemManager.Instance.ItemTable.GetItem(itemIndex));
-        
+
+        buyItems.Add(temp);
     }
     public void AddShopLIst()
     {
@@ -57,5 +66,32 @@ public class ShopManager : MonoBehaviour
     {
         DescriptionPanel.SetActive(true);
         Description.text = description;
+    }
+    public void ActiveSellButton(bool ononff)
+    {
+        SellButton.gameObject.SetActive(ononff);
+    }
+    public void OnSellButton()
+    {
+        if (ivManager.invenitem[ivManager.selectedItem_index].iteminfo.count == 1)
+        {
+            ivManager.invenitem[ivManager.selectedItem_index].iteminfo.count -= 1;
+            SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().InSafe[ivManager.selectedItem_index].count -= 1;
+            SellButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            ivManager.invenitem[ivManager.selectedItem_index].iteminfo.count -= 1;
+            SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().InSafe[ivManager.selectedItem_index].count -= 1;
+        }
+        //if(ivManager.invenitem[ivManager.selectedItem_index].iteminfo.count == 0)
+        //{
+        //    ivManager.invenitem[ivManager.selectedItem_index].iteminfo.InitItemInfo();
+        //}
+        ivManager.UpdateInventory();
+    }
+    public void OnBuyButton()
+    {
+
     }
 }

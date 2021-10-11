@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using System;
 
-[Serializable]
+[System.Serializable]
 public class Character : LivingEntity   //각 캐릭터
 {
     public int skill01Index;

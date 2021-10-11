@@ -19,6 +19,8 @@ public class Paladin : Character
     {
         base.Setup();
         className = "Paladin";
+        characterClass = PlayerCharacterClass.Paladin;
+
     }
     public override void InitCharacterStats()
     {

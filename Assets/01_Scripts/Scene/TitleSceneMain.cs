@@ -28,7 +28,7 @@ public class TitleSceneMain : BaseSceneMain
     {
         //LoadScene.Instance.SceneLoader(SceneName.CustomizingScene);
         loadScene.gameObject.SetActive(true);
-        loadScene.SceneLoader(1);
+        loadScene.SceneLoader(2);
     }
 
     public void MoveToMainLobbyScene()

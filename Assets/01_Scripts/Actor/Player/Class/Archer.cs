@@ -19,6 +19,7 @@ public class Archer : Character
     {
         base.Setup();
         className = "Archer";
+        characterClass = PlayerCharacterClass.Archer;
     }
     public override void InitCharacterStats()
     {

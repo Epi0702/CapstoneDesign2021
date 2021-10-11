@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Rendering;
-
+[System.Serializable]
 public enum CharacterPosition
 {
     First,
@@ -11,11 +11,13 @@ public enum CharacterPosition
     Third,
     Fourth,
 }
+[System.Serializable]
 public struct Resistence
 {
     public int bleeding_resi;
     public int strun_resi;
 }
+[System.Serializable]
 public struct Debuff
 {
     public bool isBleeding;
@@ -24,6 +26,7 @@ public struct Debuff
     public int bleedingCount;
     public int strunCount;
 }
+[System.Serializable]
 public struct Stats
 {
     public int maxHp;
@@ -38,6 +41,7 @@ public struct Stats
     public int origin_speed;
     public int origin_critical;
 }
+[System.Serializable]
 public struct TempChangeStats
 {
     public int temp_attackDamage;
@@ -50,6 +54,7 @@ public struct TempChangeStats
     public int temp_spd_count;
     public int temp_crt_count;
 }
+[System.Serializable]
 public abstract class LivingEntity : MonoBehaviour
 {
     public Stats stats;

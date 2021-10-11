@@ -12,40 +12,79 @@ public class SellItemSlot : MonoBehaviour
     Text itemdes;
     [SerializeField]
     Text itemCount;
-
+    [SerializeField]
+    Image UnactiveBuy;
 
     public MainLobbyItem itemInfo;
-    int count = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        itemInfo = null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void SetItem(ItemStruct itemData)
     {
+        this.name = $"slot_{Random.Range(0, 10000)}";
         MainLobbyItem temp = new MainLobbyItem();
 
         temp.SetItemInfo(itemData);
 
-        this.itemInfo = temp;
-        count = itemInfo.maxcount;
+        Debug.Log($"{this.name} : {itemData.itemCode}");
+
+        this.itemInfo = new MainLobbyItem()
+        {
+
+            description = temp.description,
+            itemCode = temp.itemCode,
+            itemFunction = temp.itemFunction,
+            itemName = temp.itemName,
+            itemType = temp.itemType,
+            maxcount = temp.maxcount,
+            price = temp.price
+        };
+
+
+        itemInfo.count = this.itemInfo.maxcount;
+        if (itemInfo.count > 0)
+            UnactiveBuy.gameObject.SetActive(false);
+
         ItemImg.sprite = Resources.Load<Sprite>(itemData.itemImgPath);
-        itemCount.text = (count.ToString() + " / " + itemInfo.maxcount);
+        itemCount.text = (itemInfo.count.ToString() + " / " + itemInfo.maxcount);
         itemdes.text = itemInfo.price.ToString();
         itemName.text = itemInfo.itemName;
-        Debug.Log(this.itemInfo.description);
+        Debug.Log(this.name + " "+itemInfo.count);
+        Debug.Log(this.name + " "+itemInfo.maxcount);
     }
+
     public void ActiveDescription()
     {
-        Debug.Log(this.itemInfo.description);
-
         SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().ShopManager.ActiveDescriptionPanel(itemInfo.description);
+    }
+    public void OnBuyButton()
+    {
+        if (itemInfo.count >= 1)
+        {
+            this.itemInfo.count -= 1;
+            if (this.itemInfo.count == 0)
+                UnactiveBuy.gameObject.SetActive(true);
+        }
+        MainLobbyItem temp = new MainLobbyItem();
+        temp.SetItemInfo(this.itemInfo);
+        temp.count = 1;
+
+
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().AddInSafeItem(temp);
+        Debug.Log("BUY!!");
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().InventoryManager.UpdateInventory();
+        UpdateCount();
+    }
+    public void UpdateCount()
+    {
+        itemCount.text = (itemInfo.count.ToString() + " / " + itemInfo.maxcount);
     }
 }

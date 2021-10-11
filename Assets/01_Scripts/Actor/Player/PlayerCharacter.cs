@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum PlayerCharacterClass
 {
+    None = -1,
     Knight = 0,
     Fighter = 1,
     Warrior = 2,

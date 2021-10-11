@@ -19,6 +19,8 @@ public class Caster : Character
     {
         base.Setup();
         className = "Caster";
+        characterClass = PlayerCharacterClass.Caster;
+
     }
     public override void InitCharacterStats()
     {

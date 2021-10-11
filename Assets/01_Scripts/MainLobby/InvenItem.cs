@@ -9,27 +9,30 @@ public class InvenItem : MonoBehaviour
     Image itemImg;
     [SerializeReference]
     TextMeshProUGUI itemCount;
+    [SerializeField]
+    Image SelectedFrame;
     public MainLobbyItem iteminfo;
     public int index;
     bool check;
     // Start is called before the first frame update
     void Start()
     {
-        check = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!check)
-        {
 
-            SellItem();
-            check = true;
-        }
+        //SellItem();
+        check = true;
+    }
+    public void SetImg()
+    {
+        itemImg.sprite = Resources.Load<Sprite>("Img/ItemImg/None");
     }
     public void SetItemInfo(MainLobbyItem item)
     {
+        this.name = $"invItem_{Random.Range(0, 10000)}";
         MainLobbyItem temp = new MainLobbyItem();
         if (item.itemCode == -1)
         {
@@ -51,16 +54,18 @@ public class InvenItem : MonoBehaviour
     public void UpdateCount()
     {
         itemCount.text = iteminfo.count.ToString();
+        if(iteminfo.count <= 0)
+        {
+            itemCount.gameObject.SetActive(false);
+        }
     }
     public void SellItem()
     {
-        if (Input.GetMouseButtonUp(1))
-        {
-
-                Debug.Log("sell");
-                Debug.Log(index);
-                //SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().InventoryManager.SellItem(this);
-            
-        }
+        Debug.Log(this.name + " " + this.GetType());
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().InventoryManager.selectedItem_index = this.index;
+    }
+    public void SetFrameActive(bool onoff)
+    {
+        SelectedFrame.gameObject.SetActive(onoff);
     }
 }

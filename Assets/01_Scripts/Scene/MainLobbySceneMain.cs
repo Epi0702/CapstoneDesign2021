@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+[System.Serializable]
 public class MainLobbyItem
 {
-    public int itemCode = -1;
-    public string itemName = "";             //아이템 이름
+    public int itemCode;
+    public string itemName;             //아이템 이름
     public ItemType itemType = ItemType.None;
-    public string description = "";
-    public string itemFunction = "";
+    public string description;
+    public string itemFunction;
     public int price = 0;
     public int count = 0;
     public int maxcount;
@@ -20,8 +21,8 @@ public class MainLobbyItem
         itemType = ItemType.None;
         description = " ";
         itemFunction = " ";
-        maxcount = -1;
-        count = -1;
+        maxcount = 0;
+        count = 0;
         price = -1;
     }
     public void SetItemInfo(ItemStruct itemData)
@@ -82,8 +83,8 @@ public class MainLobbySceneMain : BaseSceneMain
     }
     public int gold;
 
-    public List<Character> partyCharacters = new List<Character>();
-    public List<Character> allCharacters = new List<Character>();
+    public List<SaveCharacter> partyCharacters = new List<SaveCharacter>();
+    public List<SaveCharacter> allCharacters = new List<SaveCharacter>();
 
     public List<MainLobbyItem> inventory = new List<MainLobbyItem>();
     public List<MainLobbyItem> InSafe = new List<MainLobbyItem>();
@@ -98,7 +99,8 @@ public class MainLobbySceneMain : BaseSceneMain
     {
         base.OnStart();
         gold = DataController.Instance.gameData.gold;
-        LoadInsafe();
+        LoadInsafe(); 
+        LoadAllCharacter();
     }
 
     // Update is called once per frame
@@ -164,6 +166,16 @@ public class MainLobbySceneMain : BaseSceneMain
         InSafe.Clear();
         InSafe = SystemManager.Instance.JsonParse.LoadInSafeItem();
         //InventoryManager.UpdateInventory();
+        for(int i = 0; i<InSafe.Count; i++)
+        {
+            InSafe[i].SetItemInfo(SystemManager.Instance.ItemTable.GetItem(InSafe[i].itemCode));
+        }
+    }
+    public void LoadAllCharacter()
+    {
+        allCharacters.Clear();
+        allCharacters = SystemManager.Instance.JsonParse.LoadAllCharacter();
+        Debug.Log("Character Load!!");
     }
     public void CheckInvenZero()
     {

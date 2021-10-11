@@ -11,7 +11,7 @@ public class JsonParse : MonoBehaviour
     List<SaveCharacter> saveCharacterList = new List<SaveCharacter>();
     List<SaveItem> saveitemList = new List<SaveItem>();
 
-    List<Character> characterList = new List<Character>();
+    List<SaveCharacter> characterList = new List<SaveCharacter>();
     List<MainLobbyItem> itemList = new List<MainLobbyItem>();
     public SaveCharacter CreateSaveCharacter(Character character)
     {
@@ -81,7 +81,7 @@ public class JsonParse : MonoBehaviour
         saveCharacterList.Clear();
         for (int i = 0; i < SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().partyCharacters.Count; i++)
         {
-            saveCharacterList.Add(CreateSaveCharacter(SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().partyCharacters[i]));
+            saveCharacterList.Add(SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().partyCharacters[i]);
         }
         DataController.Instance.gameData.partyCharacter = null;
         DataController.Instance.gameData.partyCharacter = saveCharacterList.ToArray();
@@ -91,12 +91,12 @@ public class JsonParse : MonoBehaviour
         saveCharacterList.Clear();
         for (int i = 0; i < SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().allCharacters.Count; i++)
         {
-            saveCharacterList.Add(CreateSaveCharacter(SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().allCharacters[i]));
+            saveCharacterList.Add(SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().allCharacters[i]);
         }
-        DataController.Instance.gameData.partyCharacter = null;
-        DataController.Instance.gameData.partyCharacter = saveCharacterList.ToArray();
+        DataController.Instance.gameData.characters = null;
+        DataController.Instance.gameData.characters = saveCharacterList.ToArray();
     }
-    public List<Character> LoadPartyCharacter()
+    public List<SaveCharacter> LoadPartyCharacter()
     {
         characterList.Clear();
         saveCharacterList.Clear();
@@ -104,12 +104,12 @@ public class JsonParse : MonoBehaviour
         for (int i = 0; i < DataController.Instance.gameData.partyCharacter.Length; i++)
         {
             saveCharacterList.Add(DataController.Instance.gameData.partyCharacter[i]);
-            characterList.Add(CreateCharacter(saveCharacterList[i]));
+            characterList.Add((saveCharacterList[i]));
         }
 
         return characterList;
     }
-    public List<Character> LoadAllCharacter()
+    public List<SaveCharacter> LoadAllCharacter()
     {
         characterList.Clear();
         saveCharacterList.Clear();
@@ -117,7 +117,7 @@ public class JsonParse : MonoBehaviour
         for (int i = 0; i < DataController.Instance.gameData.characters.Length; i++)
         {
             saveCharacterList.Add(DataController.Instance.gameData.characters[i]);
-            characterList.Add(CreateCharacter(saveCharacterList[i]));
+            characterList.Add(saveCharacterList[i]);
         }
 
         return characterList;
@@ -163,10 +163,12 @@ public class JsonParse : MonoBehaviour
     }
 }
 
-[Serializable]
+[System.Serializable]
 public class SaveCharacter
 {
     public PlayerCharacterClass characterClass;
+
+    public int sp;//stat point
 
     public int skill01Index;
     public int skill02Index;
@@ -184,9 +186,30 @@ public class SaveCharacter
     public int origin_speed;
     public int origin_critical;
 
+    public void Init()
+    {
+        //characterClass = PlayerCharacterClass.Knight;
+        sp = 0;
+        skill01Index = 1000;
+        skill02Index = 1000;
+        skill03Index = 1000;
+        skill04Index = 1000;
+
+        level = 1;
+        maxExp = 10;
+        currentExp = 0;
+
+        maxHp = 100;
+        currentHp = maxHp;
+
+        origin_attackDamage = 20;
+        origin_defense = 5;
+        origin_speed = 10;
+        origin_critical = 0;
+    }
 }
 
-[Serializable]
+[System.Serializable]
 public class SaveItem
 {
     public int itemCode;

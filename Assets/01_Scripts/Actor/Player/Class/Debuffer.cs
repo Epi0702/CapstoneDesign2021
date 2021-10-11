@@ -19,6 +19,8 @@ public class Debuffer : Character
     {
         base.Setup();
         className = "Debuffer";
+        characterClass = PlayerCharacterClass.Debuffer;
+
     }
     public override void InitCharacterStats()
     {

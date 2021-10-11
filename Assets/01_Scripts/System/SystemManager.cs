@@ -85,11 +85,15 @@ public class SystemManager : MonoBehaviour
 
 
     }
+
+    public int characterCount;
     void Start()
     {
         BaseSceneMain baseSceneMain = GameObject.FindObjectOfType<BaseSceneMain>();
         Debug.Log("OnSceneLoaded! baseSceneMain.name = " + baseSceneMain.name);
         SystemManager.Instance.CurrentSceneMain = baseSceneMain;
+
+        characterCount = DataController.Instance.gameData.createCharacterIndex;
     }
     public T GetCurrentSceneMain<T>() where T : BaseSceneMain
     {

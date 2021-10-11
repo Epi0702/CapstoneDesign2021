@@ -19,6 +19,8 @@ public class Fighter : Character
     {
         base.Setup();
         className = "Fighter";
+        characterClass = PlayerCharacterClass.Fighter;
+
     }
     public override void InitCharacterStats()
     {

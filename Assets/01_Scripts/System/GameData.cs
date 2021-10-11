@@ -15,4 +15,6 @@ public class GameData
 
     public SaveItem[] inventory;
     public SaveItem[] insafe;
+
+    public int createCharacterIndex = 0;
 }

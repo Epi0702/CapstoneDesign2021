@@ -19,6 +19,8 @@ public class Priest : Character
     {
         base.Setup();
         className = "Priest";
+        characterClass = PlayerCharacterClass.Priest;
+
     }
     public override void InitCharacterStats()
     {
