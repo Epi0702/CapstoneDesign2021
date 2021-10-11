@@ -64,6 +64,13 @@ public class InvenItem : MonoBehaviour
         Debug.Log(this.name + " " + this.GetType());
         SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().InventoryManager.selectedItem_index = this.index;
     }
+    public void SelectInvenItem()
+    {
+        Debug.Log(this.name + " " + this.GetType());
+
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().InventoryManager.selectedInven_index = this.index;
+
+    }
     public void SetFrameActive(bool onoff)
     {
         SelectedFrame.gameObject.SetActive(onoff);

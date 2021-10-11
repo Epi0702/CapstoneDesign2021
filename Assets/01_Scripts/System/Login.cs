@@ -22,6 +22,7 @@ public class Login : MonoBehaviour
 
     public void ClickLoginButton()
     {
+
         if (result == 0) //로그인 성공 & 캐릭터 없음 -> 커스터마이징 씬
         {
             SystemManager.Instance.GetCurrentSceneMain<TitleSceneMain>().MoveToCustomizingScene();

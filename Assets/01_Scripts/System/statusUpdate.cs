@@ -11,9 +11,7 @@ public class statusUpdate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        energy.text = GameManager.getEnergy().ToString() + " / 100";
-        gem.text = GameManager.getGem().ToString();
-        gold.text = GameManager.getGold().ToString();
+ 
     }
 
     // Update is called once per frame

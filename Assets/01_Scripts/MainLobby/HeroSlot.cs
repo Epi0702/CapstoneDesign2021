@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class HeroSlot : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class HeroSlot : MonoBehaviour
     GameObject[] SIcon;
     [SerializeField]
     GameObject Select;
+    [SerializeField]
+    TextMeshProUGUI Level;
 
     [SerializeField]
     GameObject SelectButton;
@@ -20,47 +24,57 @@ public class HeroSlot : MonoBehaviour
     [SerializeField]
     GameObject OutputButton;
 
+    
+    public GameObject SelectFrame;
     // Start is called before the first frame update
     void Start()
     {
-        Select.SetActive(false);        
+        //SelectFrame.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void SetSlot(SaveCharacter data)
     {
         this.name = $"slot_{Random.Range(0, 10000)}";
+
+        SaveCharacter temp = new SaveCharacter();
+        temp = data;
+
         this.characterStats = new SaveCharacter()
         {
-            characterClass = data.characterClass,
-            sp = data.sp,
+            characterClass = temp.characterClass,
+            sp = temp.sp,
 
-            skill01Index = data.skill01Index,
-            skill02Index = data.skill02Index,
-            skill03Index = data.skill03Index,
-            skill04Index = data.skill04Index,
+            heroNum = temp.heroNum,
 
-            level = data.level,
-            maxExp = data.maxExp,
-            currentExp = data.currentExp,
+            skill01Index = temp.skill01Index,
+            skill02Index = temp.skill02Index,
+            skill03Index = temp.skill03Index,
+            skill04Index = temp.skill04Index,
 
-            maxHp = data.maxHp,
-            currentHp = data.currentHp,
-            origin_attackDamage = data.origin_attackDamage,
-            origin_defense = data.origin_defense,
-            origin_speed = data.origin_speed,
-            origin_critical = data.origin_critical,
+            level = temp.level,
+            maxExp = temp.maxExp,
+            currentExp = temp.currentExp,
+
+            maxHp = temp.maxHp,
+            currentHp = temp.currentHp,
+            origin_attackDamage = temp.origin_attackDamage,
+            origin_defense = temp.origin_defense,
+            origin_speed = temp.origin_speed,
+            origin_critical = temp.origin_critical,
         };
+        //Level.text = ("Lv. " + this.characterStats.level.ToString());
 
         SetClass();
     }
     public void SetClass()
     {
-        switch (characterStats.characterClass)
+
+        switch (this.characterStats.characterClass)
         {
             case PlayerCharacterClass.Knight:
                 SetIcon(0);
@@ -87,12 +101,13 @@ public class HeroSlot : MonoBehaviour
                 SetIcon(7);
                 break;
             default:
+                UnIcon();
                 break;
         }
     }
     public void SetIcon(int num)
     {
-        for(int i = 0; i< 8; i++)
+        for (int i = 0; i < 8; i++)
         {
             SIcon[i].SetActive(false);
             NIcon[i].SetActive(false);
@@ -100,19 +115,93 @@ public class HeroSlot : MonoBehaviour
         SIcon[num].SetActive(true);
         NIcon[num].SetActive(true);
     }
-
-    public void SetINOUTButton()
+    public void UnIcon()
     {
-        InputButton.SetActive(true);
-        InputButton.SetActive(true);
+        for (int i = 0; i < 8; i++)
+        {
+            SIcon[i].SetActive(false);
+            NIcon[i].SetActive(false);
+        }
     }
-    public void UnactiveButtons()
+
+    public void SetINButton()
+    {
+        InputButton.SetActive(true);
+        OutputButton.SetActive(false);
+        SetSelectFrame(false);
+    }
+    public void SetOUTButtons()
     {
         InputButton.SetActive(false);
+        OutputButton.SetActive(true);
+        SetSelectFrame(true);
+    }
+    public void UnInButton()
+    {
         InputButton.SetActive(false);
+    }
+    public void UnOutButton()
+    {
+        OutputButton.SetActive(false);
     }
     public void SetSelectFrame(bool onoff)
     {
         Select.SetActive(onoff);
+    }
+    public void HireButton()
+    {
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().allCharacters.Add(this.characterStats);
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().HeroManager.UpdateScrollView();
+        this.gameObject.SetActive(false);
+        SystemManager.Instance.JsonParse.SaveAllCharacter();
+        SystemManager.Instance.JsonParse.SavePartyCharacter();
+    }
+    public void NoHireButton()
+    {
+        this.gameObject.SetActive(false);
+    }
+    public void OnInputButton()
+    {
+        if (SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().partyCharacters.Count < 4)
+        {
+            SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().partyCharacters.Add(this.characterStats);
+            SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().HeroManager.SetClassIcon();
+            SetOUTButtons();
+
+        }
+        SystemManager.Instance.JsonParse.SaveAllCharacter();
+        SystemManager.Instance.JsonParse.SavePartyCharacter();
+    }
+    public void OnOutputButton()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().partyCharacters[i].heroNum == this.characterStats.heroNum)
+            {
+                SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().partyCharacters.RemoveAt(i);
+                SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().HeroManager.SetClassIcon();
+                SetINButton();
+                break;
+            }
+        }
+        SystemManager.Instance.JsonParse.SaveAllCharacter();
+        SystemManager.Instance.JsonParse.SavePartyCharacter();
+    }
+    public void SetLevet()
+    {
+        Level.text = ("Lv. " + this.characterStats.level.ToString());
+        Debug.Log("Player Num : " + this.characterStats.heroNum);
+        Debug.Log(this.characterStats.level);
+        Debug.Log("Lv. " + this.characterStats.level.ToString());
+    }
+    public void SelectHero()
+    {
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().HeroManager.SelectedIndex = this.characterStats.heroNum;
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().HeroManager.FrameOff();
+        this.SelectFrame.SetActive(true);
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().HeroManager.SetSelectedInfo();
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().HeroManager.skillPanel.SetPanel();
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().HeroManager.PanelButton.SetActive(true);
+        
     }
 }

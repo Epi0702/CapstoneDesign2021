@@ -13,6 +13,7 @@ public class JsonParse : MonoBehaviour
 
     List<SaveCharacter> characterList = new List<SaveCharacter>();
     List<MainLobbyItem> itemList = new List<MainLobbyItem>();
+    List<MainLobbyItem> itemList2 = new List<MainLobbyItem>();
     public SaveCharacter CreateSaveCharacter(Character character)
     {
         SaveCharacter InnerCharacter = new SaveCharacter();
@@ -159,16 +160,30 @@ public class JsonParse : MonoBehaviour
         }
 
         return itemList;
+    }   
+    public List<MainLobbyItem> LoadInvenItem()
+    {
+        itemList2.Clear();
+        saveitemList.Clear();
 
+        for (int i = 0; i < DataController.Instance.gameData.inventory.Length; i++)
+        {
+            saveitemList.Add(DataController.Instance.gameData.inventory[i]);
+            itemList2.Add(CreateItem(saveitemList[i]));
+        }
+
+        return itemList2;
     }
 }
 
 [System.Serializable]
 public class SaveCharacter
 {
-    public PlayerCharacterClass characterClass;
+    public PlayerCharacterClass characterClass = PlayerCharacterClass.None;
 
     public int sp;//stat point
+
+    public int heroNum;
 
     public int skill01Index;
     public int skill02Index;
@@ -188,7 +203,8 @@ public class SaveCharacter
 
     public void Init()
     {
-        //characterClass = PlayerCharacterClass.Knight;
+        characterClass = PlayerCharacterClass.None;
+        heroNum = -1;
         sp = 0;
         skill01Index = 1000;
         skill02Index = 1000;

@@ -52,6 +52,14 @@ public class MainLobbyItem
     }
 
 }
+[System.Serializable]
+public enum Page
+{
+    None = 0,
+    Shop = 1,
+    Hero = 2,
+    Inventory  =3,
+}
 public class MainLobbySceneMain : BaseSceneMain
 {
     [SerializeField]
@@ -80,7 +88,28 @@ public class MainLobbySceneMain : BaseSceneMain
         {
             return inventoryManager;
         }
+    }  
+    [SerializeField]
+    HeroCreator heroCreator;
+    public HeroCreator HeroCreator
+    {
+        get
+        {
+            return heroCreator;
+        }
+    }   
+    [SerializeField]
+    HeroManager heroManager;
+    public HeroManager HeroManager
+    {
+        get
+        {
+            return heroManager;
+        }
     }
+
+
+
     public int gold;
 
     public List<SaveCharacter> partyCharacters = new List<SaveCharacter>();
@@ -89,6 +118,16 @@ public class MainLobbySceneMain : BaseSceneMain
     public List<MainLobbyItem> inventory = new List<MainLobbyItem>();
     public List<MainLobbyItem> InSafe = new List<MainLobbyItem>();
 
+    public GameObject[] pages;
+
+    [SerializeField]
+    GameObject Herolist;
+    [SerializeField]
+    GameObject HeroHireList;
+    [SerializeField]
+    GameObject BuyPanel;
+    [SerializeField]
+    GameObject SellPanel;
 
     // Start is called before the first frame update
     protected override void OnAwake()
@@ -97,10 +136,10 @@ public class MainLobbySceneMain : BaseSceneMain
     }
     protected override void OnStart()
     {
+
         base.OnStart();
-        gold = DataController.Instance.gameData.gold;
-        LoadInsafe(); 
-        LoadAllCharacter();
+
+        InitMainLobby();
     }
 
     // Update is called once per frame
@@ -114,6 +153,23 @@ public class MainLobbySceneMain : BaseSceneMain
         loadScene.gameObject.SetActive(true);
         loadScene.SceneLoader(3);
         //LoadScene.Instance.SceneLoader(SceneName.InGameScene);
+    }
+    void InitParty()
+    {
+        SaveCharacter temp = new SaveCharacter();
+        temp.Init();
+        partyCharacters.Add(temp);
+    }
+    void InitMainLobby()
+    {
+        InitPages();
+        
+        gold = DataController.Instance.gameData.gold;
+        
+        LoadInsafe();
+        LoadAllCharacter();
+        LoadInventory();
+
     }
     public void AddItem()
     {
@@ -170,6 +226,19 @@ public class MainLobbySceneMain : BaseSceneMain
         {
             InSafe[i].SetItemInfo(SystemManager.Instance.ItemTable.GetItem(InSafe[i].itemCode));
         }
+        Debug.Log(InSafe[0].itemName);
+
+    }
+    public void LoadInventory()
+    {
+        inventory.Clear();
+        inventory = SystemManager.Instance.JsonParse.LoadInvenItem();
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            inventory[i].SetItemInfo(SystemManager.Instance.ItemTable.GetItem(inventory[i].itemCode));
+        }
+        Debug.Log(inventory[0].itemName);
+        Debug.Log(inventory[0].itemName);
     }
     public void LoadAllCharacter()
     {
@@ -186,5 +255,63 @@ public class MainLobbySceneMain : BaseSceneMain
                 InSafe.RemoveAt(i);
             }
         }
+    }
+    public void InitPages()
+    {
+        for (int i = 1; i < pages.Length; i++)
+        {
+            pages[i].SetActive(false);
+        }
+        Herolist.SetActive(false);
+        SellPanel.SetActive(false);
+        BuyPanel.SetActive(false);
+        HeroHireList.SetActive(false);
+
+    }
+    public void SetPage(Page page)
+    {
+        switch (page)
+        {
+            case Page.None:
+                InitPages();
+                break;
+            case Page.Shop:
+                InitPages();
+                pages[1].SetActive(true);
+                BuyPanel.SetActive(true);
+                inventoryManager.isShop = true;
+                break;
+            case Page.Hero:
+                InitPages();
+                pages[2].SetActive(true);
+                Herolist.SetActive(true);
+                break;
+            case Page.Inventory:
+                InitPages();
+                pages[3].SetActive(true);
+                SellPanel.SetActive(true);
+                inventoryManager.isShop = false;
+                break;
+            default:
+                InitPages();
+                break;
+        }
+    }
+
+    public void OnShop()
+    {
+        SetPage(Page.Shop);
+    }   
+    public void OnHero()
+    {
+        SetPage(Page.Hero);
+    }   
+    public void OnInven()
+    {
+        SetPage(Page.Inventory);
+    }
+    public void OnHome()
+    {
+        SetPage(Page.None);
     }
 }

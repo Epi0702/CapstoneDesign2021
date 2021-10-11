@@ -9,33 +9,83 @@ itemCode,itemType,itemImgaePath,itemName,functionName,description,maxcount,price
 7,1,Img/ItemImg/item_meat_potion,고기,temp,,5,300
 8,5,Img/ItemImg/item_key_bronze,열쇠,temp,key to open Chest,3,500
 1000,10,Img/SkillImg/Knight/01,나이트스킬1,Knight01,기본 공격,0,0
-1001,10,,,,,0,0
-1002,10,,,,,0,0
-1003,10,Img/SkillImg/Knight/02,나이트스킬2,Knight02,공격 + 스피드 감소,0,0
-1004,10,,,,,0,0
-1005,10,,,,,0,0
-1006,10,Img/SkillImg/Knight/03,나이트스킬3,Knight03,공격 + 출혈,0,0
-1007,10,,,,,0,0
+1001,10,Img/SkillImg/Knight/02,나이트스킬2,Knight01,기본 공격,0,0
+1002,10,Img/SkillImg/Knight/03,나이트스킬3,Knight01,기본 공격,0,0
+1003,10,Img/SkillImg/Knight/04,나이트스킬4,Knight01,기본 공격,0,0
+1004,10,Img/SkillImg/Knight/05,나이트스킬5,Knight01,기본 공격,0,0
+1005,10,Img/SkillImg/Knight/06,나이트스킬6,Knight01,기본 공격,0,0
+1006,10,Img/SkillImg/Knight/07,나이트스킬7,Knight01,기본 공격,0,0
+1007,10,Img/SkillImg/Knight/08,나이트스킬8,Knight01,기본 공격,0,0
 1008,10,,,,,0,0
-1009,10,Img/SkillImg/Knight/04,나이트스킬4,Knight04,전열2명 공격,0,0
-1010,10,,,,,0,0
-1011,10,,,,,0,0
-1012,10,Img/SkillImg/Knight/05,나이트스킬5,Knight05,,0,0
-1013,10,,,,,0,0
-1014,10,,,,,0,0
-1015,10,Img/SkillImg/Knight/06,나이트스킬6,Knight06,,0,0
-1016,10,,,,,0,0
-1017,10,,,,,0,0
-1018,10,Img/SkillImg/Knight/07,나이트스킬7,Knight07,,0,0
+1009,10,,,,,0,0
+1010,10,Img/SkillImg/Fighter/01,파이터스킬1,Knight01,기본 공격,0,0
+1011,10,Img/SkillImg/Fighter/02,파이터스킬2,Knight01,기본 공격,0,0
+1012,10,Img/SkillImg/Fighter/03,파이터스킬3,Knight01,기본 공격,0,0
+1013,10,Img/SkillImg/Fighter/04,파이터스킬4,Knight01,기본 공격,0,0
+1014,10,Img/SkillImg/Fighter/05,파이터스킬5,Knight01,기본 공격,0,0
+1015,10,Img/SkillImg/Fighter/06,파이터스킬6,Knight01,기본 공격,0,0
+1016,10,Img/SkillImg/Fighter/07,파이터스킬7,Knight01,기본 공격,0,0
+1017,10,Img/SkillImg/Fighter/08,파이터스킬8,Knight01,기본 공격,0,0
+1018,10,,,,,0,0
 1019,10,,,,,0,0
-1020,10,,,,,0,0
-1021,10,Img/SkillImg/Knight/08,나이트스킬8,Knight08,,0,0
-1022,10,,,,,0,0
-1023,10,,,,,0,0
-1024,10,Img/SkillImg/Fighter/01,파이터스킬1,Fighter01,기본 공격,0,0
-1025,10,,,,,0,0
-1026,10,,,,,0,0
-1027,10,,,,,0,0
+1020,10,Img/SkillImg/Warrior/01,워리어스킬1,Knight01,기본 공격,0,0
+1021,10,Img/SkillImg/Warrior/02,워리어스킬2,Knight01,기본 공격,0,0
+1022,10,Img/SkillImg/Warrior/03,워리어스킬3,Knight01,기본 공격,0,0
+1023,10,Img/SkillImg/Warrior/04,워리어스킬4,Knight01,기본 공격,0,0
+1024,10,Img/SkillImg/Warrior/05,워리어스킬5,Knight01,기본 공격,0,0
+1025,10,Img/SkillImg/Warrior/06,워리어스킬6,Knight01,기본 공격,0,0
+1026,10,Img/SkillImg/Warrior/07,워리어스킬7,Knight01,기본 공격,0,0
+1027,10,Img/SkillImg/Warrior/08,워리어스킬8,Knight01,기본 공격,0,0
 1028,10,,,,,0,0
 1029,10,,,,,0,0
-1030,10,,,,,0,0
+1030,10,Img/SkillImg/Caster/01,캐스터스킬1,Knight01,기본 공격,0,0
+1031,10,Img/SkillImg/Caster/02,캐스터스킬2,Knight01,기본 공격,0,0
+1032,10,Img/SkillImg/Caster/03,캐스터스킬3,Knight01,기본 공격,0,0
+1033,10,Img/SkillImg/Caster/04,캐스터스킬4,Knight01,기본 공격,0,0
+1034,10,Img/SkillImg/Caster/05,캐스터스킬5,Knight01,기본 공격,0,0
+1035,10,Img/SkillImg/Caster/06,캐스터스킬6,Knight01,기본 공격,0,0
+1036,10,Img/SkillImg/Caster/07,캐스터스킬7,Knight01,기본 공격,0,0
+1037,10,Img/SkillImg/Caster/08,캐스터스킬8,Knight01,기본 공격,0,0
+1038,10,,,,,0,0
+1039,10,,,,,0,0
+1040,10,Img/SkillImg/Archer/01,아쳐스킬1,Knight01,기본 공격,0,0
+1041,10,Img/SkillImg/Archer/02,아쳐스킬2,Knight01,기본 공격,0,0
+1042,10,Img/SkillImg/Archer/03,아쳐스킬3,Knight01,기본 공격,0,0
+1043,10,Img/SkillImg/Archer/04,아쳐스킬4,Knight01,기본 공격,0,0
+1044,10,Img/SkillImg/Archer/05,아쳐스킬5,Knight01,기본 공격,0,0
+1045,10,Img/SkillImg/Archer/06,아쳐스킬6,Knight01,기본 공격,0,0
+1046,10,Img/SkillImg/Archer/07,아쳐스킬7,Knight01,기본 공격,0,0
+1047,10,Img/SkillImg/Archer/08,아쳐스킬8,Knight01,기본 공격,0,0
+1048,10,,,,,0,0
+1049,10,,,,,0,0
+1050,10,Img/SkillImg/Debuffer/01,디버퍼스킬1,Knight01,기본 공격,0,0
+1051,10,Img/SkillImg/Debuffer/02,디버퍼스킬2,Knight01,기본 공격,0,0
+1052,10,Img/SkillImg/Debuffer/03,디버퍼스킬3,Knight01,기본 공격,0,0
+1053,10,Img/SkillImg/Debuffer/04,디버퍼스킬4,Knight01,기본 공격,0,0
+1054,10,Img/SkillImg/Debuffer/05,디버퍼스킬5,Knight01,기본 공격,0,0
+1055,10,Img/SkillImg/Debuffer/06,디버퍼스킬6,Knight01,기본 공격,0,0
+1056,10,Img/SkillImg/Debuffer/07,디버퍼스킬7,Knight01,기본 공격,0,0
+1057,10,Img/SkillImg/Debuffer/08,디버퍼스킬8,Knight01,기본 공격,0,0
+1058,10,,,,,0,0
+1059,10,,,,,0,0
+1060,10,Img/SkillImg/Priest/01,프리스트스킬1,Knight01,기본 공격,0,0
+1061,10,Img/SkillImg/Priest/02,프리스트스킬2,Knight01,기본 공격,0,0
+1062,10,Img/SkillImg/Priest/03,프리스트스킬3,Knight01,기본 공격,0,0
+1063,10,Img/SkillImg/Priest/04,프리스트스킬4,Knight01,기본 공격,0,0
+1064,10,Img/SkillImg/Priest/05,프리스트스킬5,Knight01,기본 공격,0,0
+1065,10,Img/SkillImg/Priest/06,프리스트스킬6,Knight01,기본 공격,0,0
+1066,10,Img/SkillImg/Priest/07,프리스트스킬7,Knight01,기본 공격,0,0
+1067,10,Img/SkillImg/Priest/08,프리스트스킬8,Knight01,기본 공격,0,0
+1068,10,,,,,0,0
+1069,10,,,,,0,0
+1070,10,Img/SkillImg/Paladin/01,팔라딘스킬1,Knight01,기본 공격,0,0
+1071,10,Img/SkillImg/Paladin/02,팔라딘스킬2,Knight01,기본 공격,0,0
+1072,10,Img/SkillImg/Paladin/03,팔라딘스킬3,Knight01,기본 공격,0,0
+1073,10,Img/SkillImg/Paladin/04,팔라딘스킬4,Knight01,기본 공격,0,0
+1074,10,Img/SkillImg/Paladin/05,팔라딘스킬5,Knight01,기본 공격,0,0
+1075,10,Img/SkillImg/Paladin/06,팔라딘스킬6,Knight01,기본 공격,0,0
+1076,10,Img/SkillImg/Paladin/07,팔라딘스킬7,Knight01,기본 공격,0,0
+1077,10,Img/SkillImg/Paladin/08,팔라딘스킬8,Knight01,기본 공격,0,0
+1078,10,,,,,0,0
+1079,10,,,,,0,0
+1080,10,,,,,0,0

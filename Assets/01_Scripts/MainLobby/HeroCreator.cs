@@ -19,7 +19,7 @@ public class HeroCreator : MonoBehaviour
     }
     public void OnCharacterAddButton()
     {
-        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().allCharacters.Add(CreateCharacter());
+        SystemManager.Instance.GetCurrentSceneMain<MainLobbySceneMain>().HeroManager.hire_heroes_stats.Add(CreateCharacter());
         SystemManager.Instance.JsonParse.SaveAllCharacter();
     }
     public SaveCharacter CreateCharacter()
@@ -28,6 +28,11 @@ public class HeroCreator : MonoBehaviour
         SaveCharacter temp = new SaveCharacter();
         temp.Init();
         temp.characterClass = SetClass(classnum);
+        temp.heroNum = SystemManager.Instance.characterCount;
+        SystemManager.Instance.characterCount++;
+        DataController.Instance.gameData.createCharacterIndex = SystemManager.Instance.characterCount;
+
+
         return temp;
     }
     public PlayerCharacterClass SetClass(int num)
